@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"surface-container-high":"#222b33","on-primary-container":"#002959","background":"#0b141c","secondary":"#67df70","inverse-primary":"#005cba","primary-fixed-dim":"#aac7ff","tertiary-container":"#a875fc","surface-tint":"#aac7ff","surface-container":"#182028","surface-variant":"#2d363e","inverse-on-surface":"#29313a","primary":"#aac7ff","surface-container-highest":"#2d363e","outline":"#8b919f","on-background":"#dae3ee","inverse-surface":"#dae3ee","on-tertiary-container":"#39007a","secondary-fixed":"#83fc89","on-secondary":"#00390d","on-tertiary-fixed":"#270058","on-surface-variant":"#c1c6d6","on-surface":"#dae3ee","surface":"#0b141c","surface-dim":"#0b141c","on-tertiary":"#41008b","on-primary-fixed-variant":"#00458e","secondary-container":"#27a640","on-error":"#690005","on-primary":"#002f65","error-container":"#93000a","primary-fixed":"#d7e3ff","outline-variant":"#414753","on-tertiary-fixed-variant":"#5a21ab","primary-container":"#418fff","tertiary-fixed":"#ecdcff","surface-container-low":"#141c24","on-primary-fixed":"#001b3e","surface-container-lowest":"#060f16","on-secondary-fixed-variant":"#005317","secondary-fixed-dim":"#67df70","tertiary-fixed-dim":"#d5bbff","surface-bright":"#313a43","error":"#ffb4ab","on-error-container":"#ffdad6","on-secondary-fixed":"#002105","tertiary":"#d5bbff","on-secondary-container":"#00320a"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"space-2xs":"0.125rem","sidebar-collapsed":"3.5rem","space-xl":"2rem","space-base":"1rem","space-md":"0.75rem","space-sm":"0.5rem","space-xs":"0.25rem","space-lg":"1.5rem","space-2xl":"3rem","reading-column-max":"52rem","sidebar-expanded":"16rem","modal-standard":"40rem"},"fontFamily":{"headline-md":["Inter"],"label-md":["JetBrains Mono"],"body-sm":["Inter"],"headline-lg":["Inter"],"label-sm":["JetBrains Mono"],"code-block":["JetBrains Mono"],"body-lg":["Inter"],"code-inline":["JetBrains Mono"],"headline-sm":["Inter"],"body-md":["Inter"],"display":["Inter"]},"fontSize":{"headline-md":["20px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"600"}],"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.02em","fontWeight":"500"}],"body-sm":["12px",{"lineHeight":"18px","letterSpacing":"0em","fontWeight":"400"}],"headline-lg":["24px",{"lineHeight":"32px","letterSpacing":"-0.015em","fontWeight":"600"}],"label-sm":["11px",{"lineHeight":"14px","letterSpacing":"0.03em","fontWeight":"400"}],"code-block":["13px",{"lineHeight":"20px","letterSpacing":"0em","fontWeight":"400"}],"body-lg":["16px",{"lineHeight":"26px","letterSpacing":"-0.005em","fontWeight":"400"}],"code-inline":["12px",{"lineHeight":"16px","letterSpacing":"-0.01em","fontWeight":"500"}],"headline-sm":["16px",{"lineHeight":"24px","letterSpacing":"-0.005em","fontWeight":"600"}],"body-md":["14px",{"lineHeight":"22px","letterSpacing":"0em","fontWeight":"400"}],"display":["32px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"600"}]}}}}</script></head><body class="bg-background font-body-md text-body-md text-on-surface antialiased min-h-screen"><aside class="fixed left-0 top-0 bottom-0 w-72 bg-surface-container-low z-50 flex flex-col justify-between select-none"><div class="flex flex-col h-full overflow-hidden"><div class="h-14 px-space-base flex items-center justify-between bg-surface-container-low/50"><div class="flex items-center gap-space-sm"><div class="w-7 h-7 rounded-lg bg-surface-container-highest flex items-center justify-center"><span class="material-symbols-outlined text-primary text-lg">terminal</span></div><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight">DevNotes</span><span class="font-label-sm text-label-sm px-1.5 py-0.5 rounded bg-surface-container text-outline">v2.4</span></div><button class="text-on-surface-variant hover:text-on-surface p-1 rounded-lg hover:bg-surface-container-high transition-colors" title="Toggle Sidebar"><span class="material-symbols-outlined text-lg">dock_to_left</span></button></div><div class="px-space-base py-space-sm"><button class="w-full flex items-center justify-between px-space-sm py-1.5 rounded-lg bg-surface-container text-outline-variant hover:text-on-surface-variant hover:bg-surface-container-high transition-all"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-sm">search</span><span class="font-body-sm text-body-sm text-outline">Quick search...</span></div><div class="flex items-center gap-0.5 font-label-sm text-label-sm text-outline bg-surface-container-highest px-1.5 py-0.5 rounded"><span class="text-[10px]">⌘</span>K</div></button></div><nav class="px-space-sm py-space-xs flex flex-col gap-0.5" data-active-classes="bg-surface-container-high text-primary font-medium rounded-lg"><a class="flex items-center gap-space-sm px-space-sm py-1.5 rounded-lg font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" data-path="dashboard" href="#"><span class="material-symbols-outlined text-lg">grid_view</span><span>Dashboard</span></a><a class="flex items-center gap-space-sm px-space-sm py-1.5 rounded-lg font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" data-path="favorites" href="#"><span class="material-symbols-outlined text-lg">bookmark</span><span>Favorites</span><span class="ml-auto font-label-sm text-label-sm text-outline">6</span></a><a class="flex items-center gap-space-sm px-space-sm py-1.5 rounded-lg font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" data-path="global-search" href="#"><span class="material-symbols-outlined text-lg">manage_search</span><span>Global Search</span></a><a class="flex items-center gap-space-sm px-space-sm py-1.5 rounded-lg font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" data-path="settings" href="#"><span class="material-symbols-outlined text-lg">settings</span><span>Settings</span></a></nav><div class="flex-1 overflow-y-auto px-space-sm py-space-xs"><div class="flex items-center justify-between px-space-sm py-space-xs mt-space-xs"><span class="font-label-sm text-label-sm tracking-wider text-outline uppercase font-semibold">Sections</span><button class="text-outline hover:text-primary p-0.5 rounded hover:bg-surface-container transition-colors" title="Add Section"><span class="material-symbols-outlined text-base">add</span></button></div><div class="space-y-1 mt-1 font-body-sm text-body-sm"><div class="group"><div class="flex items-center justify-between px-space-sm py-1 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container cursor-pointer transition-colors"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-base text-outline">chevron_right</span><span class="w-2 h-2 rounded-full bg-secondary-container"></span><span class="truncate font-medium">Programming Fundamentals</span></div></div></div><div class="group"><div class="flex items-center justify-between px-space-sm py-1 rounded-lg text-on-surface bg-surface-container-high/60 cursor-pointer"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-base text-on-surface-variant">expand_more</span><span class="w-2 h-2 rounded-full bg-tertiary-container"></span><span class="truncate font-medium text-on-surface">JavaScript</span></div></div><div class="pl-5 py-0.5 space-y-0.5"><a class="block px-space-sm py-1 rounded-lg text-outline hover:text-on-surface hover:bg-surface-container transition-colors truncate" data-path="javascript-fundamentals" href="#">Fundamentals</a><a class="block px-space-sm py-1 rounded-lg text-outline hover:text-on-surface hover:bg-surface-container transition-colors truncate" data-path="javascript-functions" href="#">Functions &amp; Scope</a><a class="flex items-center justify-between px-space-sm py-1 rounded-lg bg-surface-container-highest text-primary font-medium truncate" data-path="javascript-closures" href="#"><span>Closures</span><span class="w-1.5 h-1.5 rounded-full bg-primary"></span></a><a class="block px-space-sm py-1 rounded-lg text-outline hover:text-on-surface hover:bg-surface-container transition-colors truncate" data-path="javascript-async" href="#">Asynchronous JS</a><a class="block px-space-sm py-1 rounded-lg text-outline hover:text-on-surface hover:bg-surface-container transition-colors truncate" data-path="javascript-dom" href="#">DOM &amp; Events</a></div></div><div class="group"><div class="flex items-center justify-between px-space-sm py-1 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container cursor-pointer transition-colors"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-base text-outline">chevron_right</span><span class="w-2 h-2 rounded-full bg-primary-container"></span><span class="truncate font-medium">TypeScript</span></div></div></div><div class="group"><div class="flex items-center justify-between px-space-sm py-1 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container cursor-pointer transition-colors"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-base text-outline">chevron_right</span><span class="w-2 h-2 rounded-full bg-secondary-fixed-dim"></span><span class="truncate font-medium">React</span></div></div></div></div></div><div class="p-space-sm bg-surface-container-lowest/70 m-space-xs rounded-xl"><div class="flex items-center gap-space-sm"><div class="relative"><div class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center text-primary font-headline-sm text-headline-sm overflow-hidden"><span class="material-symbols-outlined text-lg">account_circle</span></div><span class="absolute bottom-0 right-0 w-2 h-2 rounded-full bg-secondary ring-2 ring-surface-container-low"></span></div><div class="flex-1 min-w-0"><div class="flex items-center justify-between"><span class="font-label-md text-label-md text-on-surface truncate font-semibold">alex.dev</span><a class="text-outline hover:text-on-surface transition-colors" data-path="settings" href="#"><span class="material-symbols-outlined text-base">tune</span></a></div><div class="w-full bg-surface-container h-1 rounded-full overflow-hidden mt-1"><div class="bg-primary h-full w-[2.4%]"></div></div><div class="flex justify-between items-center mt-1 font-label-sm text-label-sm text-outline"><span class="text-[10px]">48 MB / 2 GB</span><span class="text-[10px]">2%</span></div></div></div></div></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-14 bg-background/80 backdrop-blur-xl z-40 flex items-center justify-between px-space-lg"><div class="flex items-center gap-space-sm font-label-md text-label-md text-outline"><a class="hover:text-on-surface transition-colors" data-path="dashboard" href="#">DevNotes</a><span class="material-symbols-outlined text-xs">chevron_right</span><span class="hover:text-on-surface transition-colors">JavaScript</span><span class="material-symbols-outlined text-xs">chevron_right</span><span class="text-on-surface font-semibold">Closures</span></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs font-label-sm text-label-sm text-secondary bg-surface-container px-2 py-0.5 rounded-full"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span><span>Synced</span></div><button class="text-on-surface-variant hover:text-on-surface p-1 rounded-lg hover:bg-surface-container-high transition-colors" title="Study Mode"><span class="material-symbols-outlined text-lg">menu_book</span></button><button class="text-on-surface-variant hover:text-on-surface p-1 rounded-lg hover:bg-surface-container-high transition-colors" title="Command Palette"><span class="material-symbols-outlined text-lg">terminal</span></button><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1VmCAywLS4fzluife9Oyc9mIQXRULiuEIpsLA6mxoU1VFwrfb7i2Ya1CEuk7NyoomAnponhyvoVU9-U4rydavokniF9cDofqzd-9TNGcEGEJRO8a2T7zENyjuWDFElm0L1B2-8UsZ9wxgyu89JiCY-Jym7iSan2DOdhpz7QHBP8n6apify6c5nZqd-7-cQt7YYY2935MPneRf6leizjo_e_Q1fkNiifeX1z_Elj01J-UDHFWRUwlAqWFB4"/></div></header><main class="relative pt-14 bg-background min-h-screen"><div class="flex flex-col w-full">
+<!-- Dynamic Ambient Glow Backing -->
+<div class="relative w-full overflow-hidden">
+<div class="absolute -top-24 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none"></div>
+<div class="absolute top-1/2 left-1/3 w-80 h-80 bg-secondary/5 rounded-full blur-3xl pointer-events-none"></div>
+<!-- Top Sub-Bar / Status Header -->
+<section class="w-full bg-surface-container-lowest/80 backdrop-blur-md px-space-lg py-space-sm flex flex-wrap items-center justify-between gap-space-sm shadow-sm relative z-30">
+<div class="flex items-center gap-space-md min-w-0">
+<!-- Breadcrumb trail -->
+<div class="flex items-center gap-space-xs font-label-md text-label-md text-outline truncate">
+<span class="text-on-surface-variant font-medium">JavaScript</span>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span class="text-on-surface-variant font-medium">Closures</span>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span class="text-primary font-semibold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+            Editing Note
+          </span>
+</div>
+<div class="h-4 w-px bg-surface-container-highest"></div>
+<!-- Sync indicator -->
+<div class="flex items-center gap-space-xs font-label-sm text-label-sm text-secondary">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">cloud_done</span>
+<span class="truncate">All changes saved to local cache <span class="text-outline text-[10px]">(Auto-saved 14:02:11)</span></span>
+</div>
+</div>
+<!-- Action buttons -->
+<div class="flex items-center gap-space-xs">
+<!-- Note Accent Color trigger button -->
+<button class="flex items-center gap-space-xs px-2.5 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface font-label-sm text-label-sm transition-colors shadow-sm" id="toggleColorPickerBtn" title="Accent Color">
+<span class="w-2.5 h-2.5 rounded-full bg-[#d29922] ring-1 ring-[#d29922]/50 shadow-sm shadow-[#d29922]/40"></span>
+<span class="text-outline-variant">#d29922</span>
+<span class="material-symbols-outlined text-xs text-outline">palette</span>
+</button>
+<div class="h-4 w-px bg-surface-container-highest mx-0.5"></div>
+<!-- Mode toggles -->
+<button class="flex items-center gap-1 px-2.5 py-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-colors" id="previewToggle">
+<span class="material-symbols-outlined text-sm">visibility</span>
+<span>Preview</span>
+</button>
+<button class="flex items-center gap-1 px-2.5 py-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-colors" id="fullscreenToggle" title="Distraction-free Focus">
+<span class="material-symbols-outlined text-sm">fullscreen</span>
+<span>Zen</span>
+</button>
+<button class="px-2.5 py-1 rounded bg-surface-container hover:bg-error/20 text-outline hover:text-error font-label-sm text-label-sm transition-colors">
+          Discard
+        </button>
+<button class="flex items-center gap-1 px-3 py-1 rounded bg-primary-container hover:bg-primary text-on-primary font-label-md text-label-md font-semibold transition-all shadow-md shadow-primary-container/20">
+<span class="material-symbols-outlined text-sm">check</span>
+<span>Save &amp; Close</span>
+</button>
+<!-- Right drawer trigger -->
+<button class="p-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface-variant hover:text-primary transition-colors ml-1" id="toggleDrawerBtn" title="Toggle Outline &amp; Meta">
+<span class="material-symbols-outlined text-base">view_sidebar</span>
+</button>
+</div>
+</section>
+<!-- Editor Sticky Formatting Toolbar -->
+<header class="sticky top-0 z-20 w-full bg-surface-container-low/95 backdrop-blur-xl px-space-lg py-1.5 flex items-center justify-between gap-space-sm shadow-md overflow-x-auto select-none">
+<div class="flex items-center gap-1 flex-wrap min-w-max">
+<!-- Headers -->
+<div class="flex items-center bg-surface-container rounded p-0.5">
+<button class="px-2 py-0.5 rounded text-outline hover:text-on-surface hover:bg-surface-container-high font-label-sm text-label-sm transition-colors" title="Heading 1">H1</button>
+<button class="px-2 py-0.5 rounded bg-surface-container-highest text-primary font-label-sm text-label-sm font-semibold transition-colors" title="Heading 2">H2</button>
+<button class="px-2 py-0.5 rounded text-outline hover:text-on-surface hover:bg-surface-container-high font-label-sm text-label-sm transition-colors" title="Heading 3">H3</button>
+</div>
+<div class="h-4 w-px bg-surface-container-highest mx-1"></div>
+<!-- Inline Formats -->
+<div class="flex items-center bg-surface-container rounded p-0.5">
+<button class="p-1 rounded hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors" title="Bold (⌘B)">
+<span class="material-symbols-outlined text-sm">format_bold</span>
+</button>
+<button class="p-1 rounded hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors" title="Italic (⌘I)">
+<span class="material-symbols-outlined text-sm">format_italic</span>
+</button>
+<button class="p-1 rounded hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors" title="Strikethrough">
+<span class="material-symbols-outlined text-sm">format_strikethrough</span>
+</button>
+</div>
+<!-- Color and Highlighter Dropdowns -->
+<div class="relative group">
+<button class="flex items-center gap-1 px-2 py-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm transition-colors">
+<span class="material-symbols-outlined text-sm text-primary">format_color_text</span>
+<span class="material-symbols-outlined text-xs">arrow_drop_down</span>
+</button>
+</div>
+<div class="relative group">
+<button class="flex items-center gap-1 px-2 py-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm transition-colors" title="Highlight">
+<span class="w-3 h-3 rounded-full bg-secondary-container"></span>
+<span class="material-symbols-outlined text-xs">expand_more</span>
+</button>
+<!-- Highlighter color swatches dropdown preview -->
+<div class="absolute left-0 top-full mt-1 hidden group-hover:flex items-center gap-1 p-1 bg-surface-container-high rounded shadow-xl z-50">
+<span class="w-4 h-4 rounded bg-amber-400 cursor-pointer hover:scale-110 transition-transform" title="Amber Highlight"></span>
+<span class="w-4 h-4 rounded bg-secondary cursor-pointer hover:scale-110 transition-transform" title="Emerald Highlight"></span>
+<span class="w-4 h-4 rounded bg-primary cursor-pointer hover:scale-110 transition-transform" title="Sky Highlight"></span>
+<span class="w-4 h-4 rounded bg-tertiary cursor-pointer hover:scale-110 transition-transform" title="Violet Highlight"></span>
+<span class="w-4 h-4 rounded bg-error cursor-pointer hover:scale-110 transition-transform" title="Coral Highlight"></span>
+</div>
+</div>
+<div class="h-4 w-px bg-surface-container-highest mx-1"></div>
+<!-- Code block & Inline Code -->
+<div class="flex items-center bg-surface-container rounded p-0.5">
+<div class="flex items-center">
+<button class="flex items-center gap-1 px-2 py-0.5 text-primary font-label-sm text-label-sm hover:bg-surface-container-high rounded" title="Code Block">
+<span class="material-symbols-outlined text-sm">terminal</span>
+<span>Code</span>
+</button>
+<span class="text-[10px] font-label-sm text-outline uppercase px-1 bg-surface-container-highest rounded-r">JS</span>
+</div>
+<button class="px-2 py-0.5 text-outline hover:text-on-surface font-label-sm text-label-sm" title="Inline `code`">
+            &lt;/&gt;
+          </button>
+</div>
+<!-- Lists & Structure -->
+<div class="flex items-center bg-surface-container rounded p-0.5">
+<button class="p-1 rounded hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors" title="Bullet List">
+<span class="material-symbols-outlined text-sm">format_list_bulleted</span>
+</button>
+<button class="p-1 rounded hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors" title="Numbered List">
+<span class="material-symbols-outlined text-sm">format_list_numbered</span>
+</button>
+<button class="p-1 rounded bg-surface-container-high text-primary transition-colors" title="Task Checklist">
+<span class="material-symbols-outlined text-sm">checklist</span>
+</button>
+<button class="p-1 rounded hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors" title="Quote">
+<span class="material-symbols-outlined text-sm">format_quote</span>
+</button>
+</div>
+<!-- Callouts & Inserts -->
+<div class="flex items-center bg-surface-container rounded p-0.5">
+<button class="flex items-center gap-1 px-2 py-0.5 text-outline hover:text-on-surface font-label-sm text-label-sm" title="Callout box">
+<span class="material-symbols-outlined text-sm text-amber-400">warning</span>
+<span>Callout</span>
+</button>
+<button class="p-1 rounded hover:bg-surface-container-high text-outline hover:text-on-surface transition-colors" title="Insert Link (⌘K)">
+<span class="material-symbols-outlined text-sm">link</span>
+</button>
+<button class="p-1 rounded hover:bg-surface-container-high text-outline hover:text-on-surface transition-colors" title="Insert Diagram (Mermaid)">
+<span class="material-symbols-outlined text-sm">account_tree</span>
+</button>
+<button class="px-2 py-0.5 text-outline hover:text-on-surface font-label-sm text-label-sm" title="Math LaTeX block">
+<span class="italic font-serif font-bold">fx</span>
+</button>
+</div>
+</div>
+<div class="flex items-center gap-2 text-outline font-label-sm text-label-sm">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs">timer</span> 4 min read</span>
+<span>•</span>
+<span>742 words</span>
+</div>
+</header>
+<!-- Main Workspace Split: Note Body + Right-hand Meta / Color Palette -->
+<div class="w-full flex relative">
+<!-- Primary Note Canvas Area -->
+<main class="flex-1 min-w-0 px-space-lg lg:px-space-2xl py-space-xl flex justify-center transition-all duration-300" id="editorCanvas">
+<article class="w-full max-w-[52rem] flex flex-col gap-space-lg">
+<!-- Note Metadata Header -->
+<div class="space-y-space-sm pb-space-sm bg-gradient-to-b from-transparent to-surface-container-lowest/30 rounded-xl p-space-sm">
+<div class="flex items-center gap-space-sm text-outline font-label-sm text-label-sm">
+<span class="flex items-center gap-1 bg-surface-container px-2 py-0.5 rounded text-outline-variant">
+<span class="material-symbols-outlined text-xs text-primary">folder_open</span>
+                cs/v8-internals/closures.md
+              </span>
+<span>Updated today, 14:02</span>
+<span class="text-secondary flex items-center gap-0.5">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                Public in Workspace
+              </span>
+</div>
+<!-- Note Title Input -->
+<input class="w-full bg-transparent font-display text-display text-on-surface placeholder:text-outline-variant focus:outline-none tracking-tight leading-snug selection:bg-primary-container selection:text-on-primary" placeholder="Untitled Note..." type="text" value="Lexical Environment &amp; Closure Memory Leaks in Node.js"/>
+<!-- Interactive Tags Bar -->
+<div class="flex items-center flex-wrap gap-1.5 pt-1">
+<div class="flex items-center gap-1 px-2 py-0.5 rounded bg-primary/10 text-primary font-label-sm text-label-sm group">
+<span>#v8</span>
+<button class="material-symbols-outlined text-xs opacity-60 group-hover:opacity-100 hover:text-error">close</button>
+</div>
+<div class="flex items-center gap-1 px-2 py-0.5 rounded bg-error/10 text-error font-label-sm text-label-sm group">
+<span>#memory-leak</span>
+<button class="material-symbols-outlined text-xs opacity-60 group-hover:opacity-100 hover:text-on-surface">close</button>
+</div>
+<div class="flex items-center gap-1 px-2 py-0.5 rounded bg-tertiary-container/20 text-tertiary font-label-sm text-label-sm group">
+<span>#closures</span>
+<button class="material-symbols-outlined text-xs opacity-60 group-hover:opacity-100 hover:text-error">close</button>
+</div>
+<div class="flex items-center gap-1 px-2 py-0.5 rounded bg-secondary/10 text-secondary font-label-sm text-label-sm group">
+<span>#heap-snapshot</span>
+<button class="material-symbols-outlined text-xs opacity-60 group-hover:opacity-100 hover:text-error">close</button>
+</div>
+<!-- Add Tag Input Button -->
+<button class="flex items-center gap-1 px-2 py-0.5 rounded bg-surface-container-high hover:bg-surface-bright text-outline-variant hover:text-primary font-label-sm text-label-sm transition-colors">
+<span class="material-symbols-outlined text-xs">add</span>
+<span>Add Tag</span>
+</button>
+</div>
+</div>
+<!-- Section 1 Heading -->
+<div class="group flex items-start justify-between gap-space-sm pt-2">
+<h2 class="font-headline-lg text-headline-lg text-on-surface flex items-center gap-2" id="sec-1">
+<span class="text-primary font-label-md text-label-md px-1.5 py-0.5 rounded bg-surface-container font-mono">01</span>
+              How V8 Allocates Contexts for Inner Functions
+            </h2>
+<button class="opacity-0 group-hover:opacity-100 transition-opacity text-outline hover:text-primary p-1 rounded hover:bg-surface-container" title="Copy Section Link">
+<span class="material-symbols-outlined text-base">link</span>
+</button>
+</div>
+<!-- Narrative paragraph with formatted inline code & highlighted key term -->
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+            In JavaScript engines like Google V8, when an outer function completes execution, its local activation record is typically popped off the call stack. However, whenever any nested function closes over an identifier from that scope, V8 promotes the entire scope to a 
+            <mark class="bg-secondary/20 text-secondary-fixed font-medium px-1.5 py-0.5 rounded tracking-wide">Shared context object on the V8 heap</mark>.
+            This retains not just the explicitly accessed primitive variables, but under certain multi-closure constellations, causes unexpected reference pin-down.
+          </p>
+<!-- Callout Warning Box (Custom Aesthetic Noir) -->
+<div class="rounded-xl bg-[#221c10] p-space-base shadow-sm relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-[#d29922]"></div>
+<div class="flex items-start gap-space-md">
+<div class="w-7 h-7 rounded-lg bg-[#33250c] flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[#e3b341] text-base">warning</span>
+</div>
+<div class="space-y-1">
+<div class="font-headline-sm text-headline-sm text-[#f0e1c0] flex items-center gap-2">
+<span>Scope Pollution &amp; Memory Pinning</span>
+<span class="font-label-sm text-label-sm uppercase px-1.5 py-0.2 rounded bg-[#3d2b0e] text-[#e3b341]">Pitfall</span>
+</div>
+<p class="font-body-md text-body-md text-[#dcd2b9] leading-relaxed">
+<strong>Warning:</strong> If an unused variable in the closure scope references large buffers (such as raw IPC packets or file streams), it may prevent garbage collection entirely if <em class="text-[#f7e3af]">any sibling closure escapes</em> to an external callback or long-lived event listener.
+                </p>
+</div>
+</div>
+</div>
+<!-- Code Snippet Container -->
+<div class="rounded-xl bg-surface-container-lowest overflow-hidden shadow-lg">
+<!-- Code Block Header -->
+<div class="px-space-base py-2 bg-surface-container flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-error/60"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-amber-500/60"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-secondary/60"></span>
+</div>
+<span class="font-label-md text-label-md text-on-surface font-semibold flex items-center gap-1 ml-2">
+<span class="material-symbols-outlined text-xs text-primary">data_object</span>
+                  leak-simulation.js
+                </span>
+<span class="font-label-sm text-label-sm text-outline bg-surface-container-high px-2 py-0.5 rounded">Node v20.x</span>
+</div>
+<div class="flex items-center gap-1">
+<button class="flex items-center gap-1 px-2 py-1 rounded hover:bg-surface-container-highest text-outline hover:text-on-surface font-label-sm text-label-sm transition-colors" id="copyCodeBtn">
+<span class="material-symbols-outlined text-xs">content_copy</span>
+<span>Copy</span>
+</button>
+<button class="p-1 rounded hover:bg-surface-container-highest text-outline hover:text-on-surface transition-colors" title="Run in Sandbox">
+<span class="material-symbols-outlined text-sm">play_arrow</span>
+</button>
+</div>
+</div>
+<!-- Code Editor Body with Line Numbers & Monokai Noir Syntax Highlights -->
+<div class="p-space-base font-code-block text-code-block flex overflow-x-auto selection:bg-primary-container selection:text-on-primary">
+<!-- Line Numbers -->
+<div class="select-none text-outline-variant text-right pr-space-base flex flex-col font-label-md text-label-md opacity-40">
+<span>01</span>
+<span>02</span>
+<span>03</span>
+<span>04</span>
+<span>05</span>
+<span>06</span>
+<span>07</span>
+<span>08</span>
+<span>09</span>
+<span>10</span>
+<span>11</span>
+<span>12</span>
+<span>13</span>
+<span>14</span>
+</div>
+<!-- Syntax Body -->
+<div class="flex-1 whitespace-pre leading-5 text-on-surface pl-space-xs font-mono">
+<span class="text-tertiary">let</span> <span class="text-on-surface">outerScopeRef</span> = <span class="text-error">null</span>;
+
+<span class="text-primary-container font-semibold">function</span> <span class="text-secondary font-semibold">induceClosureLeak</span>() {
+  <span class="text-tertiary">const</span> <span class="text-on-surface">originalRef</span> = <span class="text-on-surface">outerScopeRef</span>;
+  <span class="text-tertiary">const</span> <span class="text-primary">hugeBuffer</span> = <span class="text-primary-container">Buffer</span>.<span class="text-secondary">alloc</span>(<span class="text-amber-400">1024</span> * <span class="text-amber-400">1024</span> * <span class="text-amber-400">64</span>); <span class="text-outline italic">// 64MB Payload</span>
+<span class="text-outline italic">// Sibling closure prevents 'hugeBuffer' from de-allocation</span>
+<span class="text-on-surface">outerScopeRef</span> = {
+    <span class="text-secondary">retainedBuffer</span>: <span class="text-primary">hugeBuffer</span>,
+    <span class="text-secondary">leakyCallback</span>: <span class="text-primary-container">function</span>() {
+      <span class="text-primary-container">if</span> (<span class="text-on-surface">originalRef</span>) <span class="text-primary-container">console</span>.<span class="text-secondary">log</span>(<span class="text-amber-300">"Traversing heap chain"</span>);
+    }
+  };
+}
+
+<span class="text-secondary">setInterval</span>(<span class="text-on-surface">induceClosureLeak</span>, <span class="text-amber-400">500</span>);</div>
+</div>
+<!-- Code execution footer note -->
+<div class="px-space-base py-1.5 bg-surface-container-high/40 flex items-center justify-between text-outline font-label-sm text-label-sm">
+<span class="flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-error animate-ping"></span>
+                Rapid RSS growth: ~128MB / second under high load
+              </span>
+<span class="text-outline-variant">Heap Allocation Tracked</span>
+</div>
+</div>
+<!-- Section 2: Investigation Checklist -->
+<div class="space-y-space-md pt-2">
+<h2 class="font-headline-lg text-headline-lg text-on-surface flex items-center gap-2" id="sec-2">
+<span class="text-primary font-label-md text-label-md px-1.5 py-0.5 rounded bg-surface-container font-mono">02</span>
+              Remediation &amp; Memory Diagnostics Checklist
+            </h2>
+<p class="font-body-md text-body-md text-on-surface-variant">
+              Follow this structured verification workflow before merging fixes to release branch:
+            </p>
+<!-- Checklist Card Component -->
+<div class="bg-surface-container rounded-xl p-space-base space-y-space-sm shadow-sm">
+<label class="flex items-center gap-space-sm p-2 rounded-lg bg-surface-container-low hover:bg-surface-container-high cursor-pointer transition-colors group">
+<input checked="" class="w-4 h-4 rounded bg-surface-container-highest text-primary focus:ring-0 cursor-pointer accent-primary" type="checkbox"/>
+<span class="font-body-md text-body-md text-outline line-through group-hover:text-on-surface-variant transition-colors flex-1">
+                  Trace in Chrome DevTools Memory Tab (Comparison View)
+                </span>
+<span class="font-label-sm text-label-sm px-1.5 py-0.5 rounded bg-secondary/15 text-secondary">Verified</span>
+</label>
+<label class="flex items-center gap-space-sm p-2 rounded-lg bg-surface-container-low hover:bg-surface-container-high cursor-pointer transition-colors group">
+<input class="w-4 h-4 rounded bg-surface-container-highest text-primary focus:ring-0 cursor-pointer accent-primary" type="checkbox"/>
+<span class="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors flex-1">
+                  Profile with heap snapshot and look for <code class="font-label-sm bg-surface-container px-1 py-0.5 rounded text-amber-300">system / Context</code> retaining nodes
+                </span>
+<span class="font-label-sm text-label-sm px-1.5 py-0.5 rounded bg-surface-container-highest text-outline">Pending</span>
+</label>
+<label class="flex items-center gap-space-sm p-2 rounded-lg bg-surface-container-low hover:bg-surface-container-high cursor-pointer transition-colors group">
+<input class="w-4 h-4 rounded bg-surface-container-highest text-primary focus:ring-0 cursor-pointer accent-primary" type="checkbox"/>
+<span class="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors flex-1">
+                  Write Jest unit test verifying manual GC cycle with <code class="font-label-sm bg-surface-container px-1 py-0.5 rounded text-secondary">global.gc()</code> exposed
+                </span>
+<span class="font-label-sm text-label-sm px-1.5 py-0.5 rounded bg-surface-container-highest text-outline">Priority</span>
+</label>
+</div>
+</div>
+<!-- Section 3: Visual Diagnostic Diagram preview -->
+<div class="p-space-base rounded-xl bg-surface-container-low space-y-space-sm shadow-sm">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-tertiary">schema</span>
+                Retainer Graph Visualization
+              </span>
+<span class="font-label-sm text-label-sm text-outline">SVG Retainer Tree</span>
+</div>
+<div class="w-full bg-surface-container-lowest p-space-lg rounded-lg flex items-center justify-center">
+<svg class="w-full max-w-lg text-outline" fill="none" viewbox="0 0 540 100" xmlns="http://www.w3.org/2000/svg">
+<!-- Node 1: Root -->
+<rect fill="#182028" height="36" rx="6" stroke="#414753" stroke-width="1.5" width="110" x="10" y="32"></rect>
+<text fill="#dae3ee" font-family="JetBrains Mono" font-size="11" font-weight="500" text-anchor="middle" x="65" y="55">(GC Roots)</text>
+<!-- Connector 1 -->
+<line stroke="#aac7ff" stroke-dasharray="3 3" stroke-width="2" x1="120" x2="160" y1="50" y2="50"></line>
+<polygon fill="#aac7ff" points="160,47 167,50 160,53"></polygon>
+<!-- Node 2: Context Heap Object -->
+<rect fill="#222b33" height="52" rx="6" stroke="#aac7ff" stroke-width="1.5" width="160" x="168" y="24"></rect>
+<text fill="#aac7ff" font-family="JetBrains Mono" font-size="11" font-weight="600" text-anchor="middle" x="248" y="46">system/Context</text>
+<text fill="#8b919f" font-family="JetBrains Mono" font-size="9" text-anchor="middle" x="248" y="62">retains originalRef</text>
+<!-- Connector 2 -->
+<line stroke="#67df70" stroke-width="2" x1="328" x2="378" y1="50" y2="50"></line>
+<polygon fill="#67df70" points="378,47 385,50 378,53"></polygon>
+<!-- Node 3: Unreachable Large Buffer -->
+<rect fill="#221c10" height="52" rx="6" stroke="#d29922" stroke-width="1.5" width="140" x="386" y="24"></rect>
+<text fill="#e3b341" font-family="JetBrains Mono" font-size="11" font-weight="600" text-anchor="middle" x="456" y="46">ArrayBuffer [64MB]</text>
+<text fill="#ffb4ab" font-family="JetBrains Mono" font-size="9" text-anchor="middle" x="456" y="62">Pinned on heap</text>
+</svg>
+</div>
+</div>
+<!-- Bottom spacing buffer for comfortable reading -->
+<div class="h-20"></div>
+</article>
+</main>
+<!-- Right-hand Slideout / Collapsible Assistant Panel -->
+<aside class="w-80 bg-surface-container-low/95 backdrop-blur-xl p-space-md flex flex-col gap-space-lg shrink-0 shadow-2xl relative transition-all duration-300" id="assistantDrawer">
+<!-- Drawer Header -->
+<div class="flex items-center justify-between pb-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-base">tune</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Note Inspector</span>
+</div>
+<button class="text-outline hover:text-on-surface p-1 rounded hover:bg-surface-container transition-colors" id="closeDrawerBtn">
+<span class="material-symbols-outlined text-base">close</span>
+</button>
+</div>
+<!-- Section 1: Note Accent Color Palette Picker -->
+<div class="space-y-space-sm bg-surface-container rounded-xl p-space-sm shadow-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold">Note Accent Theme</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">#d29922</span>
+</div>
+<!-- Presets Grid -->
+<div class="grid grid-cols-6 gap-1.5 pt-1">
+<button class="w-full aspect-square rounded bg-[#388bfd] hover:scale-110 transition-transform" title="Terminal Blue"></button>
+<button class="w-full aspect-square rounded bg-[#67df70] hover:scale-110 transition-transform" title="Emerald"></button>
+<button class="w-full aspect-square rounded bg-[#d29922] ring-2 ring-on-surface scale-105 shadow-md transition-transform" title="Amber Selected"></button>
+<button class="w-full aspect-square rounded bg-[#a371f7] hover:scale-110 transition-transform" title="Violet"></button>
+<button class="w-full aspect-square rounded bg-[#f85149] hover:scale-110 transition-transform" title="Rose"></button>
+<button class="w-full aspect-square rounded bg-[#8b949e] hover:scale-110 transition-transform" title="Slate"></button>
+</div>
+<!-- Hex Input & Dynamic Preview -->
+<div class="flex items-center gap-space-xs mt-2">
+<div class="w-6 h-6 rounded bg-[#d29922] shrink-0 shadow-inner"></div>
+<div class="flex-1 flex items-center bg-surface-container-highest px-2 py-1 rounded">
+<span class="text-outline font-mono text-xs select-none">#</span>
+<input class="w-full bg-transparent text-xs font-mono text-on-surface focus:outline-none ml-1 uppercase" maxlength="6" type="text" value="d29922"/>
+</div>
+<button class="px-2 py-1 bg-surface-container-high hover:bg-surface-bright text-on-surface font-label-sm text-label-sm rounded transition-colors">
+              Set
+            </button>
+</div>
+<!-- Recent Swatches -->
+<div class="flex items-center justify-between pt-1">
+<span class="text-[10px] text-outline uppercase font-label-sm">Recent Colors</span>
+<div class="flex items-center gap-1">
+<span class="w-3.5 h-3.5 rounded-full bg-[#1f6feb] cursor-pointer hover:opacity-80"></span>
+<span class="w-3.5 h-3.5 rounded-full bg-[#238636] cursor-pointer hover:opacity-80"></span>
+<span class="w-3.5 h-3.5 rounded-full bg-[#8957e5] cursor-pointer hover:opacity-80"></span>
+<span class="w-3.5 h-3.5 rounded-full bg-[#da3633] cursor-pointer hover:opacity-80"></span>
+</div>
+</div>
+</div>
+<!-- Section 2: Table of Contents / Outline -->
+<div class="space-y-space-xs flex-1">
+<div class="flex items-center justify-between pb-1">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold">Table of Contents</span>
+<span class="font-label-sm text-label-sm text-outline font-mono">2 Headings</span>
+</div>
+<nav class="space-y-1">
+<a class="flex items-center gap-2 px-2 py-1.5 rounded-lg bg-surface-container text-primary font-body-sm text-body-sm hover:bg-surface-container-high transition-colors" href="#sec-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary shrink-0"></span>
+<span class="truncate font-medium">1. Contexts Allocation</span>
+</a>
+<a class="flex items-center gap-2 px-2 py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-body-sm text-body-sm transition-colors" href="#sec-2">
+<span class="w-1.5 h-1.5 rounded-full bg-outline-variant shrink-0"></span>
+<span class="truncate">2. Diagnostics Checklist</span>
+</a>
+<div class="pl-5 pt-0.5 space-y-1">
+<a class="block py-1 text-[11px] text-outline hover:text-on-surface truncate transition-colors" href="#">
+                • Retainer Graph
+              </a>
+<a class="block py-1 text-[11px] text-outline hover:text-on-surface truncate transition-colors" href="#">
+                • Chrome Memory Tools
+              </a>
+</div>
+</nav>
+</div>
+<!-- Section 3: Technical Metadata Stats -->
+<div class="p-space-sm rounded-xl bg-surface-container space-y-2 text-outline font-label-sm text-label-sm">
+<div class="flex items-center justify-between">
+<span>Syntax Target:</span>
+<span class="text-on-surface font-mono">ECMAScript 2023</span>
+</div>
+<div class="flex items-center justify-between">
+<span>Engine Target:</span>
+<span class="text-on-surface font-mono">V8 11.8 / Node 20</span>
+</div>
+<div class="flex items-center justify-between">
+<span>Revision History:</span>
+<span class="text-primary hover:underline cursor-pointer">v14 (12 mins ago)</span>
+</div>
+</div>
+</aside>
+</div>
+</div>
+<!-- Micro-interactions JavaScript logic -->
+<script>
+    (function initEditorInteractions() {
+      const drawer = document.getElementById('assistantDrawer');
+      const toggleDrawerBtn = document.getElementById('toggleDrawerBtn');
+      const closeDrawerBtn = document.getElementById('closeDrawerBtn');
+      const toggleColorPickerBtn = document.getElementById('toggleColorPickerBtn');
+      const fullscreenToggle = document.getElementById('fullscreenToggle');
+      const copyCodeBtn = document.getElementById('copyCodeBtn');
+
+      // Toggle right sidebar
+      function toggleDrawer() {
+        if (!drawer) return;
+        if (drawer.classList.contains('hidden')) {
+          drawer.classList.remove('hidden');
+        } else {
+          drawer.classList.add('hidden');
+        }
+      }
+
+      if (toggleDrawerBtn) toggleDrawerBtn.addEventListener('click', toggleDrawer);
+      if (closeDrawerBtn) closeDrawerBtn.addEventListener('click', toggleDrawer);
+      if (toggleColorPickerBtn) toggleColorPickerBtn.addEventListener('click', () => {
+        if (drawer && drawer.classList.contains('hidden')) {
+          drawer.classList.remove('hidden');
+        }
+      });
+
+      // Zen / Fullscreen Mode toggle
+      if (fullscreenToggle) {
+        fullscreenToggle.addEventListener('click', () => {
+          const isFull = document.fullscreenElement;
+          if (!isFull) {
+            document.documentElement.requestFullscreen().catch(() => {});
+            fullscreenToggle.classList.add('bg-primary-container', 'text-on-primary');
+          } else {
+            document.exitFullscreen().catch(() => {});
+            fullscreenToggle.classList.remove('bg-primary-container', 'text-on-primary');
+          }
+        });
+      }
+
+      // Copy Code Snippet feedback
+      if (copyCodeBtn) {
+        copyCodeBtn.addEventListener('click', () => {
+          const originalHTML = copyCodeBtn.innerHTML;
+          copyCodeBtn.innerHTML = `<span class="material-symbols-outlined text-xs text-secondary">check</span><span class="text-secondary">Copied!</span>`;
+          setTimeout(() => {
+            copyCodeBtn.innerHTML = originalHTML;
+          }, 1800);
+        });
+      }
+    })();
+  </script>
+</div></main></div></body></html>

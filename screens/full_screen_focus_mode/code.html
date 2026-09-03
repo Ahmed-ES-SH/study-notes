@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"surface-container-high":"#222b33","on-primary-container":"#002959","background":"#0b141c","secondary":"#67df70","inverse-primary":"#005cba","primary-fixed-dim":"#aac7ff","tertiary-container":"#a875fc","surface-tint":"#aac7ff","surface-container":"#182028","surface-variant":"#2d363e","inverse-on-surface":"#29313a","primary":"#aac7ff","surface-container-highest":"#2d363e","outline":"#8b919f","on-background":"#dae3ee","inverse-surface":"#dae3ee","on-tertiary-container":"#39007a","secondary-fixed":"#83fc89","on-secondary":"#00390d","on-tertiary-fixed":"#270058","on-surface-variant":"#c1c6d6","on-surface":"#dae3ee","surface":"#0b141c","surface-dim":"#0b141c","on-tertiary":"#41008b","on-primary-fixed-variant":"#00458e","secondary-container":"#27a640","on-error":"#690005","on-primary":"#002f65","error-container":"#93000a","primary-fixed":"#d7e3ff","outline-variant":"#414753","on-tertiary-fixed-variant":"#5a21ab","primary-container":"#418fff","tertiary-fixed":"#ecdcff","surface-container-low":"#141c24","on-primary-fixed":"#001b3e","surface-container-lowest":"#060f16","on-secondary-fixed-variant":"#005317","secondary-fixed-dim":"#67df70","tertiary-fixed-dim":"#d5bbff","surface-bright":"#313a43","error":"#ffb4ab","on-error-container":"#ffdad6","on-secondary-fixed":"#002105","tertiary":"#d5bbff","on-secondary-container":"#00320a"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"space-2xs":"0.125rem","sidebar-collapsed":"3.5rem","space-xl":"2rem","space-base":"1rem","space-md":"0.75rem","space-sm":"0.5rem","space-xs":"0.25rem","space-lg":"1.5rem","space-2xl":"3rem","reading-column-max":"52rem","sidebar-expanded":"16rem","modal-standard":"40rem"},"fontFamily":{"headline-md":["Inter"],"label-md":["JetBrains Mono"],"body-sm":["Inter"],"headline-lg":["Inter"],"label-sm":["JetBrains Mono"],"code-block":["JetBrains Mono"],"body-lg":["Inter"],"code-inline":["JetBrains Mono"],"headline-sm":["Inter"],"body-md":["Inter"],"display":["Inter"]},"fontSize":{"headline-md":["20px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"600"}],"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.02em","fontWeight":"500"}],"body-sm":["12px",{"lineHeight":"18px","letterSpacing":"0em","fontWeight":"400"}],"headline-lg":["24px",{"lineHeight":"32px","letterSpacing":"-0.015em","fontWeight":"600"}],"label-sm":["11px",{"lineHeight":"14px","letterSpacing":"0.03em","fontWeight":"400"}],"code-block":["13px",{"lineHeight":"20px","letterSpacing":"0em","fontWeight":"400"}],"body-lg":["16px",{"lineHeight":"26px","letterSpacing":"-0.005em","fontWeight":"400"}],"code-inline":["12px",{"lineHeight":"16px","letterSpacing":"-0.01em","fontWeight":"500"}],"headline-sm":["16px",{"lineHeight":"24px","letterSpacing":"-0.005em","fontWeight":"600"}],"body-md":["14px",{"lineHeight":"22px","letterSpacing":"0em","fontWeight":"400"}],"display":["32px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"600"}]}}}}</script></head><body class="bg-background font-body-md text-body-md text-on-surface antialiased min-h-screen"><aside class="fixed left-0 top-0 bottom-0 w-72 bg-surface-container-low z-50 flex flex-col justify-between select-none"><div class="flex flex-col h-full overflow-hidden"><div class="h-14 px-space-base flex items-center justify-between bg-surface-container-low/50"><div class="flex items-center gap-space-sm"><div class="w-7 h-7 rounded-lg bg-surface-container-highest flex items-center justify-center"><span class="material-symbols-outlined text-primary text-lg">terminal</span></div><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight">DevNotes</span><span class="font-label-sm text-label-sm px-1.5 py-0.5 rounded bg-surface-container text-outline">v2.4</span></div><button class="text-on-surface-variant hover:text-on-surface p-1 rounded-lg hover:bg-surface-container-high transition-colors" title="Toggle Sidebar"><span class="material-symbols-outlined text-lg">dock_to_left</span></button></div><div class="px-space-base py-space-sm"><button class="w-full flex items-center justify-between px-space-sm py-1.5 rounded-lg bg-surface-container text-outline-variant hover:text-on-surface-variant hover:bg-surface-container-high transition-all"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-sm">search</span><span class="font-body-sm text-body-sm text-outline">Quick search...</span></div><div class="flex items-center gap-0.5 font-label-sm text-label-sm text-outline bg-surface-container-highest px-1.5 py-0.5 rounded"><span class="text-[10px]">⌘</span>K</div></button></div><nav class="px-space-sm py-space-xs flex flex-col gap-0.5" data-active-classes="bg-surface-container-high text-primary font-medium rounded-lg"><a class="flex items-center gap-space-sm px-space-sm py-1.5 rounded-lg font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" data-path="dashboard" href="#"><span class="material-symbols-outlined text-lg">grid_view</span><span>Dashboard</span></a><a class="flex items-center gap-space-sm px-space-sm py-1.5 rounded-lg font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" data-path="favorites" href="#"><span class="material-symbols-outlined text-lg">bookmark</span><span>Favorites</span><span class="ml-auto font-label-sm text-label-sm text-outline">6</span></a><a class="flex items-center gap-space-sm px-space-sm py-1.5 rounded-lg font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" data-path="global-search" href="#"><span class="material-symbols-outlined text-lg">manage_search</span><span>Global Search</span></a><a class="flex items-center gap-space-sm px-space-sm py-1.5 rounded-lg font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" data-path="settings" href="#"><span class="material-symbols-outlined text-lg">settings</span><span>Settings</span></a></nav><div class="flex-1 overflow-y-auto px-space-sm py-space-xs"><div class="flex items-center justify-between px-space-sm py-space-xs mt-space-xs"><span class="font-label-sm text-label-sm tracking-wider text-outline uppercase font-semibold">Sections</span><button class="text-outline hover:text-primary p-0.5 rounded hover:bg-surface-container transition-colors" title="Add Section"><span class="material-symbols-outlined text-base">add</span></button></div><div class="space-y-1 mt-1 font-body-sm text-body-sm"><div class="group"><div class="flex items-center justify-between px-space-sm py-1 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container cursor-pointer transition-colors"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-base text-outline">chevron_right</span><span class="w-2 h-2 rounded-full bg-secondary-container"></span><span class="truncate font-medium">Programming Fundamentals</span></div></div></div><div class="group"><div class="flex items-center justify-between px-space-sm py-1 rounded-lg text-on-surface bg-surface-container-high/60 cursor-pointer"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-base text-on-surface-variant">expand_more</span><span class="w-2 h-2 rounded-full bg-tertiary-container"></span><span class="truncate font-medium text-on-surface">JavaScript</span></div></div><div class="pl-5 py-0.5 space-y-0.5"><a class="block px-space-sm py-1 rounded-lg text-outline hover:text-on-surface hover:bg-surface-container transition-colors truncate" data-path="javascript-fundamentals" href="#">Fundamentals</a><a class="block px-space-sm py-1 rounded-lg text-outline hover:text-on-surface hover:bg-surface-container transition-colors truncate" data-path="javascript-functions" href="#">Functions &amp; Scope</a><a class="flex items-center justify-between px-space-sm py-1 rounded-lg bg-surface-container-highest text-primary font-medium truncate" data-path="javascript-closures" href="#"><span>Closures</span><span class="w-1.5 h-1.5 rounded-full bg-primary"></span></a><a class="block px-space-sm py-1 rounded-lg text-outline hover:text-on-surface hover:bg-surface-container transition-colors truncate" data-path="javascript-async" href="#">Asynchronous JS</a><a class="block px-space-sm py-1 rounded-lg text-outline hover:text-on-surface hover:bg-surface-container transition-colors truncate" data-path="javascript-dom" href="#">DOM &amp; Events</a></div></div><div class="group"><div class="flex items-center justify-between px-space-sm py-1 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container cursor-pointer transition-colors"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-base text-outline">chevron_right</span><span class="w-2 h-2 rounded-full bg-primary-container"></span><span class="truncate font-medium">TypeScript</span></div></div></div><div class="group"><div class="flex items-center justify-between px-space-sm py-1 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container cursor-pointer transition-colors"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-base text-outline">chevron_right</span><span class="w-2 h-2 rounded-full bg-secondary-fixed-dim"></span><span class="truncate font-medium">React</span></div></div></div></div></div><div class="p-space-sm bg-surface-container-lowest/70 m-space-xs rounded-xl"><div class="flex items-center gap-space-sm"><div class="relative"><div class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center text-primary font-headline-sm text-headline-sm overflow-hidden"><span class="material-symbols-outlined text-lg">account_circle</span></div><span class="absolute bottom-0 right-0 w-2 h-2 rounded-full bg-secondary ring-2 ring-surface-container-low"></span></div><div class="flex-1 min-w-0"><div class="flex items-center justify-between"><span class="font-label-md text-label-md text-on-surface truncate font-semibold">alex.dev</span><a class="text-outline hover:text-on-surface transition-colors" data-path="settings" href="#"><span class="material-symbols-outlined text-base">tune</span></a></div><div class="w-full bg-surface-container h-1 rounded-full overflow-hidden mt-1"><div class="bg-primary h-full w-[2.4%]"></div></div><div class="flex justify-between items-center mt-1 font-label-sm text-label-sm text-outline"><span class="text-[10px]">48 MB / 2 GB</span><span class="text-[10px]">2%</span></div></div></div></div></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-14 bg-background/80 backdrop-blur-xl z-40 flex items-center justify-between px-space-lg"><div class="flex items-center gap-space-sm font-label-md text-label-md text-outline"><a class="hover:text-on-surface transition-colors" data-path="dashboard" href="#">DevNotes</a><span class="material-symbols-outlined text-xs">chevron_right</span><span class="hover:text-on-surface transition-colors">JavaScript</span><span class="material-symbols-outlined text-xs">chevron_right</span><span class="text-on-surface font-semibold">Closures</span></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs font-label-sm text-label-sm text-secondary bg-surface-container px-2 py-0.5 rounded-full"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span><span>Synced</span></div><button class="text-on-surface-variant hover:text-on-surface p-1 rounded-lg hover:bg-surface-container-high transition-colors" title="Study Mode"><span class="material-symbols-outlined text-lg">menu_book</span></button><button class="text-on-surface-variant hover:text-on-surface p-1 rounded-lg hover:bg-surface-container-high transition-colors" title="Command Palette"><span class="material-symbols-outlined text-lg">terminal</span></button><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1VmCAywLS4fzluife9Oyc9mIQXRULiuEIpsLA6mxoU1VFwrfb7i2Ya1CEuk7NyoomAnponhyvoVU9-U4rydavokniF9cDofqzd-9TNGcEGEJRO8a2T7zENyjuWDFElm0L1B2-8UsZ9wxgyu89JiCY-Jym7iSan2DOdhpz7QHBP8n6apify6c5nZqd-7-cQt7YYY2935MPneRf6leizjo_e_Q1fkNiifeX1z_Elj01J-UDHFWRUwlAqWFB4"/></div></header><main class="relative pt-14 bg-background min-h-screen"><div class="flex flex-col w-full">
+<!-- Top Full-Screen Distraction-Free Header Bar -->
+<header class="sticky top-0 z-50 flex items-center justify-between px-space-lg py-space-sm bg-surface-container-low shadow-sm select-none">
+<!-- Left: Navigation & Breadcrumbs -->
+<div class="flex items-center gap-space-md min-w-0">
+<button class="flex items-center gap-space-xs px-space-sm py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface transition-all active:scale-95 group">
+<span class="material-symbols-outlined text-base group-hover:-translate-x-0.5 transition-transform text-primary">arrow_back</span>
+<span class="font-label-md text-label-md">Back to Closures</span>
+</button>
+<div class="hidden md:flex items-center gap-1.5 font-label-sm text-label-sm text-outline">
+<span class="hover:text-on-surface cursor-pointer">JavaScript</span>
+<span class="material-symbols-outlined text-[12px]">chevron_right</span>
+<span class="hover:text-on-surface cursor-pointer">Closures</span>
+<span class="material-symbols-outlined text-[12px]">chevron_right</span>
+<span class="text-primary font-medium">Note #3</span>
+</div>
+</div>
+<!-- Center: Note Title & Reading Progress Meter -->
+<div class="hidden lg:flex flex-col items-center max-w-sm w-full px-space-base">
+<div class="flex items-center justify-between w-full font-label-sm text-label-sm mb-1">
+<span class="text-on-surface-variant truncate font-medium max-w-[200px]">Lexical Scope &amp; [[Scopes]]</span>
+<span class="text-primary font-mono" id="reading-percent">48% read</span>
+</div>
+<div class="w-full bg-surface-container h-1 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full transition-all duration-150" id="reading-progress-bar" style="width: 48%;"></div>
+</div>
+</div>
+<!-- Right: Focus Controls, Sizing, and Quick Shortcuts -->
+<div class="flex items-center gap-space-xs">
+<!-- Prev/Next Keyboard Nav -->
+<div class="flex items-center bg-surface-container rounded-lg p-0.5 mr-1">
+<button class="p-1 rounded-md text-outline hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Previous Note (⌘[)">
+<span class="material-symbols-outlined text-base">arrow_upward</span>
+</button>
+<span class="w-[1px] h-3 bg-surface-container-highest"></span>
+<button class="p-1 rounded-md text-outline hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Next Note (⌘])">
+<span class="material-symbols-outlined text-base">arrow_downward</span>
+</button>
+</div>
+<!-- Typography Size Slider / Preset Toggle -->
+<div class="flex items-center bg-surface-container rounded-lg p-0.5">
+<button class="px-2 py-1 rounded-md font-label-md text-label-md text-outline hover:text-on-surface hover:bg-surface-container-high transition-colors" id="btn-font-dec" title="Decrease Font (A-)">A-</button>
+<button class="px-2 py-1 rounded-md font-label-md text-label-md text-outline hover:text-on-surface hover:bg-surface-container-high transition-colors" id="btn-font-inc" title="Increase Font (A+)">A+</button>
+</div>
+<!-- Line Width Selector -->
+<div class="hidden sm:flex items-center bg-surface-container rounded-lg p-0.5 font-label-sm text-label-sm">
+<button class="px-2 py-1 rounded-md text-outline hover:text-on-surface transition-colors" id="btn-width-narrow">Narrow</button>
+<button class="px-2 py-1 rounded-md bg-surface-container-high text-primary font-semibold shadow-sm transition-colors" id="btn-width-std">Std</button>
+<button class="px-2 py-1 rounded-md text-outline hover:text-on-surface transition-colors" id="btn-width-wide">Wide</button>
+</div>
+<!-- Edit Note Button -->
+<button class="flex items-center gap-1 px-space-sm py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-outline hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-base text-primary">edit_note</span>
+<span class="font-label-md text-label-md hidden md:inline">Edit</span>
+</button>
+<!-- Exit Fullscreen -->
+<button class="p-1.5 rounded-lg bg-surface-container text-outline hover:text-error hover:bg-surface-container-high transition-colors ml-1" title="Exit Fullscreen (Esc)">
+<span class="material-symbols-outlined text-base">fullscreen_exit</span>
+</button>
+</div>
+</header>
+<!-- Ambient Glow Background Canvas -->
+<div class="relative w-full overflow-hidden">
+<div class="absolute top-10 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-gradient-to-b from-primary/5 via-tertiary-container/5 to-transparent blur-3xl pointer-events-none rounded-full"></div>
+<!-- Reading Container (Dynamic Width Toggled) -->
+<div class="mx-auto w-full max-w-4xl py-space-xl px-space-lg transition-all duration-300" id="reader-column">
+<!-- Metadata & Taxonomy Header -->
+<div class="flex flex-col gap-space-sm mb-space-xl">
+<div class="flex items-center gap-space-sm">
+<!-- Amber Section Badge -->
+<div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-[#d29922]/15 text-[#d29922] shadow-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-[#d29922]"></span>
+<span class="font-label-sm text-label-sm font-semibold tracking-wider uppercase">JavaScript • Closures</span>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded-md bg-surface-container-highest text-outline">V8 Spec #891</span>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded-md bg-surface-container-highest text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">verified</span> Verified Accuracy
+          </span>
+</div>
+<h1 class="font-display text-display tracking-tight text-on-surface mt-2 font-bold leading-tight" id="reader-title">
+          Understanding Lexical Scope and the [[Scopes]] Property in V8
+        </h1>
+<!-- Author, Read Time, Tags -->
+<div class="flex flex-wrap items-center gap-x-space-md gap-y-1 font-label-md text-label-md text-outline mt-1 pb-space-md">
+<div class="flex items-center gap-1.5 text-on-surface font-medium">
+<span class="material-symbols-outlined text-base text-primary">account_circle</span>
+<span>Alex Dev</span>
+</div>
+<span class="text-outline-variant">•</span>
+<span>Published Oct 14</span>
+<span class="text-outline-variant">•</span>
+<span class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">schedule</span>
+            12 min comprehensive read
+          </span>
+<span class="text-outline-variant">•</span>
+<div class="flex items-center gap-1 font-mono text-[11px] text-tertiary">
+<span>#v8</span>
+<span>#engines</span>
+<span>#scope-chain</span>
+<span>#memory</span>
+</div>
+</div>
+</div>
+<!-- Lead Paragraph & Editorial Definition Callout -->
+<div class="flex flex-col gap-space-md mb-space-xl">
+<p class="font-body-lg text-body-lg text-on-surface leading-relaxed font-normal" id="lead-text">
+          In ECMAScript engines, closures are typically defined as functions combined with references to their surrounding state. However, beneath the specification lies a rigorous memory representation. Chromium's V8 engine reifies this abstraction through the internal hidden slot labeled <code class="font-code-inline text-code-inline px-1.5 py-0.5 rounded bg-surface-container-highest text-primary font-mono">[[Scopes]]</code>, allocating context environments directly on the garbage-collected V8 heap.
+        </p>
+<!-- Definition Callout with Left Brand Stripe -->
+<div class="relative p-space-lg rounded-xl bg-surface-container-low shadow-sm">
+<div class="absolute left-0 top-3 bottom-3 w-1 bg-primary rounded-r"></div>
+<div class="flex items-start gap-space-md pl-1">
+<span class="material-symbols-outlined text-primary text-xl mt-0.5">terminal</span>
+<div class="space-y-1">
+<span class="font-label-md text-label-md text-primary font-semibold uppercase tracking-wider">Engine Axiom</span>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                When an inner function escapes its lexical parent, V8 performs an escape analysis during bytecode ignition. Variables referenced downstream are promoted from volatile call-stack frames into persistent <strong class="text-on-surface font-semibold">Context Objects</strong> allocated on the heap.
+              </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Section: Visual Architecture Diagram -->
+<section class="mb-space-2xl space-y-space-base">
+<div class="flex items-center justify-between">
+<div>
+<span class="font-label-sm text-label-sm font-semibold text-outline uppercase tracking-widest">Section 01</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">The Internal [[Scopes]] Array in DevTools</h2>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="px-2 py-0.5 rounded text-[11px] font-mono bg-secondary/10 text-secondary">Heap Allocated</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-mono bg-tertiary-container/20 text-tertiary">Execution Context</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-mono bg-[#d29922]/15 text-[#d29922]">Trap/Pitfall</span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+          When inspecting any functional instance inside Chrome DevTools, expanding the instance hierarchy reveals an internal prototype field titled <code class="font-code-inline text-code-inline px-1.5 py-0.5 rounded bg-surface-container text-primary font-mono">[[Scopes]]</code>. It holds a contiguous indexed array reflecting the static chain of nested lexical records:
+        </p>
+<!-- Diagrammatic Component: Call Stack & Scope Hierarchy -->
+<div class="p-space-lg rounded-xl bg-surface-container-lowest shadow-md space-y-space-md">
+<div class="flex items-center justify-between font-label-sm text-label-sm text-outline pb-space-xs">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-base text-primary">account_tree</span>
+<span class="font-semibold text-on-surface">V8 Internal Heap Representation Model</span>
+</div>
+<span class="font-mono text-[10px] text-outline">Engine Ver: 12.8.214</span>
+</div>
+<!-- Architecture Blocks / Flow Grid -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-space-sm">
+<!-- Block 1: Call Stack Entry -->
+<div class="p-space-md rounded-lg bg-surface-container-low flex flex-col justify-between group hover:bg-surface-container transition-all">
+<div class="space-y-1">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-outline font-mono">01 // STACK</span>
+<span class="w-2 h-2 rounded-full bg-surface-container-highest"></span>
+</div>
+<div class="font-headline-sm text-headline-sm text-on-surface mt-1">Call Stack</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Active execution pointer. Stack pointer drops frame upon return.</p>
+</div>
+<div class="mt-3 pt-2">
+<span class="font-label-sm text-label-sm text-outline-variant font-mono">LIFO Frame</span>
+</div>
+</div>
+<!-- Block 2: Local Scope -->
+<div class="p-space-md rounded-lg bg-surface-container-low flex flex-col justify-between group hover:bg-surface-container transition-all">
+<div class="space-y-1">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-tertiary font-mono">02 // SCOPE</span>
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+</div>
+<div class="font-headline-sm text-headline-sm text-on-surface mt-1">Local Scope</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Ephemeral bindings. Holds parameters and variables declared via <code class="text-tertiary">let/const</code>.</p>
+</div>
+<div class="mt-3 pt-2">
+<span class="font-label-sm text-label-sm text-tertiary font-mono bg-tertiary/10 px-1.5 py-0.5 rounded">ActivationRecord</span>
+</div>
+</div>
+<!-- Block 3: Closure Record (outerFunction) -->
+<div class="p-space-md rounded-lg bg-surface-container-high flex flex-col justify-between relative shadow-sm">
+<div class="space-y-1">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-secondary font-mono">03 // CLOSURE</span>
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+</div>
+<div class="font-headline-sm text-headline-sm text-on-surface mt-1">Closure (outer)</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Retained on V8 Heap. Contains enclosed identifiers extracted by compiler.</p>
+</div>
+<div class="mt-3 pt-2 flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-secondary font-mono bg-secondary/15 px-1.5 py-0.5 rounded">Context [Heap]</span>
+<span class="material-symbols-outlined text-secondary text-sm">lock</span>
+</div>
+</div>
+<!-- Block 4: Global Scope -->
+<div class="p-space-md rounded-lg bg-surface-container-low flex flex-col justify-between group hover:bg-surface-container transition-all">
+<div class="space-y-1">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-outline font-mono">04 // ROOT</span>
+<span class="w-2 h-2 rounded-full bg-outline"></span>
+</div>
+<div class="font-headline-sm text-headline-sm text-on-surface mt-1">Global Scope</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Top of the resolution chain (<code class="text-primary">window</code> / <code class="text-primary">globalThis</code>).</p>
+</div>
+<div class="mt-3 pt-2">
+<span class="font-label-sm text-label-sm text-outline-variant font-mono">Root Object</span>
+</div>
+</div>
+</div>
+<!-- Flow Connectivity Bar -->
+<div class="flex items-center justify-between bg-surface-container-high px-space-md py-2 rounded-lg font-label-sm text-label-sm">
+<span class="text-outline">Search traversal:</span>
+<div class="flex items-center gap-2 text-on-surface font-mono">
+<span class="text-tertiary">Local</span>
+<span class="text-outline">→</span>
+<span class="text-secondary font-bold">[[Scopes]][0] (outer)</span>
+<span class="text-outline">→</span>
+<span class="text-primary">[[Scopes]][1] (Script)</span>
+<span class="text-outline">→</span>
+<span class="text-outline">Global</span>
+</div>
+<span class="text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">bolt</span>
+              O(k) traversal depth
+            </span>
+</div>
+</div>
+</section>
+<!-- Section: Deep Technical Code Implementation -->
+<section class="mb-space-2xl space-y-space-base">
+<div class="flex items-center justify-between">
+<div>
+<span class="font-label-sm text-label-sm font-semibold text-outline uppercase tracking-widest">Section 02</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Deconstruction: Heap Snapshot Inspection</h2>
+</div>
+<button class="flex items-center gap-1.5 px-space-sm py-1 rounded-md bg-surface-container-highest hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm transition-colors active:scale-95" id="copy-code-btn">
+<span class="material-symbols-outlined text-sm">content_copy</span>
+<span id="copy-btn-text">Copy Code</span>
+</button>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+          Consider the snippet below. We observe how the V8 compilation phase parses the scope graph and prunes unused lexical identifiers to minimize closure payload retention:
+        </p>
+<!-- Full-Width Technical Dark Code Block -->
+<div class="rounded-xl overflow-hidden bg-surface-container-lowest shadow-md">
+<!-- Code File Bar -->
+<div class="flex items-center justify-between px-space-base py-2 bg-surface-container-low font-label-sm text-label-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-base text-[#d29922]">javascript</span>
+<span class="text-on-surface font-mono font-medium">scope-inspector.js</span>
+<span class="text-outline-variant font-mono text-[10px]">• 18 lines</span>
+</div>
+<div class="flex items-center gap-2 font-mono text-[11px] text-outline">
+<span class="inline-block w-2 h-2 rounded-full bg-secondary"></span>
+<span>ES2024 / Node 22</span>
+</div>
+</div>
+<!-- Code Body with Syntax Highlighting and Gutter -->
+<div class="p-space-base overflow-x-auto font-code-block text-code-block leading-relaxed flex">
+<!-- Line Numbers -->
+<div class="select-none text-outline-variant/60 text-right pr-4 font-mono font-normal flex flex-col space-y-0.5">
+<span>01</span><span>02</span><span>03</span><span>04</span><span>05</span>
+<span>06</span><span>07</span><span>08</span><span>09</span><span>10</span>
+<span>11</span><span>12</span><span>13</span><span>14</span><span>15</span>
+<span>16</span><span>17</span><span>18</span>
+</div>
+<!-- Code Lines -->
+<div class="flex-1 font-mono space-y-0.5">
+<div><span class="text-[#a875fc]">function</span> <span class="text-primary">createEnclosure</span><span class="text-outline">(</span><span class="text-on-surface">realmName</span><span class="text-outline">) {</span></div>
+<div>  <span class="text-[#a875fc]">const</span> <span class="text-on-surface">heapRetained</span> <span class="text-outline">=</span> <span class="text-secondary">`Context:[${realmName}]`</span><span class="text-outline">;</span></div>
+<div>  <span class="text-[#a875fc]">const</span> <span class="text-outline">prunedGarbage</span> <span class="text-outline">=</span> <span class="text-[#a875fc]">new</span> <span class="text-primary">Uint8Array</span><span class="text-outline">(</span><span class="text-secondary">1024</span> <span class="text-outline">*</span> <span class="text-secondary">1024</span><span class="text-outline">);</span> <span class="text-outline-variant">// Collected by GC</span></div>
+<div> </div>
+<div>  <span class="text-[#a875fc]">return</span> <span class="text-[#a875fc]">function</span> <span class="text-primary">innerAccessor</span><span class="text-outline">(</span><span class="text-on-surface">token</span><span class="text-outline">) {</span></div>
+<div>    <span class="text-outline-variant">// V8 engine only retains heapRetained in [[Scopes]][0]</span></div>
+<div>    <span class="text-[#a875fc]">if</span> <span class="text-outline">(</span><span class="text-outline">!</span><span class="text-on-surface">token</span><span class="text-outline">)</span> <span class="text-[#a875fc]">throw</span> <span class="text-[#a875fc]">new</span> <span class="text-error">Error</span><span class="text-outline">(</span><span class="text-secondary">"Unauthorized"</span><span class="text-outline">);</span></div>
+<div>    <span class="text-[#a875fc]">return</span> <span class="text-secondary">`${token}::${heapRetained}`</span><span class="text-outline">;</span></div>
+<div>  <span class="text-outline">};</span></div>
+<div><span class="text-outline">}</span></div>
+<div> </div>
+<div><span class="text-[#a875fc]">const</span> <span class="text-on-surface">inspectInstance</span> <span class="text-outline">=</span> <span class="text-primary">createEnclosure</span><span class="text-outline">(</span><span class="text-secondary">"v8-worker-01"</span><span class="text-outline">);</span></div>
+<div> </div>
+<div><span class="text-outline-variant">// Introspection inside Chrome / Chromium developer tools:</span></div>
+<div><span class="text-on-surface">console</span><span class="text-outline">.</span><span class="text-primary">dir</span><span class="text-outline">(</span><span class="text-on-surface">inspectInstance</span><span class="text-outline">);</span></div>
+<div><span class="text-outline-variant">/*</span></div>
+<div><span class="text-outline-variant"> * [[Scopes]]: Scopes[2]</span></div>
+<div><span class="text-outline-variant"> *   0: Closure (createEnclosure) { heapRetained: "Context:[v8-worker-01]" }</span></div>
+<div><span class="text-outline-variant"> *   1: Global { ... }</span></div>
+<div><span class="text-outline-variant"> */</span></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section: Scope Chain Resolution Mechanics -->
+<section class="mb-space-2xl space-y-space-base">
+<div>
+<span class="font-label-sm text-label-sm font-semibold text-outline uppercase tracking-widest">Section 03</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Scope Chain Resolution Mechanics</h2>
+</div>
+<p class="font-body-md text-body-md text-on-surface leading-relaxed">
+          Resolution inside JavaScript engines does not operate by checking objects dynamically at runtime. During the parsing step, variable locations are resolved into static <em class="text-primary font-medium">context slots</em> (a 2D coordinate: context depth, and slot index).
+        </p>
+<!-- Tri-Column Metric Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md my-space-lg">
+<div class="p-space-base rounded-xl bg-surface-container-low shadow-sm space-y-2">
+<div class="flex items-center gap-2 text-secondary">
+<span class="material-symbols-outlined text-lg">memory</span>
+<span class="font-label-md text-label-md font-semibold uppercase">Memory Model</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-normal">
+              Shared references within the same parent lexical scope share an identical heap-allocated Context object, regardless of inner consumer.
+            </p>
+</div>
+<div class="p-space-base rounded-xl bg-surface-container-low shadow-sm space-y-2">
+<div class="flex items-center gap-2 text-tertiary">
+<span class="material-symbols-outlined text-lg">speed</span>
+<span class="font-label-md text-label-md font-semibold uppercase">IC Optimization</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-normal">
+              Inline Caches (IC) monomorphize closure property reads. Once a variable slot is cached, dereferencing skips hashmap lookup entirely.
+            </p>
+</div>
+<div class="p-space-base rounded-xl bg-surface-container-low shadow-sm space-y-2">
+<div class="flex items-center gap-2 text-[#d29922]">
+<span class="material-symbols-outlined text-lg">warning</span>
+<span class="font-label-md text-label-md font-semibold uppercase">Leak Potential</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-normal">
+              Co-located closures share the same Context record. If one inner closure retains a massive object, sibling closures keep it alive.
+            </p>
+</div>
+</div>
+</section>
+<!-- Section: Interactive Self-Check Drawer -->
+<section class="mb-space-2xl">
+<div class="rounded-xl bg-surface-container-low shadow-md overflow-hidden">
+<button class="w-full flex items-center justify-between p-space-base text-left hover:bg-surface-container transition-colors" id="quiz-toggle-btn">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-lg">psychology</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-outline uppercase font-semibold">Knowledge Check</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Why does <code class="font-code-inline text-primary font-mono">eval()</code> defeat V8 closure optimization?</h3>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline transition-transform duration-200" id="quiz-chevron">expand_more</span>
+</button>
+<!-- Drawer Content -->
+<div class="hidden p-space-base bg-surface-container-lowest space-y-space-md" id="quiz-content">
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              Because <code class="font-code-inline text-code-inline px-1 py-0.5 rounded bg-surface-container text-primary">eval()</code> can execute arbitrary JavaScript strings at runtime, the V8 static compiler can no longer determine in advance which lexical identifiers will be referenced.
+            </p>
+<div class="space-y-2 font-body-sm text-body-sm">
+<div class="p- space-sm p-3 rounded-lg bg-surface-container-low flex items-start gap-2">
+<span class="material-symbols-outlined text-error text-base mt-0.5">cancel</span>
+<span class="text-on-surface"><strong>Result:</strong> V8 is forced to preserve <em>all</em> lexical identifiers in the enclosing context on the heap, completely disabling tree-shaking and dead variable pruning for that scope.</span>
+</div>
+<div class="p-space-sm p-3 rounded-lg bg-surface-container-low flex items-start gap-2">
+<span class="material-symbols-outlined text-secondary text-base mt-0.5">check_circle</span>
+<span class="text-on-surface"><strong>Best Practice:</strong> Always use explicit parameter passing or strictly scoped helper methods instead of direct <code class="font-mono text-tertiary">eval()</code> invocations inside closures.</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Bottom Floating Next Note Banner -->
+<div class="rounded-xl bg-surface-container-high shadow-md p-space-base flex flex-col sm:flex-row items-center justify-between gap-space-base mt-space-xl">
+<div class="flex items-center gap-space-md w-full sm:w-auto">
+<div class="w-10 h-10 rounded-xl bg-surface-container-highest flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-xl">auto_stories</span>
+</div>
+<div class="min-w-0">
+<span class="font-label-sm text-label-sm text-outline uppercase font-semibold">Next Note in Queue</span>
+<div class="font-headline-sm text-headline-sm text-on-surface truncate font-semibold">
+              Practical Patterns: Emulating Private Methods
+            </div>
+</div>
+</div>
+<div class="flex items-center gap-space-sm w-full sm:w-auto justify-end">
+<span class="font-label-sm text-label-sm text-outline hidden md:inline">Press ⌘]</span>
+<button class="flex items-center gap-2 px-space-base py-2 rounded-lg bg-primary text-on-primary hover:bg-primary-fixed-dim transition-all shadow-sm active:scale-95 font-label-md text-label-md font-semibold">
+<span>Read Next</span>
+<span class="material-symbols-outlined text-base">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  // Reading Progress bar simulation on scroll
+  window.addEventListener('scroll', () => {
+    const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+    if (totalHeight <= 0) return;
+    const progress = Math.min(100, Math.max(0, Math.round((window.scrollY / totalHeight) * 100)));
+    const percentEl = document.getElementById('reading-percent');
+    const barEl = document.getElementById('reading-progress-bar');
+    if (percentEl) percentEl.textContent = `${progress}% read`;
+    if (barEl) barEl.style.width = `${progress}%`;
+  });
+
+  // Interactive Quiz Drawer toggle
+  const quizBtn = document.getElementById('quiz-toggle-btn');
+  const quizContent = document.getElementById('quiz-content');
+  const quizChevron = document.getElementById('quiz-chevron');
+
+  if (quizBtn && quizContent && quizChevron) {
+    quizBtn.addEventListener('click', () => {
+      const isHidden = quizContent.classList.contains('hidden');
+      if (isHidden) {
+        quizContent.classList.remove('hidden');
+        quizChevron.classList.add('rotate-180');
+      } else {
+        quizContent.classList.add('hidden');
+        quizChevron.classList.remove('rotate-180');
+      }
+    });
+  }
+
+  // Copy Code micro-interaction
+  const copyBtn = document.getElementById('copy-code-btn');
+  const copyText = document.getElementById('copy-btn-text');
+  if (copyBtn && copyText) {
+    copyBtn.addEventListener('click', () => {
+      copyText.textContent = 'Copied!';
+      setTimeout(() => {
+        copyText.textContent = 'Copy Code';
+      }, 1800);
+    });
+  }
+
+  // Column Width adjustments
+  const readerCol = document.getElementById('reader-column');
+  const btnNarrow = document.getElementById('btn-width-narrow');
+  const btnStd = document.getElementById('btn-width-std');
+  const btnWide = document.getElementById('btn-width-wide');
+
+  function resetWidthButtons() {
+    [btnNarrow, btnStd, btnWide].forEach(b => {
+      b.classList.remove('bg-surface-container-high', 'text-primary', 'font-semibold', 'shadow-sm');
+      b.classList.add('text-outline');
+    });
+  }
+
+  if (btnNarrow && readerCol) {
+    btnNarrow.addEventListener('click', () => {
+      resetWidthButtons();
+      btnNarrow.classList.add('bg-surface-container-high', 'text-primary', 'font-semibold', 'shadow-sm');
+      btnNarrow.classList.remove('text-outline');
+      readerCol.className = 'mx-auto w-full max-w-2xl py-space-xl px-space-lg transition-all duration-300';
+    });
+  }
+
+  if (btnStd && readerCol) {
+    btnStd.addEventListener('click', () => {
+      resetWidthButtons();
+      btnStd.classList.add('bg-surface-container-high', 'text-primary', 'font-semibold', 'shadow-sm');
+      btnStd.classList.remove('text-outline');
+      readerCol.className = 'mx-auto w-full max-w-4xl py-space-xl px-space-lg transition-all duration-300';
+    });
+  }
+
+  if (btnWide && readerCol) {
+    btnWide.addEventListener('click', () => {
+      resetWidthButtons();
+      btnWide.classList.add('bg-surface-container-high', 'text-primary', 'font-semibold', 'shadow-sm');
+      btnWide.classList.remove('text-outline');
+      readerCol.className = 'mx-auto w-full max-w-6xl py-space-xl px-space-lg transition-all duration-300';
+    });
+  }
+
+  // Font Size Adjustments
+  const titleEl = document.getElementById('reader-title');
+  const leadEl = document.getElementById('lead-text');
+  const btnFontDec = document.getElementById('btn-font-dec');
+  const btnFontInc = document.getElementById('btn-font-inc');
+  let currentFontStep = 1; // 0 = smaller, 1 = default, 2 = larger
+
+  if (btnFontInc && btnFontDec && titleEl && leadEl) {
+    btnFontInc.addEventListener('click', () => {
+      if (currentFontStep < 2) {
+        currentFontStep++;
+        applyFontStep();
+      }
+    });
+
+    btnFontDec.addEventListener('click', () => {
+      if (currentFontStep > 0) {
+        currentFontStep--;
+        applyFontStep();
+      }
+    });
+
+    function applyFontStep() {
+      if (currentFontStep === 0) {
+        leadEl.style.fontSize = '14px';
+        leadEl.style.lineHeight = '22px';
+      } else if (currentFontStep === 1) {
+        leadEl.style.fontSize = '16px';
+        leadEl.style.lineHeight = '26px';
+      } else if (currentFontStep === 2) {
+        leadEl.style.fontSize = '19px';
+        leadEl.style.lineHeight = '30px';
+      }
+    }
+  }
+</script></main></div></body></html>

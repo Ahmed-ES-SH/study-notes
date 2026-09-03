@@ -1,69 +1,174 @@
-import Image from "next/image";
+"use client";
+
+import React, { useState, useMemo } from "react";
+import { AppSidebar } from "../components/layout/AppSidebar";
+import { AppHeader } from "../components/layout/AppHeader";
+import { SectionFilterBar, SortOption } from "../components/sections/SectionFilterBar";
+import { SectionGrid } from "../components/sections/SectionGrid";
+import { CreateSectionModal } from "../components/sections/CreateSectionModal";
+import { EditSectionModal } from "../components/sections/EditSectionModal";
+import { DeleteSectionDialog } from "../components/sections/DeleteSectionDialog";
+import { useMainSections, SectionWithStats } from "../lib/hooks/useMainSections";
+import { Button } from "../components/common/Button";
+import { PlusIcon } from "../components/common/Icons";
 
 export default function Home() {
+  const {
+    sections,
+    isLoading,
+    error,
+    addSection,
+    editSection,
+    removeSection,
+  } = useMainSections();
+
+  const [searchQuery, setSearchQuery] = useState("");
+  const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
+  const [sortBy, setSortBy] = useState<SortOption>("updated");
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+
+  // Modal states
+  const [isCreateOpen, setIsCreateOpen] = useState(false);
+  const [editingSection, setEditingSection] = useState<SectionWithStats | null>(null);
+  const [deletingSection, setDeletingSection] = useState<SectionWithStats | null>(null);
+
+  // Filtered & Sorted sections
+  const filteredAndSortedSections = useMemo(() => {
+    const q = searchQuery.toLowerCase().trim();
+
+    const filtered = sections.filter((s) => {
+      if (!q) return true;
+      if (s.name.toLowerCase().includes(q)) return true;
+      if (s.subsections?.some((sub) => sub.name.toLowerCase().includes(q))) return true;
+      return false;
+    });
+
+    return [...filtered].sort((a, b) => {
+      if (sortBy === "name") {
+        return a.name.localeCompare(b.name, undefined, { sensitivity: "base" });
+      }
+      if (sortBy === "created") {
+        return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+      }
+      // default: updated
+      return new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime();
+    });
+  }, [sections, searchQuery, sortBy]);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <div className="min-h-screen bg-background text-on-surface flex">
+      {/* Sidebar Navigation */}
+      <AppSidebar
+        sections={sections}
+        onCreateSection={() => setIsCreateOpen(true)}
+        isCollapsed={isSidebarCollapsed}
+        onToggleCollapse={() => setIsSidebarCollapsed((prev) => !prev)}
+      />
+
+      {/* Main Canvas Area */}
+      <div
+        className={`flex-1 flex flex-col min-w-0 transition-all duration-200 ${
+          isSidebarCollapsed ? "pl-16" : "pl-64 lg:pl-72"
+        }`}
+      >
+        <AppHeader
+          isSidebarCollapsed={isSidebarCollapsed}
+          onToggleSidebar={() => setIsSidebarCollapsed((prev) => !prev)}
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
+
+        <main className="flex-1 pt-14 p-6 sm:p-8 lg:p-10 max-w-7xl mx-auto w-full space-y-8">
+          {/* Top Heading Strip */}
+          <div className="flex flex-col gap-4">
+            <div className="flex flex-wrap items-start justify-between gap-4">
+              <div className="space-y-1.5">
+                <div className="flex items-center gap-1.5 font-mono text-[11px] text-outline uppercase tracking-wider">
+                  <span>DevNotes Core</span>
+                  <span className="text-outline-variant">/</span>
+                  <span className="text-primary font-semibold">Sections Directory</span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-secondary ml-1" />
+                </div>
+                <h1 className="font-sans text-2xl sm:text-3xl font-bold text-on-surface tracking-tight">
+                  Knowledge Domains & Sections
+                </h1>
+                <p className="font-sans text-xs sm:text-sm text-on-surface-variant max-w-2xl leading-relaxed">
+                  Explore your structured developer study streams, inspect nested technical
+                  subsections, and monitor mastery retention across engineering verticals.
+                </p>
+              </div>
+
+              {/* Top Action Button */}
+              <div className="flex items-center gap-2">
+                <Button
+                  variant="primary"
+                  icon={<PlusIcon size={14} />}
+                  onClick={() => setIsCreateOpen(true)}
+                >
+                  New Section
+                </Button>
+              </div>
+            </div>
+
+            {/* Error Banner if any */}
+            {error && (
+              <div className="p-3 rounded-lg bg-red-950/30 border border-red-800/50 text-error text-xs font-mono">
+                Error loading sections: {error}
+              </div>
+            )}
+
+            {/* Search & Layout Filter Bar */}
+            <SectionFilterBar
+              searchQuery={searchQuery}
+              onSearchChange={setSearchQuery}
+              viewMode={viewMode}
+              onViewModeChange={setViewMode}
+              sortBy={sortBy}
+              onSortChange={setSortBy}
+              totalCount={sections.length}
+              filteredCount={filteredAndSortedSections.length}
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+          </div>
+
+          {/* Main Domains Section Grid / List */}
+          <SectionGrid
+            sections={filteredAndSortedSections}
+            totalSectionsCount={sections.length}
+            searchQuery={searchQuery}
+            viewMode={viewMode}
+            isLoading={isLoading}
+            onClearSearch={() => setSearchQuery("")}
+            onCreateSection={() => setIsCreateOpen(true)}
+            onEditSection={(s) => setEditingSection(s)}
+            onDeleteSection={(s) => setDeletingSection(s)}
+          />
+        </main>
+      </div>
+
+      {/* Modals & Confirmation Dialogs */}
+      <CreateSectionModal
+        isOpen={isCreateOpen}
+        onClose={() => setIsCreateOpen(false)}
+        onSubmit={async (name, color) => {
+          await addSection(name, color);
+        }}
+      />
+
+      <EditSectionModal
+        isOpen={!!editingSection}
+        section={editingSection}
+        onClose={() => setEditingSection(null)}
+        onSubmit={async (id, name, color) => {
+          await editSection(id, name, color);
+        }}
+      />
+
+      <DeleteSectionDialog
+        isOpen={!!deletingSection}
+        section={deletingSection}
+        onClose={() => setDeletingSection(null)}
+        onConfirm={async (id) => {
+          await removeSection(id);
+        }}
+      />
     </div>
   );
 }
