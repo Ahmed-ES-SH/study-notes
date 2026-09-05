@@ -33,6 +33,11 @@ pub struct Subsection {
     pub sort_order: i32,
 }
 
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+pub struct NoteCascadeInfo {
+    pub asset_count: i64,
+}
+
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Note {
     pub id: String,
