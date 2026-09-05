@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { SectionWithStats } from "../../lib/hooks/useMainSections";
 import { formatRelativeTime } from "../../lib/utils/format";
 import {
@@ -26,6 +27,7 @@ export function SectionCard({
   onDelete,
   onAddSubsection,
 }: SectionCardProps) {
+  const router = useRouter();
   const noteCount = section.stats?.note_count ?? 0;
   const subCount = section.stats?.subsection_count ?? (section.subsections?.length ?? 0);
   const previewSubs = section.subsections?.slice(0, 5) ?? [];
@@ -146,9 +148,12 @@ export function SectionCard({
           onClick={() => {
             if (onAddSubsection) {
               onAddSubsection(section.id);
+            } else {
+              router.push(`/section?id=${section.id}`);
             }
           }}
           className="font-mono text-xs text-outline hover:text-primary flex items-center gap-1.5 transition-colors cursor-pointer"
+          title="Manage subsections"
         >
           <PlusIcon size={13} />
           <span>Subsection</span>

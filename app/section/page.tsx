@@ -5,17 +5,50 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { AppSidebar } from "../../components/layout/AppSidebar";
 import { AppHeader } from "../../components/layout/AppHeader";
+import { SubsectionHero } from "../../components/subsections/SubsectionHero";
+import {
+  SubsectionToolbar,
+  SubsectionViewMode,
+} from "../../components/subsections/SubsectionToolbar";
+import { SubsectionList } from "../../components/subsections/SubsectionList";
+import { CreateSubsectionModal } from "../../components/subsections/CreateSubsectionModal";
+import { EditSubsectionModal } from "../../components/subsections/EditSubsectionModal";
+import { DeleteSubsectionDialog } from "../../components/subsections/DeleteSubsectionDialog";
+import { EditSectionModal } from "../../components/sections/EditSectionModal";
 import { useMainSections } from "../../lib/hooks/useMainSections";
+import { useSubsections } from "../../lib/hooks/useSubsections";
+import { SubsectionWithDetails } from "../../lib/api/types";
 import { Button } from "../../components/common/Button";
-import { ChevronLeftIcon, CodeIcon, BookIcon } from "../../components/common/Icons";
+import { ChevronLeftIcon, PlusIcon } from "../../components/common/Icons";
 
 function SectionDetailContent() {
   const searchParams = useSearchParams();
   const sectionId = searchParams.get("id");
-  const { sections, isLoading } = useMainSections();
+
+  const { sections, isLoading: isLoadingSections, editSection } = useMainSections();  const {
+    subsections,
+    filteredSubsections,
+    isLoading: isLoadingSubsections,
+    error,
+    searchQuery,
+    setSearchQuery,
+    addSubsection,
+    renameSubsection,
+    removeSubsection,
+    addNote,
+  } = useSubsections(sectionId);
+
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [viewMode, setViewMode] = useState<SubsectionViewMode>("detailed");
+  const [isCreateOpen, setIsCreateOpen] = useState(false);
+  const [renamingSubsection, setRenamingSubsection] = useState<SubsectionWithDetails | null>(null);
+  const [deletingSubsection, setDeletingSubsection] = useState<SubsectionWithDetails | null>(null);
+  const [isEditMetaOpen, setIsEditMetaOpen] = useState(false);
 
   const currentSection = sections.find((s) => s.id === sectionId);
+  const isNotFound = !isLoadingSections && !currentSection;
+
+  const totalNotes = subsections.reduce((acc, s) => acc + s.notes.length, 0);
 
   useEffect(() => {
     if (currentSection) {
@@ -24,8 +57,7 @@ function SectionDetailContent() {
   }, [currentSection]);
 
   const breadcrumbs = [
-    { label: "DevNotes Core", href: "/" },
-    { label: "Sections", href: "/" },
+    { label: "Main Sections", href: "/" },
     { label: currentSection ? currentSection.name : "Knowledge Domain" },
   ];
 
@@ -50,8 +82,8 @@ function SectionDetailContent() {
           onToggleSidebar={() => setIsSidebarCollapsed((prev) => !prev)}
         />
 
-        <main className="flex-1 pt-14 p-6 sm:p-8 lg:p-10 max-w-5xl mx-auto w-full space-y-6">
-          {/* Back button */}
+        <main className="flex-1 pt-14 p-6 sm:p-8 lg:p-10 max-w-6xl mx-auto w-full space-y-6">
+          {/* Back Button */}
           <div>
             <Link
               href="/"
@@ -62,97 +94,128 @@ function SectionDetailContent() {
             </Link>
           </div>
 
-          {/* Section Heading Banner */}
-          {isLoading ? (
-            <div className="h-32 rounded-xl bg-surface-container-low border border-outline-variant/30 animate-pulse p-6" />
+          {/* Parent Section Hero */}
+          {isLoadingSections ? (
+            <div className="h-36 rounded-xl bg-surface-container-low border border-outline-variant/30 animate-pulse p-6" />
           ) : currentSection ? (
-            <div className="p-6 rounded-xl bg-surface-container-low border border-outline-variant/50 space-y-4">
-              <div className="flex items-center gap-4">
-                <div
-                  className="w-12 h-12 rounded-xl flex items-center justify-center border border-outline-variant/40 shadow-xs shrink-0"
-                  style={{
-                    backgroundColor: `${currentSection.color}20`,
-                    color: currentSection.color,
-                  }}
-                >
-                  <CodeIcon size={24} />
-                </div>
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span
-                      className="w-2 h-2 rounded-full"
-                      style={{ backgroundColor: currentSection.color }}
-                    />
-                    <span
-                      className="font-mono text-xs uppercase tracking-wider font-semibold"
-                      style={{ color: currentSection.color }}
-                    >
-                      Active Domain
-                    </span>
-                  </div>
-                  <h1 className="font-sans text-2xl sm:text-3xl font-bold text-on-surface">
-                    {currentSection.name}
-                  </h1>
-                </div>
+            <SubsectionHero
+              section={currentSection}
+              subsectionCount={subsections.length}
+              noteCount={totalNotes}
+              onEditMeta={() => setIsEditMetaOpen(true)}
+            />
+          ) : isNotFound ? (
+            <div className="p-10 rounded-xl bg-surface-container-lowest border border-outline-variant/40 text-center space-y-4">
+              <div className="w-12 h-12 rounded-xl bg-surface-container-high text-error flex items-center justify-center mx-auto border border-outline-variant/40">
+                <span className="font-mono text-lg font-bold">?</span>
               </div>
-
-              {/* Summary Stats */}
-              <div className="flex flex-wrap gap-4 pt-2 border-t border-outline-variant/40 font-mono text-xs text-outline">
-                <div>
-                  <span className="text-on-surface font-semibold">
-                    {currentSection.stats?.subsection_count ?? 0}
-                  </span>{" "}
-                  Subsections
-                </div>
-                <div>•</div>
-                <div>
-                  <span className="text-on-surface font-semibold">
-                    {currentSection.stats?.note_count ?? 0}
-                  </span>{" "}
-                  Notes
-                </div>
-                <div>•</div>
-                <div>
-                  <span className="text-on-surface font-semibold">
-                    {currentSection.stats?.asset_count ?? 0}
-                  </span>{" "}
-                  Assets
-                </div>
+              <div className="space-y-1.5 max-w-md mx-auto">
+                <h2 className="font-sans font-semibold text-xl text-on-surface">
+                  Main Section not found
+                </h2>
+                <p className="font-sans text-xs text-outline leading-relaxed">
+                  The requested section ID ({sectionId || "none"}) does not exist or was deleted.
+                </p>
               </div>
+              <Link href="/">
+                <Button variant="primary">Back to Sections Directory</Button>
+              </Link>
             </div>
-          ) : (
-            <div className="p-6 rounded-xl bg-surface-container-low border border-outline-variant/50">
-              <h2 className="font-sans text-xl font-semibold text-on-surface">
-                Section Not Found
-              </h2>
-              <p className="font-sans text-xs text-outline mt-1">
-                The requested section ID ({sectionId || "none"}) does not exist.
-              </p>
+          ) : null}
+
+          {/* Toolbar */}
+          {currentSection && (
+            <SubsectionToolbar
+              searchQuery={searchQuery}
+              onSearchChange={setSearchQuery}
+              viewMode={viewMode}
+              onViewModeChange={setViewMode}
+              totalCount={subsections.length}
+              filteredCount={filteredSubsections.length}
+              onCreateSubsection={() => setIsCreateOpen(true)}
+            />
+          )}
+
+          {/* Error Banner */}
+          {error && (
+            <div className="p-3 rounded-lg bg-red-950/30 border border-red-800/50 text-error text-xs font-mono">
+              Error loading subsections: {error}
             </div>
           )}
 
-          {/* Phase 3 Placeholder Info Box */}
-          <div className="p-8 rounded-xl bg-surface-container-lowest border border-outline-variant/40 text-center space-y-4">
-            <div className="w-12 h-12 rounded-xl bg-surface-container-high text-primary flex items-center justify-center mx-auto border border-outline-variant/40">
-              <BookIcon size={24} />
-            </div>
-            <div className="space-y-1.5 max-w-md mx-auto">
-              <h3 className="font-sans font-semibold text-lg text-on-surface">
-                Phase 3: Subsections & Topics View
-              </h3>
-              <p className="font-sans text-xs text-outline leading-relaxed">
-                This route will render the full Subsections stream (Page 2),
-                including topic cards, note outlines, search filters, and breadcrumb navigation.
+          {/* Subsection Stream */}
+          {currentSection && (
+            <SubsectionList
+              subsections={filteredSubsections}
+              totalSubsections={subsections.length}
+              searchQuery={searchQuery}
+              viewMode={viewMode}
+              isLoading={isLoadingSubsections}
+              sectionColor={currentSection.color}
+              onClearSearch={() => setSearchQuery("")}
+              onCreateSubsection={() => setIsCreateOpen(true)}
+              onRename={setRenamingSubsection}
+              onDelete={setDeletingSubsection}
+              onAddNote={addNote}
+            />
+          )}
+
+          {/* Bottom Quick Creation Banner */}
+          {currentSection && !isLoadingSubsections && subsections.length > 0 && (
+            <div className="flex items-center justify-between gap-4 p-4 rounded-xl bg-surface-container-lowest border border-outline-variant/40 border-dashed">
+              <p className="font-sans text-xs text-outline">
+                Need another topic inside{" "}
+                <span className="text-on-surface font-semibold">{currentSection.name}</span>?
               </p>
-            </div>
-            <Link href="/">
-              <Button variant="secondary" size="sm">
-                Return to Directory
+              <Button
+                variant="secondary"
+                size="sm"
+                icon={<PlusIcon size={13} />}
+                onClick={() => setIsCreateOpen(true)}
+                className="shrink-0"
+              >
+                New Subsection
               </Button>
-            </Link>
-          </div>
+            </div>
+          )}
         </main>
       </div>
+
+      {/* Modals & Confirmation Dialogs */}
+      {currentSection && (
+        <CreateSubsectionModal
+          isOpen={isCreateOpen}
+          parentSectionName={currentSection.name}
+          parentSectionColor={currentSection.color}
+          onClose={() => setIsCreateOpen(false)}
+          onSubmit={addSubsection}
+        />
+      )}
+
+      <EditSubsectionModal
+        isOpen={!!renamingSubsection}
+        subsection={renamingSubsection}
+        onClose={() => setRenamingSubsection(null)}
+        onSubmit={renameSubsection}
+      />
+
+      <DeleteSubsectionDialog
+        isOpen={!!deletingSubsection}
+        subsection={deletingSubsection}
+        onClose={() => setDeletingSubsection(null)}
+        onConfirm={removeSubsection}
+      />
+
+      {currentSection && (
+        <EditSectionModal
+          isOpen={isEditMetaOpen}
+          section={currentSection}
+          onClose={() => setIsEditMetaOpen(false)}
+          onSubmit={async (id, name, color) => {
+            await editSection(id, name, color);
+          }}
+        />
+      )}
     </div>
   );
 }

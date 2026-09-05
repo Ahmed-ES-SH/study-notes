@@ -20,7 +20,7 @@
 
 ## 2. Design System: "Terminal Noir"
 
-Tokens are configured in [`app/globals.css`](file:///run/media/adev/New%20Volume/projects/study-nots-app/app/globals.css) based on [`DESIGN.md`](file:///run/media/adev/New%20Volume/projects/study-nots-app/DESIGN.md):
+Tokens are configured in `app/globals.css` based on [`DESIGN.md`](../DESIGN.md):
 
 - **Surfaces:**
   - Base Canvas: `#0b141c` (`bg-background` / `bg-surface`)
@@ -46,7 +46,7 @@ Tokens are configured in [`app/globals.css`](file:///run/media/adev/New%20Volume
 
 ## 3. Reference Screens Directory
 
-Reference mockups and HTML implementations are located in [`screens/`](file:///run/media/adev/New%20Volume/projects/study-nots-app/screens):
+Reference mockups and HTML implementations are located in [`screens/`](../screens):
 
 | Screen Folder | Target App Page | Description |
 |---------------|-----------------|-------------|
@@ -60,19 +60,19 @@ Reference mockups and HTML implementations are located in [`screens/`](file:///r
 
 ## 4. Phase Status & Plans Matrix
 
-Detailed implementation plans live in [`plans/`](file:///run/media/adev/New%20Volume/projects/study-nots-app/plans):
+Detailed implementation plans live in [`plans/`](../plans):
 
 | Phase | Description | Status | Dedicated Plan |
 |---|---|:---:|---|
 | **Phase 0** | Project Setup & Design Reconciliation | Completed | — |
-| **Phase 1** | Data Layer & Core Schema (Rust SQLite + WAL + Migrations) | Completed | [`plans/phase-1-data-layer.md`](file:///run/media/adev/New%20Volume/projects/study-nots-app/plans/phase-1-data-layer.md) |
-| **Phase 2** | Page 1: Main Sections (Home Dashboard) | Ready to Implement | [`plans/phase-2-main-sections.md`](file:///run/media/adev/New%20Volume/projects/study-nots-app/plans/phase-2-main-sections.md) |
-| **Phase 3** | Page 2: Subsections (Scoped Management) | Ready to Implement | [`plans/phase-3-subsections.md`](file:///run/media/adev/New%20Volume/projects/study-nots-app/plans/phase-3-subsections.md) |
-| **Phase 4** | Page 3: Notes List (Scoped to Subsection) | Ready to Implement | [`plans/phase-4-notes-list.md`](file:///run/media/adev/New%20Volume/projects/study-nots-app/plans/phase-4-notes-list.md) |
-| **Phase 5** | Page 4: Note Editor / Viewer (Markdown + Images + Auto-save) | Ready to Implement | [`plans/phase-5-note-editor.md`](file:///run/media/adev/New%20Volume/projects/study-nots-app/plans/phase-5-note-editor.md) |
-| **Phase 6** | Cross-Cutting Polish: Themes, Performance, Data Integrity | Ready to Implement | [`plans/phase-6-theming-performance-integrity.md`](file:///run/media/adev/New%20Volume/projects/study-nots-app/plans/phase-6-theming-performance-integrity.md) |
-| **Phase 7** | Deferred Features: Reordering (FR-6) & Local Search (FR-9) | Ready to Implement | [`plans/phase-7-reordering-and-search.md`](file:///run/media/adev/New%20Volume/projects/study-nots-app/plans/phase-7-reordering-and-search.md) |
-| **Phase 8** | Packaging & Distribution (Arch Linux / AppImage) | Ready to Implement | [`plans/phase-8-packaging-and-distribution.md`](file:///run/media/adev/New%20Volume/projects/study-nots-app/plans/phase-8-packaging-and-distribution.md) |
+| **Phase 1** | Data Layer & Core Schema (Rust SQLite + WAL + Migrations) | Completed | [`plans/phase-1-data-layer.md`](../plans/phase-1-data-layer.md) |
+| **Phase 2** | Page 1: Main Sections (Home Dashboard) | Completed | [`plans/phase-2-main-sections.md`](../plans/phase-2-main-sections.md) |
+| **Phase 3** | Page 2: Subsections (Scoped Management) | **Completed** | [`plans/phase-3-subsections.md`](../plans/phase-3-subsections.md) |
+| **Phase 4** | Page 3: Notes List (Scoped to Subsection) | **Next up — plan ready** | [`plans/phase-4-notes-list.md`](../plans/phase-4-notes-list.md) |
+| **Phase 5** | Page 4: Note Editor / Viewer (Markdown + Images + Auto-save) | Ready to Implement | [`plans/phase-5-note-editor.md`](../plans/phase-5-note-editor.md) |
+| **Phase 6** | Cross-Cutting Polish: Themes, Performance, Data Integrity | Ready to Implement | [`plans/phase-6-theming-performance-integrity.md`](../plans/phase-6-theming-performance-integrity.md) |
+| **Phase 7** | Deferred Features: Reordering (FR-6) & Local Search (FR-9) | Ready to Implement | [`plans/phase-7-reordering-and-search.md`](../plans/phase-7-reordering-and-search.md) |
+| **Phase 8** | Packaging & Distribution (Arch Linux / AppImage) | Ready to Implement | [`plans/phase-8-packaging-and-distribution.md`](../plans/phase-8-packaging-and-distribution.md) |
 
 ---
 
@@ -81,16 +81,26 @@ Detailed implementation plans live in [`plans/`](file:///run/media/adev/New%20Vo
 ### Rust Backend (`src-tauri/src/`)
 - `db/mod.rs`: SQLite initialization with WAL mode (`PRAGMA journal_mode = WAL`), foreign keys (`PRAGMA foreign_keys = ON`), and versioned migration runner.
 - `db/schema.rs`: Embedded SQL schema with tables `main_sections`, `subsections`, `notes`, `assets`, `schema_version`.
-- `db/models.rs`: Structs `MainSection`, `Subsection`, `Note`, `Asset`.
-- `db/commands.rs`: 16 CRUD commands with `BEGIN IMMEDIATE` / `COMMIT` transactions.
-- `db/tests.rs`: 10 in-memory SQLite unit tests covering schema creation, WAL mode, CRUD for all entities, and cascade deletes.
-- `lib.rs`: Registers db state `Mutex<Connection>` and exposes Tauri commands.
+- `db/models.rs`: Structs `MainSection`, `MainSectionCascadeInfo`, `Subsection`, `SubsectionCascadeInfo`, `Note`, `Asset`.
+- `db/commands.rs`: 17 CRUD commands with `BEGIN IMMEDIATE` / `COMMIT` transactions. Cascade-info commands (`get_main_section_cascade_info`, `get_subsection_cascade_info`) each have a testable `*_conn(&Connection, &str)` helper used by unit tests.
+- `db/tests.rs`: 14 in-memory SQLite unit tests covering schema creation, WAL mode, CRUD for all entities, cascade deletes, FK violations, `init()` end-to-end, and both cascade-info computations.
+- `lib.rs`: Registers db state `Mutex<Connection>` and exposes all 17 Tauri commands.
 
-### Frontend (`app/`)
+### Frontend (`app/`, `components/`, `lib/`)
 - Next.js 16 + React 19 + Tailwind CSS v4 with static export (`next.config.ts: output: 'export'`).
 - `app/layout.tsx`: Configured with Inter and JetBrains Mono local font variables.
 - `app/globals.css`: Full Terminal Noir design tokens configured via `@theme inline`.
-- `app/page.tsx`: Blank shell ready for Phase 2 implementation.
+- `app/page.tsx`: **Page 1 (Main Sections directory)** — full CRUD via `useMainSections`, client-side search, grid/list view toggle, sort (updated / A-Z / created), header strip, error banner, and all three modals wired up.
+- `app/section/page.tsx`: **Page 2 (Subsections, complete)** — `/section?id=[mainSectionId]`, Suspense-wrapped `useSearchParams`. Composed of `SubsectionHero` (breadcrumb + parent banner + abbreviation badge + stats pills + "Edit Meta" trigger opening `EditSectionModal`), `SubsectionToolbar` (filter input, detailed/compact toggle, New Subsection), `SubsectionList` (detailed 2-col grid vs compact rows, skeleton loading, empty/no-match states, bottom quick-create banner), and modals: `CreateSubsectionModal`, `EditSubsectionModal`, `DeleteSubsectionDialog` (live cascade counts), plus quick-add-note dialog inside `SubsectionCard` (calls `create_note` directly). Invalid/deleted/missing `?id=` renders a themed "Main Section not found" state with back-navigation.
+- `app/subsection/page.tsx`: **Page 3 placeholder** (`/subsection?id=[subId]`) — breadcrumbs back to Page 2, resolves parent section from `useMainSections`. Phase 4 target.
+- `components/common/`: `Button` (primary/secondary/ghost/danger variants), `Dialog` (Esc + backdrop close, initial focus management), `Input` (label/error/icon states), `Badge`, `Icons.tsx` (inline SVG only — no CDN icon fonts).
+- `components/layout/`: `AppSidebar` (collapsible, DevNotes branding, ⌘K search placeholder, dynamic section tree with color dots + expandable subsection links, Local SQLite status card), `AppHeader` (breadcrumbs, "Local Sync Active" badge, study-mode/command-palette placeholders).
+- `components/sections/`: `SectionCard` / `SectionListRow` (grid + list views), `SectionGrid` (loading skeleton, both empty states), `SectionFilterBar` (search, view toggle, sort), `ColorPicker` (12 presets + custom hex w/ live preview), `CreateSectionModal`, `EditSectionModal`, `DeleteSectionDialog` (fetches real cascade counts via `get_main_section_cascade_info`).
+- `components/subsections/`: `SubsectionHero`, `SubsectionToolbar` (exports `SubsectionViewMode = "detailed" | "compact"`), `SubsectionCard` (note preview tiles, ••• context menu, quick-add-note dialog), `SubsectionList`, `CreateSubsectionModal`, `EditSubsectionModal`, `DeleteSubsectionDialog`.
+- `lib/api/`: `types.ts` (`MainSection`, `CascadeCounts`, `Subsection`, `SubsectionCascadeInfo`, `NotePreview`, `SubsectionWithDetails`, `Note`, `Asset`), `sections.ts` (main-section + `listSubsections` wrappers), `subsections.ts` (subsections CRUD + cascade info + `fetchNotesForSubsection`).
+- `lib/hooks/useMainSections.ts`: sections state + optimistic `addSection` / `editSection` / `removeSection` / `reload`.
+- `lib/hooks/useSubsections.ts`: subsections state scoped to `mainSectionId` + note previews; exposes `filteredSubsections` (live search), `addSubsection` / `renameSubsection` / `removeSubsection` / `addNote` (all optimistic via `updateSnapshot`), `reload`, `setSearchQuery`. **Pattern to copy:** loading state is *derived* from an id-tagged snapshot (`isLoading = snapshot === null || snapshot.mainSectionId !== mainSectionId`) so query-param changes flip loading without synchronous setState in effects.
+- `lib/utils/format.ts`: `formatRelativeTime`.
 
 ---
 
@@ -121,10 +131,27 @@ cargo test --manifest-path src-tauri/Cargo.toml
 cargo clippy --manifest-path src-tauri/Cargo.toml -- -D warnings
 ```
 
+> **⚠️ Environment gotcha (this machine):** `cargo` on PATH is a rustup proxy that fails with `unknown proxy name: 'ZCode-…'` when invoked from sandboxed agents. Workaround: call the toolchain binary directly:
+> `~/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo test --manifest-path src-tauri/Cargo.toml`
+
 ---
 
-## 7. Next Steps for Incoming Agent
+## 7. Session Learnings & Conventions (do not rediscover these)
 
-1. **If implementing Phase 2 (Page 1):** Follow the 10 tasks in [`plans/phase-2-main-sections.md`](file:///run/media/adev/New%20Volume/projects/study-nots-app/plans/phase-2-main-sections.md).
-2. **If creating remaining plans:** Analyze `Main-plan.md`, `PRD.md`, and the respective `screens/` directory to write `plans/phase-4-notes-list.md`, `plans/phase-5-note-editor.md`, etc.
+1. **ESLint enforces `react-hooks/set-state-in-effect` as an error.** Never call setState synchronously inside a `useEffect` body (including through a called function like `reload()`). Approved patterns:
+   - Fetch-on-mount: call async fetchers and setState **only inside `.then()`/`.catch()` callbacks** (see `useMainSections`), guarded by an `isMounted` flag.
+   - Query-param-driven loading: derive `isLoading` from an id-tagged snapshot instead of resetting state in the effect (see `useSubsections`).
+   - Dialogs that remount per item should initialize state via `useState` defaults + a `key` prop, not effect-side resets.
+2. **TypeScript:** callback props typed `Promise<void>` reject `Promise<T>` implementations (no special-casing inside `Promise`). Type fire-and-forget submit callbacks as `Promise<unknown>`.
+3. **`useSearchParams` must be inside a component wrapped in `<Suspense>`** (static-export requirement). All route pages follow this pattern — copy `app/section/page.tsx` when adding Page 3/4.
+4. **Cascade-info pattern:** for any new cascade count UI, add a `get_*_cascade_info` Tauri command + `*_conn` helper + unit test, then have the confirmation dialog fetch live counts on open (see `DeleteSubsectionDialog`).
+5. **Name validation convention:** all name inputs are trimmed, required, max 60 chars, enforced client-side in every create/edit modal.
+6. **Navigation scheme:** Page 1 `/`, Page 2 `/section?id=[mainSectionId]`, Page 3 `/subsection?id=[subsectionId]` (placeholder). Note previews on Page 2 currently link to Page 3; Page 4 (Note Editor) route does not exist yet.
+
+---
+
+## 8. Next Steps for Incoming Agent
+
+1. **Implement Phase 4 (Page 3: Notes List):** Follow [`plans/phase-4-notes-list.md`](../plans/phase-4-notes-list.md), replacing the placeholder at `app/subsection/page.tsx`. Reuse the `useSubsections` snapshot pattern for the new `useNotes` hook; notes are listed under a subsection with the `list_notes` / `create_note` / `update_note` / `delete_note` commands (already implemented and registered in Rust — no backend work expected unless the plan says otherwise).
+2. **Uncommitted work:** Phase 3 code is complete and verified (`cargo test` 14/14, `pnpm lint` clean, `pnpm build` static export OK, `pnpm check:offline` 0 violations) but **not yet committed** — commit it before starting Phase 4. Note the working tree also contains pre-existing unrelated modifications (`.gitignore`, `components/common/Dialog.tsx`, `components/sections/SectionCard.tsx`, `src-tauri/Cargo.toml`, `scripts/check-no-network.sh`, deleted `lib/hooks/useDebounce.ts`) that were present before Phase 3.
 3. **Always ensure:** Any new command added in Rust is tested in `db/tests.rs` and registered in `lib.rs`, and frontend components use offline SVGs rather than external font CDNs.

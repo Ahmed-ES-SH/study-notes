@@ -27,8 +27,13 @@ RUST_PATTERNS=(
 
 violations=0
 
+# Scan every frontend source dir (app pages, components, lib) plus Tauri assets.
+# Exclusions keep build artifacts / vendored deps from triggering false positives.
 for pat in "${JS_PATTERNS[@]}"; do
-  if grep -rn -E "$pat" app/ src-tauri/ --include='*.ts' --include='*.tsx' --include='*.js' --include='*.jsx' 2>/dev/null; then
+  if grep -rn -E "$pat" app/ components/ lib/ src-tauri/ \
+      --include='*.ts' --include='*.tsx' --include='*.js' --include='*.jsx' \
+      --exclude-dir=node_modules --exclude-dir=target --exclude-dir=out \
+      --exclude-dir=.next --exclude-dir=gen 2>/dev/null; then
     echo "FOUND: outbound network pattern '$pat' in frontend code" >&2
     violations=$((violations + 1))
   fi

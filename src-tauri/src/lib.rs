@@ -32,6 +32,7 @@ pub fn run() {
             db::commands::create_subsection,
             db::commands::update_subsection,
             db::commands::delete_subsection,
+            db::commands::get_subsection_cascade_info,
             db::commands::list_notes,
             db::commands::create_note,
             db::commands::update_note,
