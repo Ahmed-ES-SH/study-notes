@@ -22,6 +22,24 @@ export interface Subsection {
   sort_order: number;
 }
 
+export interface SubsectionCascadeInfo {
+  note_count: number;
+  asset_count: number;
+}
+
+export interface NotePreview {
+  id: string;
+  subsection_id: string;
+  title: string;
+  content: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface SubsectionWithDetails extends Subsection {
+  notes: NotePreview[];
+}
+
 export interface Note {
   id: string;
   subsection_id: string;

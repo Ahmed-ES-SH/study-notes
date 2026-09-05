@@ -42,6 +42,13 @@ export function Dialog({
     };
   }, [isOpen, onClose]);
 
+  useEffect(() => {
+    // Move focus into the dialog unless a child (e.g. autoFocus input) already has it.
+    if (isOpen && dialogRef.current && !dialogRef.current.contains(document.activeElement)) {
+      dialogRef.current.focus();
+    }
+  }, [isOpen]);
+
   if (!isOpen) return null;
 
   const maxWidthClass = {
@@ -64,7 +71,8 @@ export function Dialog({
         ref={dialogRef}
         role="dialog"
         aria-modal="true"
-        className={`w-full ${maxWidthClass} bg-surface-container-low border border-outline-variant rounded-xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh] transition-all`}
+        tabIndex={-1}
+        className={`w-full ${maxWidthClass} bg-surface-container-low border border-outline-variant rounded-xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh] transition-all focus:outline-none`}
       >
         {(title || showCloseButton) && (
           <div className="px-6 py-4 border-b border-outline-variant/60 flex items-start justify-between bg-surface-container/40">

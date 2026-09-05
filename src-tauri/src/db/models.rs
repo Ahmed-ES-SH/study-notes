@@ -17,6 +17,12 @@ pub struct MainSectionCascadeInfo {
     pub asset_count: i64,
 }
 
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+pub struct SubsectionCascadeInfo {
+    pub note_count: i64,
+    pub asset_count: i64,
+}
+
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Subsection {
     pub id: String,

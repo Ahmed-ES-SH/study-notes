@@ -2,7 +2,9 @@ use rusqlite::Connection;
 use std::sync::Mutex;
 use tauri::State;
 
-use super::models::{Asset, MainSection, MainSectionCascadeInfo, Note, Subsection};
+use super::models::{
+    Asset, MainSection, MainSectionCascadeInfo, Note, Subsection, SubsectionCascadeInfo,
+};
 
 // ── Main Sections ───────────────────────────────────────────────────
 
@@ -312,6 +314,39 @@ pub fn delete_subsection(state: State<'_, Mutex<Connection>>, id: String) -> Res
     })?;
     conn.execute("COMMIT", []).map_err(|e| e.to_string())?;
     Ok(())
+}
+
+#[tauri::command]
+pub fn get_subsection_cascade_info(
+    state: State<'_, Mutex<Connection>>,
+    id: String,
+) -> Result<SubsectionCascadeInfo, String> {
+    let conn = state.lock().map_err(|e| e.to_string())?;
+    get_subsection_cascade_info_conn(&conn, &id).map_err(|e| e.to_string())
+}
+
+pub fn get_subsection_cascade_info_conn(
+    conn: &Connection,
+    id: &str,
+) -> rusqlite::Result<SubsectionCascadeInfo> {
+    let note_count: i64 = conn.query_row(
+        "SELECT COUNT(*) FROM notes WHERE subsection_id = ?1",
+        rusqlite::params![id],
+        |r| r.get(0),
+    ).unwrap_or(0);
+
+    let asset_count: i64 = conn.query_row(
+        "SELECT COUNT(*) FROM assets WHERE note_id IN (
+            SELECT id FROM notes WHERE subsection_id = ?1
+        )",
+        rusqlite::params![id],
+        |r| r.get(0),
+    ).unwrap_or(0);
+
+    Ok(SubsectionCascadeInfo {
+        note_count,
+        asset_count,
+    })
 }
 
 // ── Notes ───────────────────────────────────────────────────────────
