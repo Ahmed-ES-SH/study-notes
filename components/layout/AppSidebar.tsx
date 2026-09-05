@@ -4,6 +4,11 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { SectionWithStats } from "../../lib/hooks/useMainSections";
+import { checkDbIntegrity } from "../../lib/api/system";
+import { IntegrityReport } from "../../lib/api/types";
+import { ThemeToggle } from "../common/ThemeToggle";
+import { IntegrityStatusBanner } from "../common/IntegrityStatusBanner";
+import { openCommandPalette } from "../../lib/hooks/useCommandPalette";
 import {
   DevNotesLogo,
   SearchIcon,
@@ -13,6 +18,7 @@ import {
   ChevronDownIcon,
   CodeIcon,
   DatabaseIcon,
+  ShieldCheckIcon,
 } from "../common/Icons";
 
 export interface AppSidebarProps {
@@ -30,6 +36,21 @@ export function AppSidebar({
 }: AppSidebarProps) {
   const pathname = usePathname();
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
+  const [integrityReport, setIntegrityReport] = useState<IntegrityReport | null>(null);
+  const [isCheckingDb, setIsCheckingDb] = useState(false);
+
+  const runIntegrityCheck = async () => {
+    if (isCheckingDb) return;
+    setIsCheckingDb(true);
+    try {
+      const report = await checkDbIntegrity();
+      setIntegrityReport(report);
+    } catch (err) {
+      console.error("Database integrity check failed:", err);
+    } finally {
+      setIsCheckingDb(false);
+    }
+  };
 
   const toggleSectionExpand = (id: string, e: React.MouseEvent) => {
     e.preventDefault();
@@ -84,12 +105,8 @@ export function AppSidebar({
             <button
               type="button"
               className="w-full flex items-center justify-between px-3 py-1.5 rounded-lg bg-surface-container border border-outline-variant/30 text-outline hover:text-on-surface hover:bg-surface-container-high transition-all text-xs"
-              onClick={() => {
-                const searchInput = document.getElementById("domain-search");
-                if (searchInput) {
-                  searchInput.focus();
-                }
-              }}
+              onClick={openCommandPalette}
+              title="Open command palette (Cmd+K)"
             >
               <div className="flex items-center gap-2">
                 <SearchIcon size={14} />
@@ -208,13 +225,24 @@ export function AppSidebar({
           </div>
         </div>
 
-        {/* Bottom SQLite Status Card */}
+        {/* Bottom Theme Switch + SQLite Status Card */}
         {!isCollapsed && (
-          <div className="p-3 bg-surface-container-lowest/90 m-2 rounded-xl border border-outline-variant/30">
-            <div className="flex items-center gap-2.5">
-              <div className="w-7 h-7 rounded-lg bg-surface-container-high text-secondary flex items-center justify-center shrink-0 border border-outline-variant/40">
-                <DatabaseIcon size={14} />
-              </div>
+          <div className="px-2 pb-1">
+            <div className="flex items-center justify-between px-3 py-2">
+              <ThemeToggle showLabel />
+            </div>
+          </div>
+        )}
+        <div
+          className={`p-3 bg-surface-container-lowest/90 m-2 mt-0 rounded-xl border border-outline-variant/30 ${
+            isCollapsed ? "flex justify-center" : ""
+          }`}
+        >
+          <div className="flex items-center gap-2.5">
+            <div className="w-7 h-7 rounded-lg bg-surface-container-high text-secondary flex items-center justify-center shrink-0 border border-outline-variant/40">
+              <DatabaseIcon size={14} />
+            </div>
+            {!isCollapsed && (
               <div className="min-w-0 flex-1">
                 <div className="flex items-center justify-between">
                   <span className="font-mono text-xs text-on-surface font-semibold truncate">
@@ -226,10 +254,31 @@ export function AppSidebar({
                   WAL Mode • 100% Offline
                 </div>
               </div>
-            </div>
+            )}
           </div>
-        )}
+          <button
+            type="button"
+            onClick={runIntegrityCheck}
+            disabled={isCheckingDb}
+            className={`flex items-center gap-1.5 mt-2 w-full justify-center px-2 py-1.5 rounded-lg font-mono text-[11px] text-outline hover:text-on-surface hover:bg-surface-container-high border border-outline-variant/40 transition-colors disabled:opacity-50 ${
+              isCollapsed ? "mt-0 p-2" : ""
+            }`}
+            title="Run database integrity check (PRAGMA integrity_check + foreign_key_check)"
+          >
+            <ShieldCheckIcon size={13} />
+            {!isCollapsed && (
+              <span>{isCheckingDb ? "Checking..." : "Health Check"}</span>
+            )}
+          </button>
+        </div>
       </div>
+
+      {integrityReport && (
+        <IntegrityStatusBanner
+          report={integrityReport}
+          onClose={() => setIntegrityReport(null)}
+        />
+      )}
     </aside>
   );
 }

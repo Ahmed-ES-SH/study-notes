@@ -5,11 +5,23 @@ import Link from "next/link";
 import { Note } from "../../lib/api/types";
 import { formatRelativeTime } from "../../lib/utils/format";
 import { ClockIcon, EditIcon, TrashIcon, ArrowRightIcon } from "../common/Icons";
+import { DragHandle } from "../common/DragHandle";
+import { HighlightedText } from "../search/HighlightedText";
 
 export interface NoteCardProps {
   note: Note;
   onRename: (note: Note) => void;
   onDelete: (note: Note) => void;
+  /** FTS snippet (from `search_notes`) shown instead of the plain preview. */
+  snippet?: string;
+  /** Raw search query used to highlight title + snippet keywords. */
+  highlightQuery?: string;
+  /** Present while manual reordering is enabled for the list. */
+  dragHandleProps?: {
+    onGrabStart: () => void;
+    onGrabEnd: () => void;
+  };
+  isDragging?: boolean;
 }
 
 // Reduce raw markdown to a readable plain-text preview for the card snippet.
@@ -40,18 +52,39 @@ function getSnippet(content: string, maxLength = 100): string {
   return `${plain.slice(0, maxLength).trimEnd()}…`;
 }
 
-export function NoteCard({ note, onRename, onDelete }: NoteCardProps) {
+export function NoteCard({
+  note,
+  onRename,
+  onDelete,
+  snippet,
+  highlightQuery,
+  dragHandleProps,
+  isDragging,
+}: NoteCardProps) {
   return (
     <div className="group flex flex-col gap-3 p-5 bg-surface-container-low hover:bg-surface-container/90 border border-outline-variant/60 hover:border-outline/40 rounded-xl shadow-sm transition-all duration-200">
       {/* Title & Metadata Row */}
       <div className="flex items-start justify-between gap-3">
-        <Link
-          href={`/editor?id=${note.id}`}
-          className="font-sans text-xl font-semibold text-on-surface hover:text-primary transition-colors leading-snug min-w-0"
-          title={note.title}
-        >
-          {note.title || "Untitled note"}
-        </Link>
+        <div className="flex items-start gap-2 min-w-0 flex-1">
+          {dragHandleProps && (
+            <DragHandle
+              onGrabStart={dragHandleProps.onGrabStart}
+              onGrabEnd={dragHandleProps.onGrabEnd}
+              isDragging={isDragging}
+              label={`Drag to reorder ${note.title || "Untitled note"}`}
+            />
+          )}
+          <Link
+            href={`/editor?id=${note.id}`}
+            className="font-sans text-xl font-semibold text-on-surface hover:text-primary transition-colors leading-snug min-w-0"
+            title={note.title}
+          >
+            <HighlightedText
+              text={note.title || "Untitled note"}
+              query={highlightQuery}
+            />
+          </Link>
+        </div>
         <div className="flex items-center gap-1 font-mono text-xs text-outline shrink-0 pt-1">
           <ClockIcon size={12} />
           <span title={new Date(note.updated_at).toLocaleString()}>
@@ -60,9 +93,13 @@ export function NoteCard({ note, onRename, onDelete }: NoteCardProps) {
         </div>
       </div>
 
-      {/* Plain-text Snippet Preview */}
+      {/* Snippet Preview — FTS match context when searching, plain otherwise */}
       <p className="font-sans text-xs text-outline leading-relaxed line-clamp-2">
-        {getSnippet(note.content)}
+        {snippet !== undefined ? (
+          <HighlightedText text={snippet} query={highlightQuery} />
+        ) : (
+          getSnippet(note.content)
+        )}
       </p>
 
       {/* Action Bar */}

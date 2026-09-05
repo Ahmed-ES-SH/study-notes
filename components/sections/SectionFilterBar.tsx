@@ -3,7 +3,7 @@
 import React from "react";
 import { SearchIcon, GridViewIcon, ListViewIcon, ChevronDownIcon, CloseIcon } from "../common/Icons";
 
-export type SortOption = "updated" | "name" | "created";
+export type SortOption = "manual" | "updated" | "name" | "created";
 
 export interface SectionFilterBarProps {
   searchQuery: string;
@@ -29,7 +29,7 @@ export function SectionFilterBar({
   return (
     <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-surface-container-lowest p-2 rounded-xl border border-outline-variant/40 shadow-sm">
       {/* Search Input */}
-      <div className="relative flex-1 max-w-md">
+      <div className="relative flex-1 max-w-[28rem]">
         <div className="absolute left-3 top-1/2 -translate-y-1/2 text-outline pointer-events-none">
           <SearchIcon size={16} />
         </div>
@@ -93,6 +93,7 @@ export function SectionFilterBar({
               onChange={(e) => onSortChange(e.target.value as SortOption)}
               className="appearance-none bg-surface-container-low hover:bg-surface-container border border-outline-variant/30 text-on-surface font-mono text-xs rounded px-2.5 py-1 pr-6 cursor-pointer outline-none focus:border-primary-container"
             >
+              <option value="manual">Custom Order</option>
               <option value="updated">Last Updated</option>
               <option value="name">Alphabetical (A-Z)</option>
               <option value="created">Creation Date</option>

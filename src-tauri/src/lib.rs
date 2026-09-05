@@ -39,8 +39,14 @@ pub fn run() {
             db::commands::delete_note,
             db::commands::get_note_cascade_info,
             db::commands::list_assets,
-            db::commands::create_asset,
+            db::commands::attach_note_asset,
             db::commands::delete_asset,
+            db::commands::read_asset_data_url,
+            db::commands::get_note,
+            db::commands::get_note_context,
+            db::commands::check_db_integrity,
+            db::commands::search_notes,
+            db::commands::reorder_entities,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

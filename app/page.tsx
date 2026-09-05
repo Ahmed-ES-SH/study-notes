@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
+import { reportColdStart } from "../lib/utils/performance";
 import { AppSidebar } from "../components/layout/AppSidebar";
 import { AppHeader } from "../components/layout/AppHeader";
 import { SectionFilterBar, SortOption } from "../components/sections/SectionFilterBar";
@@ -20,17 +21,24 @@ export default function Home() {
     addSection,
     editSection,
     removeSection,
+    reorderSections,
   } = useMainSections();
 
   const [searchQuery, setSearchQuery] = useState("");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
-  const [sortBy, setSortBy] = useState<SortOption>("updated");
+  const [sortBy, setSortBy] = useState<SortOption>("manual");
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [reorderError, setReorderError] = useState<string | null>(null);
 
   // Modal states
   const [isCreateOpen, setIsCreateOpen] = useState(false);
   const [editingSection, setEditingSection] = useState<SectionWithStats | null>(null);
   const [deletingSection, setDeletingSection] = useState<SectionWithStats | null>(null);
+
+  // Cold-start metric (Phase 6): first JS execution → home view mounted.
+  useEffect(() => {
+    reportColdStart();
+  }, []);
 
   // Filtered & Sorted sections
   const filteredAndSortedSections = useMemo(() => {
@@ -44,6 +52,9 @@ export default function Home() {
     });
 
     return [...filtered].sort((a, b) => {
+      if (sortBy === "manual") {
+        return a.sort_order - b.sort_order;
+      }
       if (sortBy === "name") {
         return a.name.localeCompare(b.name, undefined, { sensitivity: "base" });
       }
@@ -90,7 +101,7 @@ export default function Home() {
                 <h1 className="font-sans text-2xl sm:text-3xl font-bold text-on-surface tracking-tight">
                   Knowledge Domains & Sections
                 </h1>
-                <p className="font-sans text-xs sm:text-sm text-on-surface-variant max-w-2xl leading-relaxed">
+                <p className="font-sans text-xs sm:text-sm text-on-surface-variant max-w-[42rem] leading-relaxed">
                   Explore your structured developer study streams, inspect nested technical
                   subsections, and monitor mastery retention across engineering verticals.
                 </p>
@@ -112,6 +123,14 @@ export default function Home() {
             {error && (
               <div className="p-3 rounded-lg bg-red-950/30 border border-red-800/50 text-error text-xs font-mono">
                 Error loading sections: {error}
+              </div>
+            )}
+            {reorderError && (
+              <div className="p-3 rounded-lg bg-red-950/30 border border-red-800/50 text-error text-xs font-mono flex items-center justify-between gap-3">
+                <span>Reorder failed, original order restored: {reorderError}</span>
+                <Button variant="secondary" size="sm" onClick={() => setReorderError(null)}>
+                  Dismiss
+                </Button>
               </div>
             )}
 
@@ -139,6 +158,9 @@ export default function Home() {
             onCreateSection={() => setIsCreateOpen(true)}
             onEditSection={(s) => setEditingSection(s)}
             onDeleteSection={(s) => setDeletingSection(s)}
+            onReorder={reorderSections}
+            onReorderError={(message) => setReorderError(message)}
+            reorderEnabled={sortBy === "manual" && !searchQuery.trim()}
           />
         </main>
       </div>

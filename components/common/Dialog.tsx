@@ -52,9 +52,9 @@ export function Dialog({
   if (!isOpen) return null;
 
   const maxWidthClass = {
-    sm: "max-w-md",
-    md: "max-w-lg",
-    lg: "max-w-2xl",
+    sm: "max-w-[28rem]",
+    md: "max-w-[32rem]",
+    lg: "max-w-[42rem]",
     xl: "max-w-4xl",
   }[maxWidth];
 

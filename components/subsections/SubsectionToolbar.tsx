@@ -28,7 +28,7 @@ export function SubsectionToolbar({
   return (
     <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-surface-container-lowest p-2 rounded-xl border border-outline-variant/40 shadow-sm">
       {/* Filter Input */}
-      <div className="relative flex-1 max-w-md">
+      <div className="relative flex-1 max-w-[28rem]">
         <input
           type="text"
           value={searchQuery}

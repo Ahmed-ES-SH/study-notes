@@ -3,6 +3,8 @@
 import React from "react";
 import Link from "next/link";
 import { ChevronRightIcon, TerminalIcon, BookIcon, SidebarToggleIcon } from "../common/Icons";
+import { ThemeToggle } from "../common/ThemeToggle";
+import { openCommandPalette } from "../../lib/hooks/useCommandPalette";
 
 export interface BreadcrumbItem {
   label: string;
@@ -73,10 +75,13 @@ export function AppHeader({
 
       {/* Right: Status & Quick Actions */}
       <div className="flex items-center gap-3 shrink-0">
-        {/* Synced Badge */}
+        {/* Theme Switch (System / Noir / Light) */}
+        <ThemeToggle />
+
+        {/* Offline Badge */}
         <div className="hidden sm:flex items-center gap-1.5 font-mono text-[11px] text-secondary bg-surface-container-high/80 border border-outline-variant/30 px-2.5 py-1 rounded-full shadow-2xs">
           <span className="w-1.5 h-1.5 rounded-full bg-secondary" />
-          <span>Local Sync Active</span>
+          <span>100% Offline</span>
         </div>
 
         {/* Quick Action Icons */}
@@ -90,6 +95,7 @@ export function AppHeader({
           </button>
           <button
             type="button"
+            onClick={openCommandPalette}
             className="text-outline hover:text-on-surface p-1.5 rounded-lg hover:bg-surface-container-high transition-colors"
             title="Command Palette (Cmd+K)"
           >

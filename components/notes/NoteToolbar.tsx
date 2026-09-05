@@ -19,7 +19,7 @@ export function NoteToolbar({
   return (
     <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-surface-container-lowest p-2 rounded-xl border border-outline-variant/40 shadow-sm">
       {/* Search Input */}
-      <div className="relative flex-1 max-w-md">
+      <div className="relative flex-1 max-w-[28rem]">
         <div className="absolute left-3 top-1/2 -translate-y-1/2 text-outline pointer-events-none">
           <SearchIcon size={14} />
         </div>
@@ -45,9 +45,11 @@ export function NoteToolbar({
       {/* Match Counter */}
       {totalCount > 0 && (
         <span className="font-mono text-[11px] text-outline px-2 py-0.5 rounded bg-surface-container self-center hidden sm:inline-block">
-          {filteredCount === totalCount
-            ? `${totalCount} ${totalCount === 1 ? "note" : "notes"}`
-            : `${filteredCount} of ${totalCount} notes`}
+          {searchQuery.trim()
+            ? `${filteredCount} ${filteredCount === 1 ? "note" : "notes"} matching “${searchQuery.trim()}”`
+            : filteredCount === totalCount
+              ? `${totalCount} ${totalCount === 1 ? "note" : "notes"}`
+              : `${filteredCount} of ${totalCount} notes`}
         </span>
       )}
     </div>

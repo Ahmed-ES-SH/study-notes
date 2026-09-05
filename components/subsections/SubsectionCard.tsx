@@ -16,7 +16,10 @@ import {
   TrashIcon,
   ArrowRightIcon,
   PlusIcon,
+  ArrowUpIcon,
+  ArrowDownIcon,
 } from "../common/Icons";
+import { DragHandle } from "../common/DragHandle";
 
 export interface SubsectionCardProps {
   subsection: SubsectionWithDetails;
@@ -25,6 +28,16 @@ export interface SubsectionCardProps {
   onRename: (subsection: SubsectionWithDetails) => void;
   onDelete: (subsection: SubsectionWithDetails) => void;
   onAddNote: (subsectionId: string, title: string) => Promise<unknown>;
+  /** Present while manual reordering is enabled for the list. */
+  dragHandleProps?: {
+    onGrabStart: () => void;
+    onGrabEnd: () => void;
+  };
+  isDragging?: boolean;
+  /** Shift position up/down via the context menu (keyboard alternative). */
+  onMoveBy?: (delta: number) => void;
+  canMoveUp?: boolean;
+  canMoveDown?: boolean;
 }
 
 function NotePreviewTile({
@@ -130,6 +143,11 @@ export function SubsectionCard({
   onRename,
   onDelete,
   onAddNote,
+  dragHandleProps,
+  isDragging,
+  onMoveBy,
+  canMoveUp = false,
+  canMoveDown = false,
 }: SubsectionCardProps) {
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -164,6 +182,32 @@ export function SubsectionCard({
             <button
               type="button"
               role="menuitem"
+              disabled={onMoveBy === undefined || !canMoveUp}
+              onClick={() => {
+                setIsMenuOpen(false);
+                onMoveBy?.(-1);
+              }}
+              className="w-full flex items-center gap-2 px-3 py-2 font-mono text-xs text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors text-left cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
+            >
+              <ArrowUpIcon size={13} />
+              Move Up
+            </button>
+            <button
+              type="button"
+              role="menuitem"
+              disabled={onMoveBy === undefined || !canMoveDown}
+              onClick={() => {
+                setIsMenuOpen(false);
+                onMoveBy?.(1);
+              }}
+              className="w-full flex items-center gap-2 px-3 py-2 font-mono text-xs text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors text-left cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
+            >
+              <ArrowDownIcon size={13} />
+              Move Down
+            </button>
+            <button
+              type="button"
+              role="menuitem"
               onClick={() => {
                 setIsMenuOpen(false);
                 onRename(subsection);
@@ -194,6 +238,14 @@ export function SubsectionCard({
   const header = (
     <div className="flex items-start justify-between gap-3">
       <div className="flex items-center gap-2.5 min-w-0">
+        {dragHandleProps && (
+          <DragHandle
+            onGrabStart={dragHandleProps.onGrabStart}
+            onGrabEnd={dragHandleProps.onGrabEnd}
+            isDragging={isDragging}
+            label={`Drag to reorder ${subsection.name}`}
+          />
+        )}
         <span
           className="w-2.5 h-2.5 rounded-full shrink-0"
           style={{ backgroundColor: color }}

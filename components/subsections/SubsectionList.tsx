@@ -5,6 +5,7 @@ import { SubsectionWithDetails } from "../../lib/api/types";
 import { SubsectionCard } from "./SubsectionCard";
 import { SubsectionViewMode } from "./SubsectionToolbar";
 import { Button } from "../common/Button";
+import { ReorderableList } from "../common/ReorderableList";
 import { HubIcon, ManageSearchIcon, PlusIcon } from "../common/Icons";
 
 export interface SubsectionListProps {
@@ -19,6 +20,11 @@ export interface SubsectionListProps {
   onRename: (subsection: SubsectionWithDetails) => void;
   onDelete: (subsection: SubsectionWithDetails) => void;
   onAddNote: (subsectionId: string, title: string) => Promise<unknown>;
+  /** Persisted manual reorder of subsections (drag + Alt+Arrow). */
+  onReorder?: (orderedIds: string[]) => Promise<void>;
+  onReorderError?: (message: string) => void;
+  /** False while a filter hides part of the list. */
+  reorderEnabled?: boolean;
 }
 
 function LoadingSkeleton() {
@@ -46,6 +52,9 @@ export function SubsectionList({
   onRename,
   onDelete,
   onAddNote,
+  onReorder,
+  onReorderError,
+  reorderEnabled = false,
 }: SubsectionListProps) {
   if (isLoading) {
     return <LoadingSkeleton />;
@@ -58,7 +67,7 @@ export function SubsectionList({
         <div className="w-12 h-12 rounded-xl bg-surface-container-high text-primary flex items-center justify-center mx-auto border border-outline-variant/40">
           <HubIcon size={24} />
         </div>
-        <div className="space-y-1.5 max-w-md mx-auto">
+        <div className="space-y-1.5 max-w-[28rem] mx-auto">
           <h3 className="font-sans font-semibold text-lg text-on-surface">
             No subsections yet
           </h3>
@@ -84,7 +93,7 @@ export function SubsectionList({
         <div className="w-12 h-12 rounded-xl bg-surface-container-high text-outline flex items-center justify-center mx-auto border border-outline-variant/40">
           <ManageSearchIcon size={24} />
         </div>
-        <div className="space-y-1.5 max-w-md mx-auto">
+        <div className="space-y-1.5 max-w-[28rem] mx-auto">
           <h3 className="font-sans font-semibold text-lg text-on-surface">
             No subsections match your filter
           </h3>
@@ -99,37 +108,68 @@ export function SubsectionList({
     );
   }
 
+  const renderCard = (
+    sub: SubsectionWithDetails,
+    reorderState?: {
+      handleProps: { onGrabStart: () => void; onGrabEnd: () => void };
+      isDragging: boolean;
+      moveBy: (delta: number) => void;
+      canMoveUp: boolean;
+      canMoveDown: boolean;
+    }
+  ) => (
+    <SubsectionCard
+      key={sub.id}
+      subsection={sub}
+      color={sectionColor}
+      viewMode={viewMode}
+      onRename={onRename}
+      onDelete={onDelete}
+      onAddNote={onAddNote}
+      dragHandleProps={reorderState?.handleProps}
+      isDragging={reorderState?.isDragging}
+      onMoveBy={reorderState?.moveBy}
+      canMoveUp={reorderState?.canMoveUp ?? false}
+      canMoveDown={reorderState?.canMoveDown ?? false}
+    />
+  );
+
   if (viewMode === "compact") {
+    if (reorderEnabled && onReorder) {
+      return (
+        <ReorderableList
+          items={subsections}
+          getId={(sub) => sub.id}
+          ariaLabel="Subsections"
+          onReorder={onReorder}
+          onError={onReorderError}
+          className="space-y-2"
+        >
+          {(sub, state) => renderCard(sub, state)}
+        </ReorderableList>
+      );
+    }
+    return <div className="space-y-2">{subsections.map((sub) => renderCard(sub))}</div>;
+  }
+
+  if (reorderEnabled && onReorder) {
     return (
-      <div className="space-y-2">
-        {subsections.map((sub) => (
-          <SubsectionCard
-            key={sub.id}
-            subsection={sub}
-            color={sectionColor}
-            viewMode="compact"
-            onRename={onRename}
-            onDelete={onDelete}
-            onAddNote={onAddNote}
-          />
-        ))}
-      </div>
+      <ReorderableList
+        items={subsections}
+        getId={(sub) => sub.id}
+        ariaLabel="Subsections"
+        onReorder={onReorder}
+        onError={onReorderError}
+        className="grid grid-cols-1 xl:grid-cols-2 gap-4"
+      >
+        {(sub, state) => renderCard(sub, state)}
+      </ReorderableList>
     );
   }
 
   return (
     <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
-      {subsections.map((sub) => (
-        <SubsectionCard
-          key={sub.id}
-          subsection={sub}
-          color={sectionColor}
-          viewMode="detailed"
-          onRename={onRename}
-          onDelete={onDelete}
-          onAddNote={onAddNote}
-        />
-      ))}
+      {subsections.map((sub) => renderCard(sub))}
     </div>
   );
 }

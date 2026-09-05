@@ -35,6 +35,7 @@ function SectionDetailContent() {
     addSubsection,
     renameSubsection,
     removeSubsection,
+    reorderSubsections,
     addNote,
   } = useSubsections(sectionId);
 
@@ -44,6 +45,7 @@ function SectionDetailContent() {
   const [renamingSubsection, setRenamingSubsection] = useState<SubsectionWithDetails | null>(null);
   const [deletingSubsection, setDeletingSubsection] = useState<SubsectionWithDetails | null>(null);
   const [isEditMetaOpen, setIsEditMetaOpen] = useState(false);
+  const [reorderError, setReorderError] = useState<string | null>(null);
 
   const currentSection = sections.find((s) => s.id === sectionId);
   const isNotFound = !isLoadingSections && !currentSection;
@@ -109,7 +111,7 @@ function SectionDetailContent() {
               <div className="w-12 h-12 rounded-xl bg-surface-container-high text-error flex items-center justify-center mx-auto border border-outline-variant/40">
                 <span className="font-mono text-lg font-bold">?</span>
               </div>
-              <div className="space-y-1.5 max-w-md mx-auto">
+              <div className="space-y-1.5 max-w-[28rem] mx-auto">
                 <h2 className="font-sans font-semibold text-xl text-on-surface">
                   Main Section not found
                 </h2>
@@ -142,6 +144,14 @@ function SectionDetailContent() {
               Error loading subsections: {error}
             </div>
           )}
+          {reorderError && (
+            <div className="p-3 rounded-lg bg-red-950/30 border border-red-800/50 text-error text-xs font-mono flex items-center justify-between gap-3">
+              <span>Reorder failed, original order restored: {reorderError}</span>
+              <Button variant="secondary" size="sm" onClick={() => setReorderError(null)}>
+                Dismiss
+              </Button>
+            </div>
+          )}
 
           {/* Subsection Stream */}
           {currentSection && (
@@ -157,6 +167,9 @@ function SectionDetailContent() {
               onRename={setRenamingSubsection}
               onDelete={setDeletingSubsection}
               onAddNote={addNote}
+              onReorder={reorderSubsections}
+              onReorderError={(message) => setReorderError(message)}
+              reorderEnabled={!searchQuery.trim()}
             />
           )}
 
