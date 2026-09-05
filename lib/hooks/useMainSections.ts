@@ -10,6 +10,7 @@ import {
   getMainSectionCascadeInfo,
   listSubsections,
 } from "../api/sections";
+import { reorderEntities } from "../api/reorder";
 
 export interface SectionWithStats extends MainSection {
   stats?: CascadeCounts;
@@ -113,6 +114,32 @@ export function useMainSections() {
     setSections((prev) => prev.filter((s) => s.id !== id));
   };
 
+  const reorderSections = useCallback(
+    async (orderedIds: string[]): Promise<void> => {
+      // Optimistic local swap first; the id-level reorder keeps every
+      // stats/subsections payload attached to its section.
+      const previous = sections;
+      setSections((prev) => {
+        const byId = new Map(prev.map((s) => [s.id, s]));
+        const next = orderedIds
+          .map((id) => byId.get(id))
+          .filter((s): s is SectionWithStats => s !== undefined);
+        // Append any section missing from orderedIds to avoid data loss.
+        for (const s of prev) {
+          if (!orderedIds.includes(s.id)) next.push(s);
+        }
+        return next.map((s, i) => ({ ...s, sort_order: i }));
+      });
+      try {
+        await reorderEntities("main_sections", orderedIds);
+      } catch (err) {
+        setSections(previous);
+        throw err;
+      }
+    },
+    [sections]
+  );
+
   return {
     sections,
     isLoading,
@@ -121,5 +148,6 @@ export function useMainSections() {
     addSection,
     editSection,
     removeSection,
+    reorderSections,
   };
 }

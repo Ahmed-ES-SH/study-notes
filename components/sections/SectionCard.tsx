@@ -13,12 +13,19 @@ import {
   CodeIcon,
   PlusIcon,
 } from "../common/Icons";
+import { DragHandle } from "../common/DragHandle";
 
 export interface SectionCardProps {
   section: SectionWithStats;
   onEdit: (section: SectionWithStats) => void;
   onDelete: (section: SectionWithStats) => void;
   onAddSubsection?: (sectionId: string) => void;
+  /** Present while manual reordering is enabled for the grid. */
+  dragHandleProps?: {
+    onGrabStart: () => void;
+    onGrabEnd: () => void;
+  };
+  isDragging?: boolean;
 }
 
 export function SectionCard({
@@ -26,6 +33,8 @@ export function SectionCard({
   onEdit,
   onDelete,
   onAddSubsection,
+  dragHandleProps,
+  isDragging,
 }: SectionCardProps) {
   const router = useRouter();
   const noteCount = section.stats?.note_count ?? 0;
@@ -40,6 +49,15 @@ export function SectionCard({
           {/* Header Row: Icon + Category + Title + Time + Context Actions */}
           <div className="flex items-start justify-between gap-3">
             <div className="flex items-center gap-3.5 min-w-0">
+              {dragHandleProps && (
+                <DragHandle
+                  onGrabStart={dragHandleProps.onGrabStart}
+                  onGrabEnd={dragHandleProps.onGrabEnd}
+                  isDragging={isDragging}
+                  label={`Drag to reorder ${section.name}`}
+                />
+              )}
+
               {/* Domain Icon Box */}
               <div
                 className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform border border-outline-variant/30 shadow-xs"

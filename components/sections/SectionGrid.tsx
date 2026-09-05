@@ -5,6 +5,7 @@ import { SectionWithStats } from "../../lib/hooks/useMainSections";
 import { SectionCard } from "./SectionCard";
 import { SectionListRow } from "./SectionListRow";
 import { Button } from "../common/Button";
+import { ReorderableList } from "../common/ReorderableList";
 import { ManageSearchIcon, PlusIcon, CodeIcon } from "../common/Icons";
 
 export interface SectionGridProps {
@@ -18,6 +19,11 @@ export interface SectionGridProps {
   onEditSection: (section: SectionWithStats) => void;
   onDeleteSection: (section: SectionWithStats) => void;
   onAddSubsection?: (sectionId: string) => void;
+  /** Persisted manual reorder of main sections (drag + Alt+Arrow). */
+  onReorder?: (orderedIds: string[]) => Promise<void>;
+  onReorderError?: (message: string) => void;
+  /** True when sort mode is "Custom Order" and no search filter is active. */
+  reorderEnabled?: boolean;
 }
 
 export function SectionGrid({
@@ -31,6 +37,9 @@ export function SectionGrid({
   onEditSection,
   onDeleteSection,
   onAddSubsection,
+  onReorder,
+  onReorderError,
+  reorderEnabled = false,
 }: SectionGridProps) {
   if (isLoading) {
     return (
@@ -62,7 +71,7 @@ export function SectionGrid({
         <div className="w-14 h-14 rounded-2xl bg-surface-container-high text-primary flex items-center justify-center border border-outline-variant/50 shadow-inner">
           <CodeIcon size={28} />
         </div>
-        <div className="space-y-1.5 max-w-md">
+        <div className="space-y-1.5 max-w-[28rem]">
           <h3 className="font-sans font-semibold text-lg text-on-surface">
             No knowledge domains yet
           </h3>
@@ -89,7 +98,7 @@ export function SectionGrid({
         <div className="w-14 h-14 rounded-2xl bg-surface-container-high text-outline flex items-center justify-center border border-outline-variant/50">
           <ManageSearchIcon size={28} />
         </div>
-        <div className="space-y-1.5 max-w-sm">
+        <div className="space-y-1.5 max-w-[24rem]">
           <h3 className="font-sans font-semibold text-base text-on-surface">
             No matching domain found
           </h3>
@@ -106,6 +115,28 @@ export function SectionGrid({
 
   // Grid or List display
   if (viewMode === "list") {
+    if (reorderEnabled && onReorder) {
+      return (
+        <ReorderableList
+          items={sections}
+          getId={(s) => s.id}
+          ariaLabel="Main sections"
+          onReorder={onReorder}
+          onError={onReorderError}
+          className="flex flex-col gap-2.5"
+        >
+          {(section, state) => (
+            <SectionListRow
+              section={section}
+              onEdit={onEditSection}
+              onDelete={onDeleteSection}
+              dragHandleProps={state.handleProps}
+              isDragging={state.isDragging}
+            />
+          )}
+        </ReorderableList>
+      );
+    }
     return (
       <div className="flex flex-col gap-2.5">
         {sections.map((section) => (
@@ -117,6 +148,30 @@ export function SectionGrid({
           />
         ))}
       </div>
+    );
+  }
+
+  if (reorderEnabled && onReorder) {
+    return (
+      <ReorderableList
+        items={sections}
+        getId={(s) => s.id}
+        ariaLabel="Main sections"
+        onReorder={onReorder}
+        onError={onReorderError}
+        className="grid grid-cols-1 md:grid-cols-2 gap-4"
+      >
+        {(section, state) => (
+          <SectionCard
+            section={section}
+            onEdit={onEditSection}
+            onDelete={onDeleteSection}
+            onAddSubsection={onAddSubsection}
+            dragHandleProps={state.handleProps}
+            isDragging={state.isDragging}
+          />
+        )}
+      </ReorderableList>
     );
   }
 

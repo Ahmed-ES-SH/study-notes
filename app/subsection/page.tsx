@@ -28,6 +28,8 @@ function SubsectionNotesContent() {
   const {
     notes,
     filteredNotes,
+    searchResults,
+    searchError,
     isLoading: isLoadingNotes,
     error,
     searchQuery,
@@ -36,12 +38,14 @@ function SubsectionNotesContent() {
     addNote,
     renameNote,
     removeNote,
+    reorderNotes,
   } = useNotes(subsectionId);
 
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [isCreateOpen, setIsCreateOpen] = useState(false);
   const [renamingNote, setRenamingNote] = useState<Note | null>(null);
   const [deletingNote, setDeletingNote] = useState<Note | null>(null);
+  const [reorderError, setReorderError] = useState<string | null>(null);
 
   const parentSection = sections.find((s) =>
     s.subsections?.some((sub) => sub.id === subsectionId)
@@ -106,7 +110,7 @@ function SubsectionNotesContent() {
               <div className="w-12 h-12 rounded-xl bg-surface-container-high text-error flex items-center justify-center mx-auto border border-outline-variant/40">
                 <span className="font-mono text-lg font-bold">?</span>
               </div>
-              <div className="space-y-1.5 max-w-md mx-auto">
+              <div className="space-y-1.5 max-w-[28rem] mx-auto">
                 <h1 className="font-sans font-semibold text-xl text-on-surface">
                   Subsection not found
                 </h1>
@@ -146,6 +150,19 @@ function SubsectionNotesContent() {
                   </Button>
                 </div>
               )}
+              {searchError && (
+                <div className="p-3 rounded-lg bg-red-950/30 border border-red-800/50 text-error text-xs font-mono">
+                  Search failed: {searchError}
+                </div>
+              )}
+              {reorderError && (
+                <div className="p-3 rounded-lg bg-red-950/30 border border-red-800/50 text-error text-xs font-mono flex items-center justify-between gap-3">
+                  <span>Reorder failed, original order restored: {reorderError}</span>
+                  <Button variant="secondary" size="sm" onClick={() => setReorderError(null)}>
+                    Dismiss
+                  </Button>
+                </div>
+              )}
 
               {/* Notes Stream */}
               <NoteList
@@ -157,6 +174,10 @@ function SubsectionNotesContent() {
                 onCreateNote={() => setIsCreateOpen(true)}
                 onRename={setRenamingNote}
                 onDelete={setDeletingNote}
+                searchResults={searchResults}
+                onReorder={reorderNotes}
+                onReorderError={(message) => setReorderError(message)}
+                reorderEnabled={!searchQuery.trim()}
               />
             </>
           ) : null}

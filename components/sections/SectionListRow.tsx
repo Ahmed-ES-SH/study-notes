@@ -5,17 +5,25 @@ import Link from "next/link";
 import { SectionWithStats } from "../../lib/hooks/useMainSections";
 import { formatRelativeTime } from "../../lib/utils/format";
 import { ClockIcon, EditIcon, TrashIcon, ArrowRightIcon } from "../common/Icons";
+import { DragHandle } from "../common/DragHandle";
 
 export interface SectionListRowProps {
   section: SectionWithStats;
   onEdit: (section: SectionWithStats) => void;
   onDelete: (section: SectionWithStats) => void;
+  dragHandleProps?: {
+    onGrabStart: () => void;
+    onGrabEnd: () => void;
+  };
+  isDragging?: boolean;
 }
 
 export function SectionListRow({
   section,
   onEdit,
   onDelete,
+  dragHandleProps,
+  isDragging,
 }: SectionListRowProps) {
   const noteCount = section.stats?.note_count ?? 0;
   const subCount = section.stats?.subsection_count ?? (section.subsections?.length ?? 0);
@@ -24,6 +32,14 @@ export function SectionListRow({
     <div className="group flex items-center justify-between px-4 py-3 bg-surface-container-low hover:bg-surface-container border border-outline-variant/50 hover:border-outline/40 rounded-lg transition-all">
       {/* Left: Indicator, Title, Stats */}
       <div className="flex items-center gap-3.5 min-w-0 flex-1">
+        {dragHandleProps && (
+          <DragHandle
+            onGrabStart={dragHandleProps.onGrabStart}
+            onGrabEnd={dragHandleProps.onGrabEnd}
+            isDragging={isDragging}
+            label={`Drag to reorder ${section.name}`}
+          />
+        )}
         <span
           className="w-2.5 h-2.5 rounded-full shrink-0 ring-2 ring-surface-container-high"
           style={{ backgroundColor: section.color }}

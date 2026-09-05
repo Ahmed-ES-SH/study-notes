@@ -1,5 +1,13 @@
 import { invoke } from "@tauri-apps/api/core";
-import { Note, NoteCascadeInfo } from "./types";
+import { Note, NoteCascadeInfo, NoteContextHierarchy } from "./types";
+
+export async function fetchNote(id: string): Promise<Note> {
+  return await invoke<Note>("get_note", { id });
+}
+
+export async function fetchNoteContext(id: string): Promise<NoteContextHierarchy> {
+  return await invoke<NoteContextHierarchy>("get_note_context", { id });
+}
 
 export async function fetchNotes(subsectionId: string): Promise<Note[]> {
   return await invoke<Note[]>("list_notes", { subsectionId });

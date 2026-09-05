@@ -57,3 +57,13 @@ pub struct Asset {
     pub alt_text: String,
     pub created_at: String,
 }
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct NoteContextHierarchy {
+    pub note: Note,
+    pub subsection_id: String,
+    pub subsection_name: String,
+    pub main_section_id: String,
+    pub main_section_name: String,
+    pub main_section_color: String,
+}

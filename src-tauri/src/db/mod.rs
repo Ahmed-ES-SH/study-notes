@@ -31,6 +31,10 @@ pub fn init() -> Result<Connection, Box<dyn std::error::Error>> {
     conn.execute_batch("PRAGMA journal_mode = WAL;")?;
     // Enable foreign key enforcement
     conn.execute_batch("PRAGMA foreign_keys = ON;")?;
+    // WAL + NORMAL syncing keeps writes durable yet fast; the busy timeout
+    // prevents spurious "database is locked" errors under rapid auto-saves.
+    conn.execute_batch("PRAGMA synchronous = NORMAL;")?;
+    conn.execute_batch("PRAGMA busy_timeout = 5000;")?;
 
     migration::run_migrations(&conn)?;
 

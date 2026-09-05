@@ -9,6 +9,7 @@ import {
   deleteSubsection,
   fetchNotesForSubsection,
 } from "../api/subsections";
+import { reorderEntities } from "../api/reorder";
 import { invoke } from "@tauri-apps/api/core";
 
 interface SubsectionsSnapshot {
@@ -110,6 +111,29 @@ export function useSubsections(mainSectionId: string | null) {
     [updateSnapshot]
   );
 
+  const reorderSubsections = useCallback(
+    async (orderedIds: string[]): Promise<void> => {
+      const previous = snapshot;
+      updateSnapshot((prev) => {
+        const byId = new Map(prev.map((s) => [s.id, s]));
+        const next = orderedIds
+          .map((id) => byId.get(id))
+          .filter((s): s is SubsectionWithDetails => s !== undefined);
+        for (const s of prev) {
+          if (!orderedIds.includes(s.id)) next.push(s);
+        }
+        return next.map((s, i) => ({ ...s, sort_order: i }));
+      });
+      try {
+        await reorderEntities("subsections", orderedIds);
+      } catch (err) {
+        setSnapshot(previous);
+        throw err;
+      }
+    },
+    [snapshot, updateSnapshot]
+  );
+
   const addNote = useCallback(
     async (subsectionId: string, title: string): Promise<NotePreview> => {
       const created = await invoke<NotePreview>("create_note", {
@@ -143,6 +167,7 @@ export function useSubsections(mainSectionId: string | null) {
     addSubsection,
     renameSubsection,
     removeSubsection,
+    reorderSubsections,
     addNote,
   };
 }
