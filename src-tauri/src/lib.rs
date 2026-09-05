@@ -37,6 +37,7 @@ pub fn run() {
             db::commands::create_note,
             db::commands::update_note,
             db::commands::delete_note,
+            db::commands::get_note_cascade_info,
             db::commands::list_assets,
             db::commands::create_asset,
             db::commands::delete_asset,

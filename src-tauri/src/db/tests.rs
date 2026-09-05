@@ -1,7 +1,7 @@
 use rusqlite::Connection;
 
 use crate::db::migration;
-use crate::db::models::{Asset, MainSection, MainSectionCascadeInfo, Note, Subsection, SubsectionCascadeInfo};
+use crate::db::models::{Asset, MainSection, MainSectionCascadeInfo, Note, NoteCascadeInfo, Subsection, SubsectionCascadeInfo};
 use crate::db::schema;
 
 fn setup_db() -> Connection {
@@ -910,6 +910,103 @@ fn test_subsection_cascade_info() {
     let non_existent = crate::db::commands::get_subsection_cascade_info_conn(&conn, "fake-id").unwrap();
     assert_eq!(non_existent, SubsectionCascadeInfo {
         note_count: 0,
+        asset_count: 0,
+    });
+}
+
+// ── Test 15: Note cascade info computation ──────────────────────
+
+#[test]
+fn test_note_cascade_info() {
+    let conn = setup_db();
+    let now = chrono::Utc::now().to_rfc3339();
+
+    // 1. Create two notes under separate subsections
+    let ms1_id = uuid::Uuid::new_v4().to_string();
+    let ms2_id = uuid::Uuid::new_v4().to_string();
+
+    conn.execute(
+        "INSERT INTO main_sections (id, name, color, created_at, updated_at, sort_order)
+         VALUES (?1, 'CS Core', '#388bfd', ?2, ?2, 0)",
+        rusqlite::params![ms1_id, now],
+    ).unwrap();
+
+    conn.execute(
+        "INSERT INTO main_sections (id, name, color, created_at, updated_at, sort_order)
+         VALUES (?1, 'Databases', '#3fb950', ?2, ?2, 1)",
+        rusqlite::params![ms2_id, now],
+    ).unwrap();
+
+    let sub1_id = uuid::Uuid::new_v4().to_string();
+    let sub2_id = uuid::Uuid::new_v4().to_string();
+
+    conn.execute(
+        "INSERT INTO subsections (id, main_section_id, name, created_at, updated_at, sort_order)
+         VALUES (?1, ?2, 'Algorithms', ?3, ?3, 0)",
+        rusqlite::params![sub1_id, ms1_id, now],
+    ).unwrap();
+
+    conn.execute(
+        "INSERT INTO subsections (id, main_section_id, name, created_at, updated_at, sort_order)
+         VALUES (?1, ?2, 'SQL', ?3, ?3, 0)",
+        rusqlite::params![sub2_id, ms2_id, now],
+    ).unwrap();
+
+    let note1_id = uuid::Uuid::new_v4().to_string();
+    let note2_id = uuid::Uuid::new_v4().to_string();
+
+    conn.execute(
+        "INSERT INTO notes (id, subsection_id, title, content, created_at, updated_at, sort_order)
+         VALUES (?1, ?2, 'Binary Search', '', ?3, ?3, 0)",
+        rusqlite::params![note1_id, sub1_id, now],
+    ).unwrap();
+    conn.execute(
+        "INSERT INTO notes (id, subsection_id, title, content, created_at, updated_at, sort_order)
+         VALUES (?1, ?2, 'Postgres MVCC', '', ?3, ?3, 0)",
+        rusqlite::params![note2_id, sub2_id, now],
+    ).unwrap();
+
+    // Note without assets reports zero
+    let empty_info = crate::db::commands::get_note_cascade_info_conn(&conn, &note1_id).unwrap();
+    assert_eq!(empty_info, NoteCascadeInfo {
+        asset_count: 0,
+    });
+
+    // 2. Add assets under note1 only
+    let asset1_id = uuid::Uuid::new_v4().to_string();
+    let asset2_id = uuid::Uuid::new_v4().to_string();
+    let asset_other_id = uuid::Uuid::new_v4().to_string();
+
+    conn.execute(
+        "INSERT INTO assets (id, note_id, file_path, alt_text, created_at)
+         VALUES (?1, ?2, 'tree.png', 'Tree visual', ?3)",
+        rusqlite::params![asset1_id, note1_id, now],
+    ).unwrap();
+    conn.execute(
+        "INSERT INTO assets (id, note_id, file_path, alt_text, created_at)
+         VALUES (?1, ?2, 'graph.png', 'Graph visual', ?3)",
+        rusqlite::params![asset2_id, note1_id, now],
+    ).unwrap();
+    conn.execute(
+        "INSERT INTO assets (id, note_id, file_path, alt_text, created_at)
+         VALUES (?1, ?2, 'mvcc.png', 'MVCC chart', ?3)",
+        rusqlite::params![asset_other_id, note2_id, now],
+    ).unwrap();
+
+    // note1 counts only its own assets
+    let full_info_note1 = crate::db::commands::get_note_cascade_info_conn(&conn, &note1_id).unwrap();
+    assert_eq!(full_info_note1, NoteCascadeInfo {
+        asset_count: 2,
+    });
+
+    let full_info_note2 = crate::db::commands::get_note_cascade_info_conn(&conn, &note2_id).unwrap();
+    assert_eq!(full_info_note2, NoteCascadeInfo {
+        asset_count: 1,
+    });
+
+    // Non-existent ID returns zero
+    let non_existent = crate::db::commands::get_note_cascade_info_conn(&conn, "fake-id").unwrap();
+    assert_eq!(non_existent, NoteCascadeInfo {
         asset_count: 0,
     });
 }

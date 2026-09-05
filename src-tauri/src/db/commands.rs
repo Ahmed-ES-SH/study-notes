@@ -3,7 +3,8 @@ use std::sync::Mutex;
 use tauri::State;
 
 use super::models::{
-    Asset, MainSection, MainSectionCascadeInfo, Note, Subsection, SubsectionCascadeInfo,
+    Asset, MainSection, MainSectionCascadeInfo, Note, NoteCascadeInfo, Subsection,
+    SubsectionCascadeInfo,
 };
 
 // ── Main Sections ───────────────────────────────────────────────────
@@ -487,6 +488,30 @@ pub fn delete_note(state: State<'_, Mutex<Connection>>, id: String) -> Result<()
         })?;
     conn.execute("COMMIT", []).map_err(|e| e.to_string())?;
     Ok(())
+}
+
+#[tauri::command]
+pub fn get_note_cascade_info(
+    state: State<'_, Mutex<Connection>>,
+    id: String,
+) -> Result<NoteCascadeInfo, String> {
+    let conn = state.lock().map_err(|e| e.to_string())?;
+    get_note_cascade_info_conn(&conn, &id).map_err(|e| e.to_string())
+}
+
+pub fn get_note_cascade_info_conn(
+    conn: &Connection,
+    id: &str,
+) -> rusqlite::Result<NoteCascadeInfo> {
+    let asset_count: i64 = conn.query_row(
+        "SELECT COUNT(*) FROM assets WHERE note_id = ?1",
+        rusqlite::params![id],
+        |r| r.get(0),
+    ).unwrap_or(0);
+
+    Ok(NoteCascadeInfo {
+        asset_count,
+    })
 }
 
 // ── Assets ──────────────────────────────────────────────────────────

@@ -50,6 +50,15 @@ export interface Note {
   sort_order: number;
 }
 
+export interface NoteCascadeInfo {
+  asset_count: number;
+}
+
+export interface SubsectionContext {
+  subsection: Subsection;
+  main_section: MainSection;
+}
+
 export interface Asset {
   id: string;
   note_id: string;
