@@ -1,7 +1,7 @@
 # Maintainer: Ahmed <ahmed@users.noreply.github.com>
 # Contributor: Ahmed-ES-SH (https://github.com/Ahmed-ES-SH)
 pkgname=study-notes
-pkgver=0.1.0
+pkgver=0.2.0
 pkgrel=1
 pkgdesc="Linux-first, offline hierarchical study notes desktop application for developers"
 arch=('x86_64')
@@ -31,9 +31,9 @@ build() {
     pnpm install --frozen-lockfile
     # pnpm tauri build compiles both the Next.js frontend and the Rust
     # backend in a single step — no separate cargo build invocation needed.
-    # `--bundles none` skips packaging; makepkg only needs the raw binary
+    # `--no-bundle` skips packaging; makepkg only needs the raw binary
     # plus the resources installed manually in package().
-    pnpm tauri build --bundles none
+    pnpm tauri build --no-bundle
 }
 
 check() {

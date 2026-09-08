@@ -1,6 +1,6 @@
 pkgbase = study-notes
 	pkgdesc = Linux-first, offline hierarchical study notes desktop application for developers
-	pkgver = 0.1.0
+	pkgver = 0.2.0
 	pkgrel = 1
 	url = https://github.com/Ahmed-ES-SH/study-notes
 	arch = x86_64

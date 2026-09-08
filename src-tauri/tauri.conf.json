@@ -2,7 +2,7 @@
   "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
   "productName": "study-notes",
   "mainBinaryName": "study-notes",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "identifier": "com.studynotes.app",
   "build": {
     "frontendDist": "../out",

@@ -13,6 +13,7 @@ zero outbound network connections (enforced by CSP and verified by
 - **Full-text search** (SQLite FTS5) with BM25 ranking, snippets, and scope
   narrowing, via the global command palette (`Ctrl+K`)
 - **Local image assets** stored on disk next to the database
+- **PDF export** — print any note to PDF from the editor (`Ctrl+P`), fully offline
 - **Integrity tooling** — `PRAGMA integrity_check` / foreign-key report from
   inside the app
 - **First-run onboarding** — a clean install provisions the data directory and
@@ -36,15 +37,15 @@ rofi/dmenu automatically.
 
 ### AppImage (any distribution)
 
-Download `study-notes_0.1.0_amd64.AppImage` from the releases page, then:
+Download `study-notes_0.2.0_amd64.AppImage` from the releases page, then:
 
 ```bash
-chmod +x study-notes_0.1.0_amd64.AppImage
-./study-notes_0.1.0_amd64.AppImage
+chmod +x study-notes_0.2.0_amd64.AppImage
+./study-notes_0.2.0_amd64.AppImage
 ```
 
 > **No FUSE?** On minimal installs without `libfuse2` (e.g. Ubuntu 24.04+),
-> run: `./study-notes_0.1.0_amd64.AppImage --appimage-extract-and-run`
+> run: `./study-notes_0.2.0_amd64.AppImage --appimage-extract-and-run`
 
 The app runs natively on both X11 and Wayland.
 
@@ -94,6 +95,7 @@ systemd timers for automatic backups.
 |---|---|
 | `Ctrl/Cmd + K` | Global command palette & full-text search |
 | `Ctrl/Cmd + S` | Flush pending autosave immediately |
+| `Ctrl/Cmd + P` | Export the open note as PDF (print dialog) |
 | `Ctrl/Cmd + B` / `Ctrl/Cmd + I` | Bold / italic selection |
 | `Alt + ↑` / `Alt + ↓` | Reorder the focused list item |
 | `Esc` | Close dialog / exit Zen mode |

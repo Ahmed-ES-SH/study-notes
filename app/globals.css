@@ -141,9 +141,12 @@ html[data-theme="light"] {
 /* ── Terminal Light (Paper Noir) ──
    Overrides the Terminal Noir token values when the theme hook sets
    `data-theme="light"` on <html>. Default (no attribute / "dark") stays
-   Terminal Noir. */
+   Terminal Noir. `.theme-paper` applies the same paper palette without
+   touching the runtime theme — used by the print/PDF export root so a
+   dark-mode note still prints legibly on white paper. */
 
-[data-theme="light"] {
+[data-theme="light"],
+.theme-paper {
   /* ── Surface Tiers ── */
   --color-surface: #f6f8fa;
   --color-surface-dim: #eaeef2;
@@ -430,4 +433,94 @@ body {
 }
 .animate-pal-in {
   animation: pal-in 140ms ease-out;
+}
+
+/* ── Phase 9: PDF export (print pipeline) ────────────────────────
+   Export portals the note into a body-level #print-root and opens the
+   WebKit print dialog ("Print to File → PDF"). On screen the root is
+   never visible; @media print hides everything else and shows only it.
+   Paper colors come from the .theme-paper token scope above, so syntax
+   highlighting utilities (which resolve through the same custom
+   properties) automatically switch to their light variants. */
+
+#print-root {
+  display: none;
+}
+
+@media print {
+  @page {
+    margin: 16mm 14mm;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  /* Drop the layout's top padding; the page margin handles spacing. */
+  body {
+    padding: 0 !important;
+  }
+
+  /* Only the note print root survives (app shell, palette, dialogs,
+     zen overlay are all direct or nested body children). */
+  body > *:not(#print-root) {
+    display: none !important;
+  }
+
+  #print-root {
+    display: block !important;
+    color: #1f2328;
+    font-size: 11pt;
+  }
+
+  #print-root .print-title {
+    font-size: 20pt;
+    font-weight: 700;
+    line-height: 1.25;
+    margin: 0 0 0.6em;
+    padding-bottom: 0.3em;
+    border-bottom: 1px solid #d0d7de;
+    /* Same bidi behavior as rendered prose headings. */
+    unicode-bidi: plaintext;
+    text-align: start;
+  }
+
+  #print-root .md-prose {
+    font-size: 1em;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Page-break hygiene: keep atomic blocks whole and bind headings to
+     the content that follows them. */
+  #print-root .md-codeblock,
+  #print-root .md-blockquote,
+  #print-root .md-img,
+  #print-root .md-img-missing {
+    break-inside: avoid;
+  }
+  #print-root .md-h {
+    break-after: avoid;
+  }
+
+  /* Code wraps instead of clipping at the page edge; interactive copy
+     buttons have no meaning on paper. */
+  #print-root .md-codeblock pre {
+    overflow-x: hidden;
+  }
+  #print-root .md-codeblock pre code {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+  #print-root .md-copy-btn {
+    display: none;
+  }
+
+  /* Links stay readable on paper. */
+  #print-root .md-link {
+    color: #0969da;
+  }
 }

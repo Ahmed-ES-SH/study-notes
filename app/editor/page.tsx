@@ -1,8 +1,16 @@
 "use client";
 
-import React, { Suspense, useCallback, useEffect, useRef, useState } from "react";
+import React, {
+  Suspense,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  useSyncExternalStore,
+} from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
+import { createPortal } from "react-dom";
 import { AppSidebar } from "../../components/layout/AppSidebar";
 import { AppHeader } from "../../components/layout/AppHeader";
 import { EditorBreadcrumb, EditorHeader } from "../../components/editor/EditorHeader";
@@ -20,11 +28,24 @@ import { DeleteNoteDialog } from "../../components/notes/DeleteNoteDialog";
 import { useMainSections } from "../../lib/hooks/useMainSections";
 import { useNoteEditor } from "../../lib/hooks/useNoteEditor";
 import { useTableOfContents } from "../../lib/hooks/useTableOfContents";
+import { PRINT_EXPORT_EVENT, usePrintExport } from "../../lib/hooks/usePrintExport";
 import { Asset } from "../../lib/api/types";
 import { deleteNote } from "../../lib/api/notes";
 import { clearAssetCache } from "../../lib/utils/assetPath";
 import { Button } from "../../components/common/Button";
 import { AlertTriangleIcon, ChevronLeftIcon, EditIcon } from "../../components/common/Icons";
+
+const emptySubscribe = () => () => {};
+
+// Client-only rendering flag for portals: false during SSR/prerender and
+// the hydration pass, true afterwards.
+function useIsClient() {
+  return useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false
+  );
+}
 
 function EditorWorkspace({ noteId }: { noteId: string }) {
   const router = useRouter();
@@ -62,6 +83,7 @@ function EditorWorkspace({ noteId }: { noteId: string }) {
   const [isClosing, setIsClosing] = useState(false);
   const [actionError, setActionError] = useState<string | null>(null);
   const [deleting, setDeleting] = useState(false);
+  const isMounted = useIsClient();
 
   const subsectionId = context?.subsection_id ?? null;
   const subsectionHref = subsectionId ? `/subsection?id=${subsectionId}` : "/";
@@ -71,6 +93,30 @@ function EditorWorkspace({ noteId }: { noteId: string }) {
       document.title = `${note.title || "Untitled note"} — DevNotes`;
     }
   }, [note]);
+
+  // ── PDF export ────────────────────────────────────────────────────
+
+  const handleExportPdf = usePrintExport(flushSave);
+
+  // Global entry points (command palette) dispatch the event; the editor
+  // page owns the actual export because it holds the note state.
+  useEffect(() => {
+    const onExportEvent = () => void handleExportPdf();
+    window.addEventListener(PRINT_EXPORT_EVENT, onExportEvent);
+    return () => window.removeEventListener(PRINT_EXPORT_EVENT, onExportEvent);
+  }, [handleExportPdf]);
+
+  // Ctrl+P inside the editor routes to the same export flow.
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && !e.shiftKey && e.key.toLowerCase() === "p") {
+        e.preventDefault();
+        void handleExportPdf();
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [handleExportPdf]);
 
   const breadcrumbs: EditorBreadcrumb[] = context
     ? [
@@ -244,6 +290,7 @@ function EditorWorkspace({ noteId }: { noteId: string }) {
               onToggleInspector={() => setIsInspectorOpen((prev) => !prev)}
               onSaveAndClose={() => void handleSaveAndClose()}
               onDelete={() => setDeleting(true)}
+              onExportPdf={() => void handleExportPdf()}
               isBusy={isClosing}
             />
           )}
@@ -365,6 +412,18 @@ function EditorWorkspace({ noteId }: { noteId: string }) {
           onClose={() => setDeleting(false)}
           onConfirm={handleDeleteNote}
         />
+      )}
+
+      {/* Print/PDF export root — portaled to <body> so @media print can
+          hide the entire app shell and show only this subtree. Screen CSS
+          keeps it display:none; the .theme-paper class forces the paper
+          palette regardless of the runtime theme. */}
+      {isMounted && note && createPortal(
+        <div id="print-root" className="theme-paper">
+          <h1 className="print-title">{title || "Untitled note"}</h1>
+          <MarkdownPreview content={content} assetsVersion={assetsVersion} />
+        </div>,
+        document.body
       )}
       </div>
     </div>

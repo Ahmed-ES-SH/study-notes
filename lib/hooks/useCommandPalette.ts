@@ -8,6 +8,7 @@ import { searchNotes } from "../api/search";
 import { MainSection, SearchResult, Subsection } from "../api/types";
 import { useDebounce } from "./useDebounce";
 import { THEME_CHANGED_EVENT, THEME_STORAGE_KEY } from "./useTheme";
+import { requestPrintExport } from "./usePrintExport";
 
 export type PaletteScope = "all" | "domain" | "topic";
 
@@ -135,6 +136,14 @@ export function useCommandPalette() {
     window.dispatchEvent(new Event(THEME_CHANGED_EVENT));
   }, []);
 
+  // The export action only makes sense with an open note (editor route +
+  // id). Read at render time — the palette re-renders on open, so the flag
+  // reflects the route the palette was opened from.
+  const canExportPdf =
+    typeof window !== "undefined" &&
+    window.location.pathname === "/editor" &&
+    new URLSearchParams(window.location.search).has("id");
+
   const actions = useMemo<PaletteItem[]>(
     () => [
       {
@@ -151,8 +160,19 @@ export function useCommandPalette() {
         hint: "Appearance",
         run: toggleTheme,
       },
+      ...(canExportPdf
+        ? [
+            {
+              kind: "action" as const,
+              id: "action-export-pdf",
+              title: "Export Note as PDF",
+              hint: "Export",
+              run: requestPrintExport,
+            },
+          ]
+        : []),
     ],
-    [router, toggleTheme]
+    [router, toggleTheme, canExportPdf]
   );
 
   // Global activation shortcut (Cmd+K / Ctrl+K) + trigger events.
