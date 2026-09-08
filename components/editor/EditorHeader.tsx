@@ -8,6 +8,7 @@ import {
   CheckIcon,
   ChevronRightIcon,
   PanelRightIcon,
+  PrinterIcon,
   TrashIcon,
 } from "../common/Icons";
 
@@ -29,6 +30,7 @@ export interface EditorHeaderProps {
   onToggleInspector: () => void;
   onSaveAndClose: () => void;
   onDelete: () => void;
+  onExportPdf: () => void;
   isBusy?: boolean;
 }
 
@@ -86,6 +88,7 @@ export function EditorHeader({
   onToggleInspector,
   onSaveAndClose,
   onDelete,
+  onExportPdf,
   isBusy = false,
 }: EditorHeaderProps) {
   return (
@@ -163,6 +166,17 @@ export function EditorHeader({
         >
           <BookIcon size={13} />
           <span>Zen</span>
+        </button>
+
+        {/* Export as PDF via the print dialog */}
+        <button
+          type="button"
+          onClick={onExportPdf}
+          className="flex items-center gap-1 px-2 py-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface font-mono text-[11px] border border-outline-variant/40 transition-colors cursor-pointer"
+          title="Export as PDF (opens the print dialog — choose 'Print to File')"
+        >
+          <PrinterIcon size={13} />
+          <span>PDF</span>
         </button>
 
         {/* Inspector drawer toggle */}

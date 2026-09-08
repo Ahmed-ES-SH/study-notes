@@ -70,9 +70,10 @@ Detailed implementation plans live in [`plans/`](../plans):
 | **Phase 3** | Page 2: Subsections (Scoped Management) | **Completed** | [`plans/phase-3-subsections.md`](../plans/phase-3-subsections.md) |
 | **Phase 4** | Page 3: Notes List (Scoped to Subsection) | **Completed** | [`plans/phase-4-notes-list.md`](../plans/phase-4-notes-list.md) |
 | **Phase 5** | Page 4: Note Editor / Viewer (Markdown + Images + Auto-save) | **Completed** | [`plans/phase-5-note-editor.md`](../plans/phase-5-note-editor.md) |
-| **Phase 6** | Cross-Cutting Polish: Themes, Performance, Data Integrity | Ready to Implement | [`plans/phase-6-theming-performance-integrity.md`](../plans/phase-6-theming-performance-integrity.md) |
-| **Phase 7** | Deferred Features: Reordering (FR-6) & Local Search (FR-9) | Ready to Implement | [`plans/phase-7-reordering-and-search.md`](../plans/phase-7-reordering-and-search.md) |
-| **Phase 8** | Packaging & Distribution (Arch Linux / AppImage) | Ready to Implement | [`plans/phase-8-packaging-and-distribution.md`](../plans/phase-8-packaging-and-distribution.md) |
+| **Phase 6** | Cross-Cutting Polish: Themes, Performance, Data Integrity | Completed | [`plans/phase-6-theming-performance-integrity.md`](../plans/phase-6-theming-performance-integrity.md) |
+| **Phase 7** | Deferred Features: Reordering (FR-6) & Local Search (FR-9) | Completed | [`plans/phase-7-reordering-and-search.md`](../plans/phase-7-reordering-and-search.md) |
+| **Phase 8** | Packaging & Distribution (Arch Linux / AppImage) | Completed | [`plans/phase-8-packaging-and-distribution.md`](../plans/phase-8-packaging-and-distribution.md) |
+| **Phase 9** | Export Note as PDF (print-dialog approach, frontend-only) | Completed | [`plans/phase-9-pdf-export.md`](../plans/phase-9-pdf-export.md) |
 
 ---
 
