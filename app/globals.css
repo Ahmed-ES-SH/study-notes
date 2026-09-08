@@ -249,6 +249,17 @@ body {
   word-wrap: break-word;
 }
 
+/* Bidi support: each block takes its base direction from its own first
+   strong character, so Arabic paragraphs lay out RTL and English ones LTR
+   independently, and mixed Arabic/English runs inside a line follow the
+   Unicode bidirectional algorithm. */
+.md-prose .md-p,
+.md-prose .md-h,
+.md-prose .md-blockquote {
+  unicode-bidi: plaintext;
+  text-align: start;
+}
+
 .md-prose .md-h {
   color: var(--color-on-surface);
   font-weight: 600;
@@ -272,20 +283,24 @@ body {
 .md-prose .md-ul,
 .md-prose .md-ol {
   margin: 0.75em 0;
-  padding-left: 1.6em;
+  /* Logical property: flips to the right side when the list direction
+     resolves RTL (first strong character of the list content). */
+  padding-inline-start: 1.6em;
+  unicode-bidi: plaintext;
+  text-align: start;
 }
 
 .md-prose .md-ul { list-style: disc; }
 .md-prose .md-ol { list-style: decimal; }
-.md-prose .md-li { margin: 0.3em 0; }
+.md-prose .md-li { margin: 0.3em 0; unicode-bidi: plaintext; text-align: start; }
 .md-prose .md-li::marker { color: var(--color-accent-cobalt); }
 
 .md-prose .md-blockquote {
   margin: 1em 0;
   padding: 0.4em 1em;
-  border-left: 3px solid var(--color-accent-cobalt);
+  border-inline-start: 3px solid var(--color-accent-cobalt);
   background: var(--color-surface-1);
-  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  border-radius: var(--radius-md);
   color: var(--color-text-secondary);
 }
 
@@ -310,6 +325,10 @@ body {
   border-radius: var(--radius-md);
   padding: 0.1em 0.4em;
   color: var(--color-on-surface);
+  /* Code is always LTR; isolate it so English code embedded in an Arabic
+     line keeps its internal ordering. */
+  direction: ltr;
+  unicode-bidi: isolate;
 }
 
 .md-prose .md-codeblock {
@@ -318,6 +337,14 @@ body {
   border-radius: var(--radius-lg);
   overflow: hidden;
   background: var(--color-canvas);
+}
+
+/* Code stays strictly LTR regardless of surrounding Arabic content. */
+.md-prose .md-codeblock pre,
+.md-prose .md-codeblock pre code {
+  direction: ltr;
+  text-align: left;
+  unicode-bidi: isolate;
 }
 
 .md-prose .md-codeblock-header {

@@ -43,6 +43,18 @@ const AUTO_CLOSE_PAIRS: Record<string, string> = {
   "*": "*",
 };
 
+// Native textarea undo is unreliable in a fully controlled React component
+// (React's value reconciliation plus programmatic updates clear the browser's
+// undo stack), so the editor maintains its own history.
+const UNDO_GROUP_MS = 400;
+const HISTORY_LIMIT = 200;
+
+interface HistoryEntry {
+  value: string;
+  selectionStart: number;
+  selectionEnd: number;
+}
+
 function indentLines(
   value: string,
   selectionStart: number,
@@ -128,6 +140,84 @@ export const MarkdownEditor = forwardRef<MarkdownEditorHandle, MarkdownEditorPro
       applySelection();
     }, [value, applySelection]);
 
+    // Undo history. `entries[index]` mirrors the committed value; every
+    // externally-committed change (typing, toolbar transforms) is recorded
+    // here. Changes applied by undo/redo itself are recognized because
+    // `committedValueRef` already matches and skipped.
+    const historyRef = useRef<{ entries: HistoryEntry[]; index: number }>({
+      entries: [{ value, selectionStart: 0, selectionEnd: 0 }],
+      index: 0,
+    });
+    const committedValueRef = useRef(value);
+    // Timestamp of the last recorded change; edits within UNDO_GROUP_MS are
+    // coalesced into a single undo step (word-level undo like native editors).
+    const lastEditAtRef = useRef(0);
+
+    useEffect(() => {
+      if (value === committedValueRef.current) return;
+      committedValueRef.current = value;
+
+      const textarea = textareaRef.current;
+      const selection = textarea
+        ? { selectionStart: textarea.selectionStart, selectionEnd: textarea.selectionEnd }
+        : { selectionStart: 0, selectionEnd: 0 };
+
+      // A change while the textarea is not focused is an external
+      // replacement (e.g. a note reload): restart history instead of
+      // splicing unrelated content into the stack.
+      if (!textarea || document.activeElement !== textarea) {
+        historyRef.current = { entries: [{ value, ...selection }], index: 0 };
+        lastEditAtRef.current = 0;
+        return;
+      }
+
+      const history = historyRef.current;
+      const now = Date.now();
+      const coalesce = now - lastEditAtRef.current < UNDO_GROUP_MS && history.index > 0;
+      lastEditAtRef.current = now;
+
+      if (coalesce) {
+        history.entries[history.index] = { value, ...selection };
+        return;
+      }
+
+      const nextEntries = [
+        ...history.entries.slice(0, history.index + 1),
+        { value, ...selection },
+      ];
+      history.entries = nextEntries.slice(-HISTORY_LIMIT);
+      history.index = history.entries.length - 1;
+    }, [value]);
+
+    const applyHistoryEntry = useCallback(
+      (entry: HistoryEntry) => {
+        committedValueRef.current = entry.value;
+        // A break in the edit timeline: the next keystroke starts a new
+        // undo group instead of merging into a redone state.
+        lastEditAtRef.current = 0;
+        pendingSelectionRef.current = {
+          start: entry.selectionStart,
+          end: entry.selectionEnd,
+        };
+        onChange(entry.value);
+      },
+      [onChange]
+    );
+
+    const undo = useCallback(() => {
+      const history = historyRef.current;
+      if (disabled || history.index <= 0) return;
+      history.index -= 1;
+      applyHistoryEntry(history.entries[history.index]);
+    }, [disabled, applyHistoryEntry]);
+
+    const redo = useCallback(() => {
+      const history = historyRef.current;
+      if (disabled || history.index >= history.entries.length - 1) return;
+      history.index += 1;
+      applyHistoryEntry(history.entries[history.index]);
+    }, [disabled, applyHistoryEntry]);
+
     const applyTransform = useCallback(
       (transform: EditorTransform) => {
         const textarea = textareaRef.current;
@@ -142,6 +232,8 @@ export const MarkdownEditor = forwardRef<MarkdownEditorHandle, MarkdownEditorPro
           start: result.selectionStart,
           end: result.selectionEnd,
         };
+        // Each transform is its own undo step, separate from typing.
+        lastEditAtRef.current = 0;
         onChange(result.value);
       },
       [disabled, onChange]
@@ -168,22 +260,35 @@ export const MarkdownEditor = forwardRef<MarkdownEditorHandle, MarkdownEditorPro
         const mod = e.metaKey || e.ctrlKey;
 
         // Formatting shortcuts.
-        if (mod && !e.shiftKey && !e.altKey) {
+        if (mod && !e.altKey) {
           const key = e.key.toLowerCase();
-          if (key === "b") {
+          if (key === "z") {
             e.preventDefault();
-            applyTransform((v, s, t) => wrapSelection(v, s, t, "**"));
+            if (e.shiftKey) redo();
+            else undo();
             return;
           }
-          if (key === "i") {
+          if (key === "y") {
             e.preventDefault();
-            applyTransform((v, s, t) => wrapSelection(v, s, t, "*"));
+            redo();
             return;
           }
-          if (key === "k") {
-            e.preventDefault();
-            applyTransform(insertLink);
-            return;
+          if (!e.shiftKey) {
+            if (key === "b") {
+              e.preventDefault();
+              applyTransform((v, s, t) => wrapSelection(v, s, t, "**"));
+              return;
+            }
+            if (key === "i") {
+              e.preventDefault();
+              applyTransform((v, s, t) => wrapSelection(v, s, t, "*"));
+              return;
+            }
+            if (key === "k") {
+              e.preventDefault();
+              applyTransform(insertLink);
+              return;
+            }
           }
         }
 
@@ -203,6 +308,7 @@ export const MarkdownEditor = forwardRef<MarkdownEditorHandle, MarkdownEditorPro
               start: listResult.selectionStart,
               end: listResult.selectionEnd,
             };
+            lastEditAtRef.current = 0;
             onChange(listResult.value);
           }
           return;
@@ -231,7 +337,7 @@ export const MarkdownEditor = forwardRef<MarkdownEditorHandle, MarkdownEditorPro
           return;
         }
       },
-      [applyTransform, onChange]
+      [applyTransform, onChange, undo, redo]
     );
 
     return (
@@ -258,8 +364,9 @@ export const MarkdownEditor = forwardRef<MarkdownEditorHandle, MarkdownEditorPro
           onKeyDown={handleKeyDown}
           disabled={disabled}
           spellCheck={false}
+          dir="auto"
           placeholder="# Start writing your note in markdown..."
-          className="flex-1 min-w-0 h-full resize-none bg-transparent px-4 py-4 text-on-surface placeholder:text-text-muted focus:outline-none disabled:opacity-60"
+          className="flex-1 min-w-0 h-full resize-none bg-transparent px-4 py-4 text-on-surface placeholder:text-text-muted focus:outline-none disabled:opacity-60 [unicode-bidi:plaintext] text-start"
         />
       </div>
     );

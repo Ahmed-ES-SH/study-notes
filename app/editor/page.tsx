@@ -276,7 +276,8 @@ function EditorWorkspace({ noteId }: { noteId: string }) {
                     onChange={(e) => editTitle(e.target.value)}
                     placeholder="Untitled note"
                     maxLength={200}
-                    className="w-full bg-transparent font-sans font-bold text-3xl leading-snug text-on-surface placeholder:text-text-muted focus:outline-none"
+                    dir="auto"
+                    className="w-full bg-transparent font-sans font-bold text-3xl leading-snug text-on-surface placeholder:text-text-muted focus:outline-none text-start"
                   />
                   {actionError && (
                     <div className="mt-2 p-2.5 rounded-lg bg-red-950/30 border border-red-800/50 text-error text-xs font-mono flex items-center gap-2">

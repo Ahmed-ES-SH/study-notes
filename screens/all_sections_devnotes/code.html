@@ -1,765 +1,1937 @@
-<!DOCTYPE html><html class="dark" lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"surface-container-high":"#222b33","on-primary-container":"#002959","background":"#0b141c","secondary":"#67df70","inverse-primary":"#005cba","primary-fixed-dim":"#aac7ff","tertiary-container":"#a875fc","surface-tint":"#aac7ff","surface-container":"#182028","surface-variant":"#2d363e","inverse-on-surface":"#29313a","primary":"#aac7ff","surface-container-highest":"#2d363e","outline":"#8b919f","on-background":"#dae3ee","inverse-surface":"#dae3ee","on-tertiary-container":"#39007a","secondary-fixed":"#83fc89","on-secondary":"#00390d","on-tertiary-fixed":"#270058","on-surface-variant":"#c1c6d6","on-surface":"#dae3ee","surface":"#0b141c","surface-dim":"#0b141c","on-tertiary":"#41008b","on-primary-fixed-variant":"#00458e","secondary-container":"#27a640","on-error":"#690005","on-primary":"#002f65","error-container":"#93000a","primary-fixed":"#d7e3ff","outline-variant":"#414753","on-tertiary-fixed-variant":"#5a21ab","primary-container":"#418fff","tertiary-fixed":"#ecdcff","surface-container-low":"#141c24","on-primary-fixed":"#001b3e","surface-container-lowest":"#060f16","on-secondary-fixed-variant":"#005317","secondary-fixed-dim":"#67df70","tertiary-fixed-dim":"#d5bbff","surface-bright":"#313a43","error":"#ffb4ab","on-error-container":"#ffdad6","on-secondary-fixed":"#002105","tertiary":"#d5bbff","on-secondary-container":"#00320a"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"space-2xs":"0.125rem","sidebar-collapsed":"3.5rem","space-xl":"2rem","space-base":"1rem","space-md":"0.75rem","space-sm":"0.5rem","space-xs":"0.25rem","space-lg":"1.5rem","space-2xl":"3rem","reading-column-max":"52rem","sidebar-expanded":"16rem","modal-standard":"40rem"},"fontFamily":{"headline-md":["Inter"],"label-md":["JetBrains Mono"],"body-sm":["Inter"],"headline-lg":["Inter"],"label-sm":["JetBrains Mono"],"code-block":["JetBrains Mono"],"body-lg":["Inter"],"code-inline":["JetBrains Mono"],"headline-sm":["Inter"],"body-md":["Inter"],"display":["Inter"]},"fontSize":{"headline-md":["20px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"600"}],"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.02em","fontWeight":"500"}],"body-sm":["12px",{"lineHeight":"18px","letterSpacing":"0em","fontWeight":"400"}],"headline-lg":["24px",{"lineHeight":"32px","letterSpacing":"-0.015em","fontWeight":"600"}],"label-sm":["11px",{"lineHeight":"14px","letterSpacing":"0.03em","fontWeight":"400"}],"code-block":["13px",{"lineHeight":"20px","letterSpacing":"0em","fontWeight":"400"}],"body-lg":["16px",{"lineHeight":"26px","letterSpacing":"-0.005em","fontWeight":"400"}],"code-inline":["12px",{"lineHeight":"16px","letterSpacing":"-0.01em","fontWeight":"500"}],"headline-sm":["16px",{"lineHeight":"24px","letterSpacing":"-0.005em","fontWeight":"600"}],"body-md":["14px",{"lineHeight":"22px","letterSpacing":"0em","fontWeight":"400"}],"display":["32px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"600"}]}}}}</script></head><body class="bg-background font-body-md text-body-md text-on-surface antialiased min-h-screen"><aside class="fixed left-0 top-0 bottom-0 w-72 bg-surface-container-low z-50 flex flex-col justify-between select-none"><div class="flex flex-col h-full overflow-hidden"><div class="h-14 px-space-base flex items-center justify-between bg-surface-container-low/50"><a class="flex items-center gap-space-sm" data-path="sections-directory" href="#"><div class="w-7 h-7 rounded-lg overflow-hidden flex items-center justify-center"><img alt="DevNotes Logo" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1VmCAywLS4fzluife9Oyc9mIQXRULiuEIpsLA6mxoU1VFwrfb7i2Ya1CEuk7NyoomAnponhyvoVU9-U4rydavokniF9cDofqzd-9TNGcEGEJRO8a2T7zENyjuWDFElm0L1B2-8UsZ9wxgyu89JiCY-Jym7iSan2DOdhpz7QHBP8n6apify6c5nZqd-7-cQt7YYY2935MPneRf6leizjo_e_Q1fkNiifeX1z_Elj01J-UDHFWRUwlAqWFB4"></div><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight">DevNotes</span><span class="font-label-sm text-label-sm px-1.5 py-0.5 rounded bg-surface-container text-outline">v2.4</span></a><button class="text-on-surface-variant hover:text-on-surface p-1 rounded-lg hover:bg-surface-container-high transition-colors" title="Toggle Sidebar"><span class="material-symbols-outlined text-lg">dock_to_left</span></button></div><div class="px-space-base py-space-sm"><button class="w-full flex items-center justify-between px-space-sm py-1.5 rounded-lg bg-surface-container text-outline-variant hover:text-on-surface-variant hover:bg-surface-container-high transition-all"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-sm">search</span><span class="font-body-sm text-body-sm text-outline">Quick search...</span></div><div class="flex items-center gap-0.5 font-label-sm text-label-sm text-outline bg-surface-container-highest px-1.5 py-0.5 rounded"><span class="text-[10px]">⌘</span>K</div></button></div><nav class="px-space-sm py-space-xs flex flex-col gap-0.5" data-active-classes="bg-surface-container-high text-primary font-medium rounded-lg"><a aria-current="page" class="flex items-center px-space-sm py-1.5 transition-colors bg-surface-container-high text-primary font-medium rounded-lg" data-path="sections-directory" href="#">Sections Directory</a><a class="flex items-center justify-between px-space-sm py-1.5 rounded-lg font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" data-path="favorites" href="#"><span class="">Favorites</span><span class="font-label-sm text-label-sm text-outline">6</span></a><a class="flex items-center px-space-sm py-1.5 rounded-lg font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" data-path="global-search" href="#">Global Search</a><a class="flex items-center px-space-sm py-1.5 rounded-lg font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" data-path="settings" href="#">Settings</a></nav><div class="flex-1 overflow-y-auto px-space-sm py-space-xs"><div class="flex items-center justify-between px-space-sm py-space-xs mt-space-xs"><a class="font-label-sm text-label-sm tracking-wider text-outline hover:text-on-surface uppercase font-semibold transition-colors" data-path="sections-directory" href="#">Sections</a><button class="text-outline hover:text-primary p-0.5 rounded hover:bg-surface-container transition-colors" title="Add Section"><span class="material-symbols-outlined text-base">add</span></button></div><div class="space-y-1 mt-1 font-body-sm text-body-sm"><div class="group"><div class="flex items-center justify-between px-space-sm py-1 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container cursor-pointer transition-colors"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-base text-outline">chevron_right</span><span class="w-2 h-2 rounded-full bg-secondary-container"></span><span class="truncate font-medium">Programming Fundamentals</span></div></div></div><div class="group"><a class="flex items-center justify-between px-space-sm py-1 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high/60 transition-colors" data-path="section-javascript" href="#"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-base text-on-surface-variant">expand_more</span><span class="w-2 h-2 rounded-full bg-tertiary-container"></span><span class="truncate font-medium">JavaScript</span></div></a><div class="pl-5 py-0.5 space-y-0.5"><a class="block px-space-sm py-1 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors truncate" data-path="javascript-fundamentals" href="#">Fundamentals</a><a class="block px-space-sm py-1 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors truncate" data-path="javascript-functions" href="#">Functions &amp; Scope</a><a class="block px-space-sm py-1 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors truncate" data-path="javascript-closures" href="#">Closures</a><a class="block px-space-sm py-1 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors truncate" data-path="javascript-async" href="#">Asynchronous JS</a><a class="block px-space-sm py-1 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors truncate" data-path="javascript-dom" href="#">DOM &amp; Events</a></div></div><div class="group"><div class="flex items-center justify-between px-space-sm py-1 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container cursor-pointer transition-colors"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-base text-outline">chevron_right</span><span class="w-2 h-2 rounded-full bg-primary-container"></span><span class="truncate font-medium">TypeScript</span></div></div></div><div class="group"><div class="flex items-center justify-between px-space-sm py-1 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container cursor-pointer transition-colors"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-base text-outline">chevron_right</span><span class="w-2 h-2 rounded-full bg-secondary-fixed-dim"></span><span class="truncate font-medium">React</span></div></div></div></div></div><div class="p-space-sm bg-surface-container-lowest/70 m-space-xs rounded-xl"><div class="flex items-center gap-space-sm"><div class="relative"><div class="w-8 h-8 rounded-full bg-surface-container-highest overflow-hidden flex items-center justify-center"><img alt="User Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1V6J9nw0TQiscoelK_N0EkKgwNaQpVBrPoFMW1NSND3lX2-g2wkjOx6YbSdGml4u2V8QHVAYmRu9Ed9LdTOHay4z7DaIdOlqIrS2RHLFbnf77YowBF8zsu6hlKqm4KbLlbcRaw4TdSmU_Rm7D4ubxmLR-Vf-XKizZn2iz3GJaTtMVlfdc-QvQ4YZYeAM_G4pxyBQkUL9ulm5kn2sowX-GD5DEDqI8S5eHpTnEaNpw3sP2Cqnekv_1QqBms"></div><span class="absolute bottom-0 right-0 w-2 h-2 rounded-full bg-secondary ring-2 ring-surface-container-low"></span></div><div class="flex-1 min-w-0"><div class="flex items-center justify-between"><span class="font-label-md text-label-md text-on-surface truncate font-semibold">alex.dev</span><a class="text-outline hover:text-on-surface transition-colors" data-path="settings" href="#"><span class="material-symbols-outlined text-base">tune</span></a></div><div class="w-full bg-surface-container h-1 rounded-full overflow-hidden mt-1"><div class="bg-primary h-full w-[2.4%]"></div></div><div class="flex justify-between items-center mt-1 font-label-sm text-label-sm text-outline"><span class="text-[10px]">48 MB / 2 GB</span><span class="text-[10px]">2%</span></div></div></div></div></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-14 bg-background/80 backdrop-blur-xl z-40 flex items-center justify-between px-space-lg"><div class="flex items-center gap-space-sm font-label-md text-label-md text-outline"><a class="hover:text-on-surface transition-colors" data-path="sections-directory" href="#">DevNotes</a><span class="material-symbols-outlined text-xs">chevron_right</span><a class="hover:text-on-surface transition-colors" data-path="section-javascript" href="#">JavaScript</a><span class="material-symbols-outlined text-xs">chevron_right</span><span class="text-on-surface font-semibold">Overview</span></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs font-label-sm text-label-sm text-secondary bg-surface-container px-2 py-0.5 rounded-full"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span><span class="">Synced</span></div><button class="text-on-surface-variant hover:text-on-surface p-1 rounded-lg hover:bg-surface-container-high transition-colors" title="Study Mode"><span class="material-symbols-outlined text-lg">menu_book</span></button><button class="text-on-surface-variant hover:text-on-surface p-1 rounded-lg hover:bg-surface-container-high transition-colors" title="Command Palette"><span class="material-symbols-outlined text-lg">terminal</span></button><div class="w-8 h-8 rounded-full overflow-hidden"><img alt="Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1V6J9nw0TQiscoelK_N0EkKgwNaQpVBrPoFMW1NSND3lX2-g2wkjOx6YbSdGml4u2V8QHVAYmRu9Ed9LdTOHay4z7DaIdOlqIrS2RHLFbnf77YowBF8zsu6hlKqm4KbLlbcRaw4TdSmU_Rm7D4ubxmLR-Vf-XKizZn2iz3GJaTtMVlfdc-QvQ4YZYeAM_G4pxyBQkUL9ulm5kn2sowX-GD5DEDqI8S5eHpTnEaNpw3sP2Cqnekv_1QqBms"></div></div></header><main class="relative pt-14 bg-background min-h-screen"><div class="flex flex-col w-full">
-<!-- Interactive & Filter Controller State -->
-<div class="px-space-xl py-space-xl max-w-7xl mx-auto w-full space-y-space-xl">
-<!-- Top Command & Section Heading Header -->
-<div class="flex flex-col gap-space-lg">
-<div class="flex flex-wrap items-center justify-between gap-space-md">
-<div class="space-y-1">
-<div class="flex items-center gap-space-xs font-label-sm text-label-sm text-outline uppercase tracking-wider">
-<span class="">DevNotes Core</span>
-<span class="text-outline-variant">/</span>
-<span class="text-primary font-medium">Sections Directory</span>
-<span class="w-1.5 h-1.5 rounded-full bg-secondary ml-1"></span>
-</div>
-<h1 class="font-display text-display text-on-surface tracking-tight font-semibold flex items-center gap-space-sm">
-            Knowledge Domains &amp; Sections
-          </h1>
-<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">
-            Explore your structured developer study streams, inspect nested technical subsections, and monitor mastery retention across engineering verticals.
-          </p>
-</div>
-<!-- Action Buttons -->
-<div class="flex items-center gap-space-sm self-start lg:self-center">
-<button class="flex items-center gap-space-xs px-space-md py-1.5 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface text-label-md font-label-md transition-colors shadow-sm">
-<span class="material-symbols-outlined text-base text-outline">swap_vert</span>
-<span class="">Reorder</span>
-</button>
-<button class="flex items-center gap-space-xs px-space-md py-1.5 rounded-lg bg-primary hover:bg-primary-container text-on-primary text-label-md font-label-md transition-all shadow-md active:scale-95 font-semibold">
-<span class="material-symbols-outlined text-base">add</span>
-<span class="">New Section</span>
-</button>
-</div>
-</div>
-<!-- Live Stat Counter Strip -->
-
-<!-- Controls & Live Filter Strip -->
-<div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-space-md bg-surface-container-lowest p-space-sm rounded-xl">
-<div class="relative flex-1 max-w-md">
-<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-lg pointer-events-none">search</span>
-<input class="w-full bg-surface-container-low text-on-surface font-body-sm text-body-sm placeholder:text-outline pl-9 pr-space-md py-2 rounded-lg outline-none focus:bg-surface-container-high transition-all" id="domain-search" oninput="filterCards(this.value)" placeholder="Search domain, subsection or syntax tag... (e.g. closures, v8, rsc)" type="text">
-</div>
-<div class="flex items-center gap-space-sm justify-between sm:justify-end">
-<div class="flex items-center gap-1 bg-surface-container-low p-1 rounded-lg">
-<button class="p-1.5 rounded bg-surface-container-high text-primary transition-all" id="view-grid-btn" onclick="setViewMode('grid')" title="Grid Layout">
-<span class="material-symbols-outlined text-lg leading-none">grid_view</span>
-</button>
-<button class="p-1.5 rounded text-outline hover:text-on-surface hover:bg-surface-container-high transition-all" id="view-list-btn" onclick="setViewMode('list')" title="Compact List">
-<span class="material-symbols-outlined text-lg leading-none">view_agenda</span>
-</button>
-</div>
-<div class="h-5 w-px bg-surface-container-high hidden sm:block"></div>
-<div class="flex items-center gap-space-xs font-label-sm text-label-sm text-outline">
-<span class="">Sort:</span>
-<button class="text-on-surface font-medium hover:text-primary flex items-center gap-0.5">
-              Retention %
-              <span class="material-symbols-outlined text-sm">arrow_drop_down</span>
-</button>
-</div>
-</div>
-</div>
-</div>
-<!-- Main Domain Cards Grid -->
-<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-space-lg transition-all duration-300" id="domains-container">
-<!-- Domain Card 1: Programming Fundamentals -->
-<div class="domain-card group flex flex-col bg-surface-container-low hover:bg-surface-container rounded-xl overflow-hidden shadow-sm transition-all duration-200" data-domain-title="programming fundamentals core cs algorithms oop memory">
-<div class="p-space-lg flex-1 flex flex-col justify-between space-y-space-md">
-<div>
-<div class="flex items-start justify-between gap-space-md">
-<div class="flex items-center gap-space-md">
-<div class="w-12 h-12 rounded-xl bg-surface-container-high text-secondary flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
-<span class="material-symbols-outlined text-2xl">data_object</span>
-</div>
-<div>
-<div class="flex items-center gap-space-xs">
-<span class="w-2 h-2 rounded-full bg-secondary"></span>
-<span class="font-label-sm text-label-sm text-secondary font-medium tracking-wide uppercase">Core Architecture</span>
-</div>
-<h2 class="font-headline-md text-headline-md text-on-surface font-semibold group-hover:text-primary transition-colors">
-                    Programming Fundamentals
-                  </h2>
-</div>
-</div>
-<div class="flex items-center gap-1 font-label-sm text-label-sm text-outline">
-<span class="material-symbols-outlined text-sm">schedule</span>
-<span class="">2d ago</span>
-</div>
-</div>
-<p class="font-body-sm text-body-sm text-on-surface-variant mt-space-md leading-relaxed">
-              Core computer science abstractions, stack/heap memory topologies, algorithmic complexity, and foundational object-oriented paradigms.
-            </p>
-</div>
-<!-- Subsections Matrix -->
-<div class="space-y-space-xs">
-<div class="flex items-center justify-between font-label-sm text-label-sm text-outline">
-<span class="">Subsections (5)</span>
-<span class="text-outline-variant">Structured Sequence</span>
-</div>
-<div class="flex flex-wrap gap-1.5">
-<span class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface cursor-pointer transition-colors">Variables &amp; Data Types</span>
-<span class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface cursor-pointer transition-colors">Control Flow</span>
-<span class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface cursor-pointer transition-colors">Functions &amp; Stack</span>
-<span class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface cursor-pointer transition-colors">OOP Paradigms</span>
-<span class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface cursor-pointer transition-colors">Error Handling</span>
-</div>
-</div>
-<!-- Mastery / Retention Gauge -->
-<div class="space-y-1.5 pt-space-xs">
-<div class="flex items-center justify-between font-label-sm text-label-sm">
-<span class="text-outline flex items-center gap-1">
-<span class="material-symbols-outlined text-sm text-secondary">verified</span>
-                Domain Mastery
-              </span>
-<span class="font-semibold text-secondary">95%</span>
-</div>
-<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden">
-<div class="bg-secondary h-full rounded-full transition-all duration-500" style="width: 95%;"></div>
-</div>
-<div class="flex justify-between items-center font-label-sm text-label-sm text-outline pt-0.5">
-<span class="">28 Notes</span>
-<span class="">Target: 30</span>
-</div>
-</div>
-</div>
-<!-- Footer Card Action Bar -->
-<div class="px-space-lg py-space-sm bg-surface-container-lowest/80 flex items-center justify-between">
-<button class="font-label-sm text-label-sm text-outline hover:text-primary flex items-center gap-1 transition-colors">
-<span class="material-symbols-outlined text-sm">add_circle</span>
-<span class="">Subsection</span>
-</button>
-<a class="font-label-sm text-label-sm text-primary hover:text-primary-fixed flex items-center gap-1 font-semibold transition-colors" data-path="section-javascript" href="#">
-<span class="">Open Stream</span>
-<span class="material-symbols-outlined text-base">arrow_forward</span>
-</a>
-</div>
-</div>
-<!-- Domain Card 2: JavaScript (Highlighted Active Domain) -->
-<div class="domain-card group flex flex-col bg-surface-container-low hover:bg-surface-container rounded-xl overflow-hidden shadow-md transition-all duration-200" data-domain-title="javascript js ecmascript closures event loop async v8 browser dom">
-<div class="p-space-lg flex-1 flex flex-col justify-between space-y-space-md">
-<div>
-<div class="flex items-start justify-between gap-space-md">
-<div class="flex items-center gap-space-md">
-<div class="w-12 h-12 rounded-xl bg-surface-container-high text-tertiary flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
-<span class="material-symbols-outlined text-2xl">javascript</span>
-</div>
-<div>
-<div class="flex items-center gap-space-xs">
-<span class="w-2 h-2 rounded-full bg-tertiary"></span>
-<span class="font-label-sm text-label-sm text-tertiary font-medium tracking-wide uppercase">Primary Study Focus</span>
-</div>
-<h2 class="font-headline-md text-headline-md text-on-surface font-semibold group-hover:text-primary transition-colors flex items-center gap-space-xs">
-                    JavaScript
-                    <span class="font-label-sm text-label-sm px-1.5 py-0.5 rounded bg-surface-container-high text-secondary font-mono">Active</span>
-</h2>
-</div>
-</div>
-<div class="flex items-center gap-1 font-label-sm text-label-sm text-secondary">
-<span class="material-symbols-outlined text-sm">bolt</span>
-<span class="">22m ago</span>
-</div>
-</div>
-<p class="font-body-sm text-body-sm text-on-surface-variant mt-space-md leading-relaxed">
-              ECMAScript specifications, V8 engine internals, call stacks, lexical scoping, closures, microtask queues, and web runtime APIs.
-            </p>
-</div>
-<!-- Subsections Matrix with Active Closures Node -->
-<div class="space-y-space-xs">
-<div class="flex items-center justify-between font-label-sm text-label-sm text-outline">
-<span class="">Subsections (5)</span>
-<span class="text-tertiary font-mono">1 Active Topic</span>
-</div>
-<div class="flex flex-wrap gap-1.5">
-<a class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface transition-colors" data-path="javascript-fundamentals" href="#">Fundamentals</a>
-<a class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface transition-colors" data-path="javascript-functions" href="#">Functions &amp; Scope</a>
-<a class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-highest text-primary flex items-center gap-1 shadow-sm font-semibold" data-path="javascript-closures" href="#">
-<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
-                Closures (8 notes)
-              </a>
-<a class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface transition-colors" data-path="javascript-async" href="#">Async &amp; Event Loop</a>
-<a class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface transition-colors" data-path="javascript-dom" href="#">DOM &amp; Web APIs</a>
-</div>
-</div>
-<!-- Mastery Gauge -->
-<div class="space-y-1.5 pt-space-xs">
-<div class="flex items-center justify-between font-label-sm text-label-sm">
-<span class="text-outline flex items-center gap-1">
-<span class="material-symbols-outlined text-sm text-primary">verified</span>
-                Domain Mastery
-              </span>
-<span class="font-semibold text-primary">88%</span>
-</div>
-<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden">
-<div class="bg-primary h-full rounded-full transition-all duration-500" style="width: 88%;"></div>
-</div>
-<div class="flex justify-between items-center font-label-sm text-label-sm text-outline pt-0.5">
-<span class="">48 Notes Recorded</span>
-<span class="">5 Active Branches</span>
-</div>
-</div>
-</div>
-<!-- Footer Card Action Bar -->
-<div class="px-space-lg py-space-sm bg-surface-container-lowest/80 flex items-center justify-between">
-<button class="font-label-sm text-label-sm text-outline hover:text-primary flex items-center gap-1 transition-colors">
-<span class="material-symbols-outlined text-sm">add_circle</span>
-<span class="">Subsection</span>
-</button>
-<a class="font-label-sm text-label-sm text-primary hover:text-primary-fixed flex items-center gap-1 font-semibold transition-colors" data-path="section-javascript" href="#">
-<span class="">Resume Stream</span>
-<span class="material-symbols-outlined text-base">arrow_forward</span>
-</a>
-</div>
-</div>
-<!-- Domain Card 3: TypeScript -->
-<div class="domain-card group flex flex-col bg-surface-container-low hover:bg-surface-container rounded-xl overflow-hidden shadow-sm transition-all duration-200" data-domain-title="typescript ts types generics interfaces type systems ast">
-<div class="p-space-lg flex-1 flex flex-col justify-between space-y-space-md">
-<div>
-<div class="flex items-start justify-between gap-space-md">
-<div class="flex items-center gap-space-md">
-<div class="w-12 h-12 rounded-xl bg-surface-container-high text-primary flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
-<span class="material-symbols-outlined text-2xl">code_blocks</span>
-</div>
-<div>
-<div class="flex items-center gap-space-xs">
-<span class="w-2 h-2 rounded-full bg-primary"></span>
-<span class="font-label-sm text-label-sm text-primary font-medium tracking-wide uppercase">Static Typing</span>
-</div>
-<h2 class="font-headline-md text-headline-md text-on-surface font-semibold group-hover:text-primary transition-colors">
-                    TypeScript
-                  </h2>
-</div>
-</div>
-<div class="flex items-center gap-1 font-label-sm text-label-sm text-outline">
-<span class="material-symbols-outlined text-sm">schedule</span>
-<span class="">2h ago</span>
-</div>
-</div>
-<p class="font-body-sm text-body-sm text-on-surface-variant mt-space-md leading-relaxed">
-              Structural type engine, generics constraints, conditional types, template literals, compiler AST analysis, and type gymnastics.
-            </p>
-</div>
-<!-- Subsections Matrix -->
-<div class="space-y-space-xs">
-<div class="flex items-center justify-between font-label-sm text-label-sm text-outline">
-<span class="">Subsections (5)</span>
-<span class="text-outline-variant">Advanced Typing</span>
-</div>
-<div class="flex flex-wrap gap-1.5">
-<span class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface cursor-pointer transition-colors">Basic &amp; Primitive</span>
-<span class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface cursor-pointer transition-colors">Interfaces &amp; Aliases</span>
-<span class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface cursor-pointer transition-colors">Generics &amp; Bounds</span>
-<span class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface cursor-pointer transition-colors">Utility Types</span>
-<span class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface cursor-pointer transition-colors">Type Inference</span>
-</div>
-</div>
-<!-- Mastery Gauge -->
-<div class="space-y-1.5 pt-space-xs">
-<div class="flex items-center justify-between font-label-sm text-label-sm">
-<span class="text-outline flex items-center gap-1">
-<span class="material-symbols-outlined text-sm text-primary">verified</span>
-                Domain Mastery
-              </span>
-<span class="font-semibold text-primary">74%</span>
-</div>
-<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden">
-<div class="bg-primary h-full rounded-full transition-all duration-500" style="width: 74%;"></div>
-</div>
-<div class="flex justify-between items-center font-label-sm text-label-sm text-outline pt-0.5">
-<span class="">36 Notes</span>
-<span class="">12 Code Snippets</span>
-</div>
-</div>
-</div>
-<!-- Footer Card Action Bar -->
-<div class="px-space-lg py-space-sm bg-surface-container-lowest/80 flex items-center justify-between">
-<button class="font-label-sm text-label-sm text-outline hover:text-primary flex items-center gap-1 transition-colors">
-<span class="material-symbols-outlined text-sm">add_circle</span>
-<span class="">Subsection</span>
-</button>
-<a class="font-label-sm text-label-sm text-primary hover:text-primary-fixed flex items-center gap-1 font-semibold transition-colors" href="#">
-<span class="">Open Stream</span>
-<span class="material-symbols-outlined text-base">arrow_forward</span>
-</a>
-</div>
-</div>
-<!-- Domain Card 4: React Ecosystem -->
-<div class="domain-card group flex flex-col bg-surface-container-low hover:bg-surface-container rounded-xl overflow-hidden shadow-sm transition-all duration-200" data-domain-title="react ecosystem rsc fiber hooks components nextjs frontend">
-<div class="p-space-lg flex-1 flex flex-col justify-between space-y-space-md">
-<div>
-<div class="flex items-start justify-between gap-space-md">
-<div class="flex items-center gap-space-md">
-<div class="w-12 h-12 rounded-xl bg-surface-container-high text-primary flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
-<span class="material-symbols-outlined text-2xl">view_in_ar</span>
-</div>
-<div>
-<div class="flex items-center gap-space-xs">
-<span class="w-2 h-2 rounded-full bg-primary"></span>
-<span class="font-label-sm text-label-sm text-primary font-medium tracking-wide uppercase">UI &amp; Concurrency</span>
-</div>
-<h2 class="font-headline-md text-headline-md text-on-surface font-semibold group-hover:text-primary transition-colors">
-                    React Ecosystem
-                  </h2>
-</div>
-</div>
-<div class="flex items-center gap-1 font-label-sm text-label-sm text-outline">
-<span class="material-symbols-outlined text-sm">schedule</span>
-<span class="">Yesterday</span>
-</div>
-</div>
-<p class="font-body-sm text-body-sm text-on-surface-variant mt-space-md leading-relaxed">
-              Fiber reconciler architecture, concurrent scheduling, custom hook mechanics, Server Components (RSC), and state orchestration.
-            </p>
-</div>
-<!-- Subsections Matrix -->
-<div class="space-y-space-xs">
-<div class="flex items-center justify-between font-label-sm text-label-sm text-outline">
-<span class="">Subsections (5)</span>
-<span class="text-outline-variant">Frameworks</span>
-</div>
-<div class="flex flex-wrap gap-1.5">
-<span class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface cursor-pointer transition-colors">Component Anatomy</span>
-<span class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface cursor-pointer transition-colors">State &amp; Props</span>
-<span class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface cursor-pointer transition-colors">Hooks Deep-Dive</span>
-<span class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface cursor-pointer transition-colors">RSC &amp; Server Actions</span>
-<span class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface cursor-pointer transition-colors">Memo &amp; Profiling</span>
-</div>
-</div>
-<!-- Mastery Gauge -->
-<div class="space-y-1.5 pt-space-xs">
-<div class="flex items-center justify-between font-label-sm text-label-sm">
-<span class="text-outline flex items-center gap-1">
-<span class="material-symbols-outlined text-sm text-primary">verified</span>
-                Domain Mastery
-              </span>
-<span class="font-semibold text-primary">82%</span>
-</div>
-<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden">
-<div class="bg-primary h-full rounded-full transition-all duration-500" style="width: 82%;"></div>
-</div>
-<div class="flex justify-between items-center font-label-sm text-label-sm text-outline pt-0.5">
-<span class="">32 Notes</span>
-<span class="">8 Sandboxes</span>
-</div>
-</div>
-</div>
-<!-- Footer Card Action Bar -->
-<div class="px-space-lg py-space-sm bg-surface-container-lowest/80 flex items-center justify-between">
-<button class="font-label-sm text-label-sm text-outline hover:text-primary flex items-center gap-1 transition-colors">
-<span class="material-symbols-outlined text-sm">add_circle</span>
-<span class="">Subsection</span>
-</button>
-<a class="font-label-sm text-label-sm text-primary hover:text-primary-fixed flex items-center gap-1 font-semibold transition-colors" href="#">
-<span class="">Open Stream</span>
-<span class="material-symbols-outlined text-base">arrow_forward</span>
-</a>
-</div>
-</div>
-<!-- Domain Card 5: Databases & Storage -->
-<div class="domain-card group flex flex-col bg-surface-container-low hover:bg-surface-container rounded-xl overflow-hidden shadow-sm transition-all duration-200" data-domain-title="databases storage sql postgresql btree acid wal redis cache">
-<div class="p-space-lg flex-1 flex flex-col justify-between space-y-space-md">
-<div>
-<div class="flex items-start justify-between gap-space-md">
-<div class="flex items-center gap-space-md">
-<div class="w-12 h-12 rounded-xl bg-surface-container-high text-secondary flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
-<span class="material-symbols-outlined text-2xl">database</span>
-</div>
-<div>
-<div class="flex items-center gap-space-xs">
-<span class="w-2 h-2 rounded-full bg-secondary"></span>
-<span class="font-label-sm text-label-sm text-secondary font-medium tracking-wide uppercase">Persistence &amp; OLTP</span>
-</div>
-<h2 class="font-headline-md text-headline-md text-on-surface font-semibold group-hover:text-primary transition-colors">
-                    Databases &amp; Storage
-                  </h2>
-</div>
-</div>
-<div class="flex items-center gap-1 font-label-sm text-label-sm text-outline">
-<span class="material-symbols-outlined text-sm">schedule</span>
-<span class="">3d ago</span>
-</div>
-</div>
-<p class="font-body-sm text-body-sm text-on-surface-variant mt-space-md leading-relaxed">
-              Relational algebra, PostgreSQL MVCC, B-Tree indices, Write-Ahead Logging (WAL), distributed consensus, and Redis storage engines.
-            </p>
-</div>
-<!-- Subsections Matrix -->
-<div class="space-y-space-xs">
-<div class="flex items-center justify-between font-label-sm text-label-sm text-outline">
-<span class="">Subsections (4)</span>
-<span class="text-outline-variant">Storage Engines</span>
-</div>
-<div class="flex flex-wrap gap-1.5">
-<span class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface cursor-pointer transition-colors">Relational &amp; Postgres</span>
-<span class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface cursor-pointer transition-colors">Indexing &amp; B-Trees</span>
-<span class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface cursor-pointer transition-colors">Distributed Consensus</span>
-<span class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface cursor-pointer transition-colors">Key-Value Caching</span>
-</div>
-</div>
-<!-- Mastery Gauge -->
-<div class="space-y-1.5 pt-space-xs">
-<div class="flex items-center justify-between font-label-sm text-label-sm">
-<span class="text-outline flex items-center gap-1">
-<span class="material-symbols-outlined text-sm text-secondary">verified</span>
-                Domain Mastery
-              </span>
-<span class="font-semibold text-secondary">68%</span>
-</div>
-<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden">
-<div class="bg-secondary h-full rounded-full transition-all duration-500" style="width: 68%;"></div>
-</div>
-<div class="flex justify-between items-center font-label-sm text-label-sm text-outline pt-0.5">
-<span class="">26 Notes</span>
-<span class="">4 Schemas</span>
-</div>
-</div>
-</div>
-<!-- Footer Card Action Bar -->
-<div class="px-space-lg py-space-sm bg-surface-container-lowest/80 flex items-center justify-between">
-<button class="font-label-sm text-label-sm text-outline hover:text-primary flex items-center gap-1 transition-colors">
-<span class="material-symbols-outlined text-sm">add_circle</span>
-<span class="">Subsection</span>
-</button>
-<a class="font-label-sm text-label-sm text-primary hover:text-primary-fixed flex items-center gap-1 font-semibold transition-colors" href="#">
-<span class="">Open Stream</span>
-<span class="material-symbols-outlined text-base">arrow_forward</span>
-</a>
-</div>
-</div>
-<!-- Domain Card 6: System Design & Architecture -->
-<div class="domain-card group flex flex-col bg-surface-container-low hover:bg-surface-container rounded-xl overflow-hidden shadow-sm transition-all duration-200" data-domain-title="system design architecture distributed microservices kafka grpc scale">
-<div class="p-space-lg flex-1 flex flex-col justify-between space-y-space-md">
-<div>
-<div class="flex items-start justify-between gap-space-md">
-<div class="flex items-center gap-space-md">
-<div class="w-12 h-12 rounded-xl bg-surface-container-high text-tertiary flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
-<span class="material-symbols-outlined text-2xl">hub</span>
-</div>
-<div>
-<div class="flex items-center gap-space-xs">
-<span class="w-2 h-2 rounded-full bg-tertiary"></span>
-<span class="font-label-sm text-label-sm text-tertiary font-medium tracking-wide uppercase">Distributed Infra</span>
-</div>
-<h2 class="font-headline-md text-headline-md text-on-surface font-semibold group-hover:text-primary transition-colors">
-                    System Design &amp; Architecture
-                  </h2>
-</div>
-</div>
-<div class="flex items-center gap-1 font-label-sm text-label-sm text-outline">
-<span class="material-symbols-outlined text-sm">schedule</span>
-<span class="">5d ago</span>
-</div>
-</div>
-<p class="font-body-sm text-body-sm text-on-surface-variant mt-space-md leading-relaxed">
-              High-availability topologies, message queues (Kafka), microservice boundaries, gRPC/REST protocols, and rate-limiting mechanics.
-            </p>
-</div>
-<!-- Subsections Matrix -->
-<div class="space-y-space-xs">
-<div class="flex items-center justify-between font-label-sm text-label-sm text-outline">
-<span class="">Subsections (4)</span>
-<span class="text-outline-variant">Scale Topologies</span>
-</div>
-<div class="flex flex-wrap gap-1.5">
-<span class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface cursor-pointer transition-colors">Distributed Systems</span>
-<span class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface cursor-pointer transition-colors">Event-Driven &amp; Kafka</span>
-<span class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface cursor-pointer transition-colors">API Protocols (gRPC)</span>
-<span class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface cursor-pointer transition-colors">Cache Invalidation</span>
-</div>
-</div>
-<!-- Mastery Gauge -->
-<div class="space-y-1.5 pt-space-xs">
-<div class="flex items-center justify-between font-label-sm text-label-sm">
-<span class="text-outline flex items-center gap-1">
-<span class="material-symbols-outlined text-sm text-tertiary">verified</span>
-                Domain Mastery
-              </span>
-<span class="font-semibold text-tertiary">55%</span>
-</div>
-<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden">
-<div class="bg-tertiary h-full rounded-full transition-all duration-500" style="width: 55%;"></div>
-</div>
-<div class="flex justify-between items-center font-label-sm text-label-sm text-outline pt-0.5">
-<span class="">18 Notes</span>
-<span class="">6 Diagrams</span>
-</div>
-</div>
-</div>
-<!-- Footer Card Action Bar -->
-<div class="px-space-lg py-space-sm bg-surface-container-lowest/80 flex items-center justify-between">
-<button class="font-label-sm text-label-sm text-outline hover:text-primary flex items-center gap-1 transition-colors">
-<span class="material-symbols-outlined text-sm">add_circle</span>
-<span class="">Subsection</span>
-</button>
-<a class="font-label-sm text-label-sm text-primary hover:text-primary-fixed flex items-center gap-1 font-semibold transition-colors" href="#">
-<span class="">Open Stream</span>
-<span class="material-symbols-outlined text-base">arrow_forward</span>
-</a>
-</div>
-</div>
-<!-- Domain Card 7: Linux & Systems Programming -->
-<div class="domain-card group flex flex-col bg-surface-container-low hover:bg-surface-container rounded-xl overflow-hidden shadow-sm transition-all duration-200" data-domain-title="linux systems programming kernel ebpf syscalls posix memory io">
-<div class="p-space-lg flex-1 flex flex-col justify-between space-y-space-md">
-<div>
-<div class="flex items-start justify-between gap-space-md">
-<div class="flex items-center gap-space-md">
-<div class="w-12 h-12 rounded-xl bg-surface-container-high text-outline flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
-<span class="material-symbols-outlined text-2xl">terminal</span>
-</div>
-<div>
-<div class="flex items-center gap-space-xs">
-<span class="w-2 h-2 rounded-full bg-outline"></span>
-<span class="font-label-sm text-label-sm text-outline font-medium tracking-wide uppercase">Kernel &amp; Runtime</span>
-</div>
-<h2 class="font-headline-md text-headline-md text-on-surface font-semibold group-hover:text-primary transition-colors">
-                    Linux &amp; Systems Programming
-                  </h2>
-</div>
-</div>
-<div class="flex items-center gap-1 font-label-sm text-label-sm text-outline">
-<span class="material-symbols-outlined text-sm">schedule</span>
-<span class="">1w ago</span>
-</div>
-</div>
-<p class="font-body-sm text-body-sm text-on-surface-variant mt-space-md leading-relaxed">
-              Linux kernel architecture, eBPF tracepoints, POSIX threads, memory paging, and low-level system call interfaces.
-            </p>
-</div>
-<!-- Subsections Matrix -->
-<div class="space-y-space-xs">
-<div class="flex items-center justify-between font-label-sm text-label-sm text-outline">
-<span class="">Subsections (3)</span>
-<span class="text-outline-variant">Kernel Space</span>
-</div>
-<div class="flex flex-wrap gap-1.5">
-<span class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface cursor-pointer transition-colors">Kernel &amp; Syscalls</span>
-<span class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface cursor-pointer transition-colors">eBPF &amp; Observability</span>
-<span class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface cursor-pointer transition-colors">Memory Paging &amp; I/O</span>
-</div>
-</div>
-<!-- Mastery Gauge -->
-<div class="space-y-1.5 pt-space-xs">
-<div class="flex items-center justify-between font-label-sm text-label-sm">
-<span class="text-outline flex items-center gap-1">
-<span class="material-symbols-outlined text-sm text-outline">verified</span>
-                Domain Mastery
-              </span>
-<span class="font-semibold text-on-surface">62%</span>
-</div>
-<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden">
-<div class="bg-outline h-full rounded-full transition-all duration-500" style="width: 62%;"></div>
-</div>
-<div class="flex justify-between items-center font-label-sm text-label-sm text-outline pt-0.5">
-<span class="">14 Notes</span>
-<span class="">3 Modules</span>
-</div>
-</div>
-</div>
-<!-- Footer Card Action Bar -->
-<div class="px-space-lg py-space-sm bg-surface-container-lowest/80 flex items-center justify-between">
-<button class="font-label-sm text-label-sm text-outline hover:text-primary flex items-center gap-1 transition-colors">
-<span class="material-symbols-outlined text-sm">add_circle</span>
-<span class="">Subsection</span>
-</button>
-<a class="font-label-sm text-label-sm text-primary hover:text-primary-fixed flex items-center gap-1 font-semibold transition-colors" href="#">
-<span class="">Open Stream</span>
-<span class="material-symbols-outlined text-base">arrow_forward</span>
-</a>
-</div>
-</div>
-<!-- Domain Card 8: DevOps & Cloud Infrastructure -->
-<div class="domain-card group flex flex-col bg-surface-container-low hover:bg-surface-container rounded-xl overflow-hidden shadow-sm transition-all duration-200" data-domain-title="devops cloud infrastructure kubernetes docker k8s terraform cicd">
-<div class="p-space-lg flex-1 flex flex-col justify-between space-y-space-md">
-<div>
-<div class="flex items-start justify-between gap-space-md">
-<div class="flex items-center gap-space-md">
-<div class="w-12 h-12 rounded-xl bg-surface-container-high text-outline-variant flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
-<span class="material-symbols-outlined text-2xl">cloud_sync</span>
-</div>
-<div>
-<div class="flex items-center gap-space-xs">
-<span class="w-2 h-2 rounded-full bg-outline-variant"></span>
-<span class="font-label-sm text-label-sm text-outline-variant font-medium tracking-wide uppercase">Deployments &amp; IaC</span>
-</div>
-<h2 class="font-headline-md text-headline-md text-on-surface font-semibold group-hover:text-primary transition-colors">
-                    DevOps &amp; Cloud Infrastructure
-                  </h2>
-</div>
-</div>
-<div class="flex items-center gap-1 font-label-sm text-label-sm text-outline">
-<span class="material-symbols-outlined text-sm">schedule</span>
-<span class="">2w ago</span>
-</div>
-</div>
-<p class="font-body-sm text-body-sm text-on-surface-variant mt-space-md leading-relaxed">
-              Kubernetes cluster orchestrations, Docker layer caching strategies, GitOps continuous delivery, and declarative Terraform specs.
-            </p>
-</div>
-<!-- Subsections Matrix -->
-<div class="space-y-space-xs">
-<div class="flex items-center justify-between font-label-sm text-label-sm text-outline">
-<span class="">Subsections (3)</span>
-<span class="text-outline-variant">Cloud Native</span>
-</div>
-<div class="flex flex-wrap gap-1.5">
-<span class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface cursor-pointer transition-colors">Container Runtimes</span>
-<span class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface cursor-pointer transition-colors">Kubernetes Operators</span>
-<span class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface cursor-pointer transition-colors">CI/CD Automation</span>
-</div>
-</div>
-<!-- Mastery Gauge -->
-<div class="space-y-1.5 pt-space-xs">
-<div class="flex items-center justify-between font-label-sm text-label-sm">
-<span class="text-outline flex items-center gap-1">
-<span class="material-symbols-outlined text-sm text-outline">verified</span>
-                Domain Mastery
-              </span>
-<span class="font-semibold text-outline">45%</span>
-</div>
-<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden">
-<div class="bg-outline-variant h-full rounded-full transition-all duration-500" style="width: 45%;"></div>
-</div>
-<div class="flex justify-between items-center font-label-sm text-label-sm text-outline pt-0.5">
-<span class="">11 Notes</span>
-<span class="">2 Clusters</span>
-</div>
-</div>
-</div>
-<!-- Footer Card Action Bar -->
-<div class="px-space-lg py-space-sm bg-surface-container-lowest/80 flex items-center justify-between">
-<button class="font-label-sm text-label-sm text-outline hover:text-primary flex items-center gap-1 transition-colors">
-<span class="material-symbols-outlined text-sm">add_circle</span>
-<span class="">Subsection</span>
-</button>
-<a class="font-label-sm text-label-sm text-primary hover:text-primary-fixed flex items-center gap-1 font-semibold transition-colors" href="#">
-<span class="">Open Stream</span>
-<span class="material-symbols-outlined text-base">arrow_forward</span>
-</a>
-</div>
-</div>
-</div>
-<!-- Empty Search State -->
-<div class="hidden flex-col items-center justify-center py-space-2xl text-center space-y-space-md" id="empty-state">
-<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-outline">
-<span class="material-symbols-outlined text-2xl">manage_search</span>
-</div>
-<div>
-<h3 class="font-headline-sm text-headline-sm text-on-surface">No knowledge domain found</h3>
-<p class="font-body-sm text-body-sm text-outline mt-1 max-w-sm">No domains match your search query. Try filtering by general keywords like "async", "v8", "memory", or "sql".</p>
-</div>
-<button class="px-space-md py-1.5 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-primary font-label-sm text-label-sm transition-colors" onclick="clearSearch()">
-        Clear Filter
-      </button>
-</div>
-<!-- Activity & Stream Feed Micro-Panel -->
-<div class="bg-surface-container-low rounded-xl p-space-lg shadow-sm">
-<div class="flex items-center justify-between pb-space-md">
-<div class="flex items-center gap-space-sm">
-<span class="material-symbols-outlined text-primary text-xl">history</span>
-<h3 class="font-headline-sm text-headline-sm text-on-surface">Recent Sub-Topic Activity</h3>
-</div>
-<span class="font-label-sm text-label-sm text-outline">Realtime Sync Active</span>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
-<a class="p-space-md bg-surface-container rounded-lg hover:bg-surface-container-high transition-colors flex flex-col justify-between" data-path="javascript-closures" href="#">
-<div class="space-y-1">
-<div class="flex items-center justify-between">
-<span class="font-label-sm text-label-sm text-tertiary">JavaScript / Closures</span>
-<span class="font-label-sm text-label-sm text-outline">22m ago</span>
-</div>
-<div class="font-headline-sm text-headline-sm text-on-surface font-semibold text-sm">Lexical Environment Lexicon Record</div>
-<p class="font-body-sm text-body-sm text-outline line-clamp-1">Detailed note on inner scope capture vs GC deallocation.</p>
-</div>
-<div class="pt-2 font-code-inline text-code-inline text-primary flex items-center gap-1">
-<span class="">Inspect note</span>
-<span class="material-symbols-outlined text-xs">chevron_right</span>
-</div>
-</a>
-<div class="p-space-md bg-surface-container rounded-lg hover:bg-surface-container-high transition-colors flex flex-col justify-between cursor-pointer">
-<div class="space-y-1">
-<div class="flex items-center justify-between">
-<span class="font-label-sm text-label-sm text-primary">TypeScript / Generics</span>
-<span class="font-label-sm text-label-sm text-outline">2h ago</span>
-</div>
-<div class="font-headline-sm text-headline-sm text-on-surface font-semibold text-sm">Distributed Conditional Types</div>
-<p class="font-body-sm text-body-sm text-outline line-clamp-1">Naked type parameter behavior across union distributions.</p>
-</div>
-<div class="pt-2 font-code-inline text-code-inline text-primary flex items-center gap-1">
-<span class="">Inspect note</span>
-<span class="material-symbols-outlined text-xs">chevron_right</span>
-</div>
-</div>
-<div class="p-space-md bg-surface-container rounded-lg hover:bg-surface-container-high transition-colors flex flex-col justify-between cursor-pointer">
-<div class="space-y-1">
-<div class="flex items-center justify-between">
-<span class="font-label-sm text-label-sm text-secondary">Databases / Indexing</span>
-<span class="font-label-sm text-label-sm text-outline">3d ago</span>
-</div>
-<div class="font-headline-sm text-headline-sm text-on-surface font-semibold text-sm">PostgreSQL GiST vs GIN Indexes</div>
-<p class="font-body-sm text-body-sm text-outline line-clamp-1">Tradeoffs for full-text search and array containment.</p>
-</div>
-<div class="pt-2 font-code-inline text-code-inline text-primary flex items-center gap-1">
-<span class="">Inspect note</span>
-<span class="material-symbols-outlined text-xs">chevron_right</span>
-</div>
-</div>
-</div>
-</div>
-</div>
-<script>
-    function filterCards(query) {
-      const q = query.toLowerCase().trim();
-      const cards = document.querySelectorAll('.domain-card');
-      let visibleCount = 0;
-
-      cards.forEach(card => {
-        const text = card.getAttribute('data-domain-title') || '';
-        const innerContent = card.innerText.toLowerCase();
-        if (text.includes(q) || innerContent.includes(q)) {
-          card.classList.remove('hidden');
-          visibleCount++;
-        } else {
-          card.classList.add('hidden');
+<!doctype html>
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      @layer base {
+        html,
+        body {
+          margin: 0;
+          padding: 0;
         }
-      });
-
-      const empty = document.getElementById('empty-state');
-      if (visibleCount === 0) {
-        empty.classList.remove('hidden');
-        empty.classList.add('flex');
-      } else {
-        empty.classList.add('hidden');
-        empty.classList.remove('flex');
+        body {
+          overscroll-behavior: none;
+        }
+        main > :first-child {
+          margin-top: 0 !important;
+        }
+        main > :last-child {
+          margin-bottom: 0 !important;
+        }
       }
-    }
-
-    function clearSearch() {
-      const input = document.getElementById('domain-search');
-      input.value = '';
-      filterCards('');
-      input.focus();
-    }
-
-    function setViewMode(mode) {
-      const container = document.getElementById('domains-container');
-      const gridBtn = document.getElementById('view-grid-btn');
-      const listBtn = document.getElementById('view-list-btn');
-
-      if (mode === 'list') {
-        container.classList.remove('md:grid-cols-2', 'xl:grid-cols-2');
-        container.classList.add('grid-cols-1');
-        listBtn.classList.add('bg-surface-container-high', 'text-primary');
-        listBtn.classList.remove('text-outline');
-        gridBtn.classList.remove('bg-surface-container-high', 'text-primary');
-        gridBtn.classList.add('text-outline');
-      } else {
-        container.classList.add('md:grid-cols-2', 'xl:grid-cols-2');
-        container.classList.remove('grid-cols-1');
-        gridBtn.classList.add('bg-surface-container-high', 'text-primary');
-        gridBtn.classList.remove('text-outline');
-        listBtn.classList.remove('bg-surface-container-high', 'text-primary');
-        listBtn.classList.add('text-outline');
+      ::-webkit-scrollbar {
+        display: none;
       }
-    }
-  </script>
-</div></main></div>
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-high": "#222b33",
+              "on-primary-container": "#002959",
+              background: "#0b141c",
+              secondary: "#67df70",
+              "inverse-primary": "#005cba",
+              "primary-fixed-dim": "#aac7ff",
+              "tertiary-container": "#a875fc",
+              "surface-tint": "#aac7ff",
+              "surface-container": "#182028",
+              "surface-variant": "#2d363e",
+              "inverse-on-surface": "#29313a",
+              primary: "#aac7ff",
+              "surface-container-highest": "#2d363e",
+              outline: "#8b919f",
+              "on-background": "#dae3ee",
+              "inverse-surface": "#dae3ee",
+              "on-tertiary-container": "#39007a",
+              "secondary-fixed": "#83fc89",
+              "on-secondary": "#00390d",
+              "on-tertiary-fixed": "#270058",
+              "on-surface-variant": "#c1c6d6",
+              "on-surface": "#dae3ee",
+              surface: "#0b141c",
+              "surface-dim": "#0b141c",
+              "on-tertiary": "#41008b",
+              "on-primary-fixed-variant": "#00458e",
+              "secondary-container": "#27a640",
+              "on-error": "#690005",
+              "on-primary": "#002f65",
+              "error-container": "#93000a",
+              "primary-fixed": "#d7e3ff",
+              "outline-variant": "#414753",
+              "on-tertiary-fixed-variant": "#5a21ab",
+              "primary-container": "#418fff",
+              "tertiary-fixed": "#ecdcff",
+              "surface-container-low": "#141c24",
+              "on-primary-fixed": "#001b3e",
+              "surface-container-lowest": "#060f16",
+              "on-secondary-fixed-variant": "#005317",
+              "secondary-fixed-dim": "#67df70",
+              "tertiary-fixed-dim": "#d5bbff",
+              "surface-bright": "#313a43",
+              error: "#ffb4ab",
+              "on-error-container": "#ffdad6",
+              "on-secondary-fixed": "#002105",
+              tertiary: "#d5bbff",
+              "on-secondary-container": "#00320a",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {
+              "space-2xs": "0.125rem",
+              "sidebar-collapsed": "3.5rem",
+              "space-xl": "2rem",
+              "space-base": "1rem",
+              "space-md": "0.75rem",
+              "space-sm": "0.5rem",
+              "space-xs": "0.25rem",
+              "space-lg": "1.5rem",
+              "space-2xl": "3rem",
+              "reading-column-max": "52rem",
+              "sidebar-expanded": "16rem",
+              "modal-standard": "40rem",
+            },
+            fontFamily: {
+              "headline-md": ["Inter"],
+              "label-md": ["JetBrains Mono"],
+              "body-sm": ["Inter"],
+              "headline-lg": ["Inter"],
+              "label-sm": ["JetBrains Mono"],
+              "code-block": ["JetBrains Mono"],
+              "body-lg": ["Inter"],
+              "code-inline": ["JetBrains Mono"],
+              "headline-sm": ["Inter"],
+              "body-md": ["Inter"],
+              display: ["Inter"],
+            },
+            fontSize: {
+              "headline-md": [
+                "20px",
+                {
+                  lineHeight: "28px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "label-md": [
+                "12px",
+                {
+                  lineHeight: "16px",
+                  letterSpacing: "0.02em",
+                  fontWeight: "500",
+                },
+              ],
+              "body-sm": [
+                "12px",
+                { lineHeight: "18px", letterSpacing: "0em", fontWeight: "400" },
+              ],
+              "headline-lg": [
+                "24px",
+                {
+                  lineHeight: "32px",
+                  letterSpacing: "-0.015em",
+                  fontWeight: "600",
+                },
+              ],
+              "label-sm": [
+                "11px",
+                {
+                  lineHeight: "14px",
+                  letterSpacing: "0.03em",
+                  fontWeight: "400",
+                },
+              ],
+              "code-block": [
+                "13px",
+                { lineHeight: "20px", letterSpacing: "0em", fontWeight: "400" },
+              ],
+              "body-lg": [
+                "16px",
+                {
+                  lineHeight: "26px",
+                  letterSpacing: "-0.005em",
+                  fontWeight: "400",
+                },
+              ],
+              "code-inline": [
+                "12px",
+                {
+                  lineHeight: "16px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "500",
+                },
+              ],
+              "headline-sm": [
+                "16px",
+                {
+                  lineHeight: "24px",
+                  letterSpacing: "-0.005em",
+                  fontWeight: "600",
+                },
+              ],
+              "body-md": [
+                "14px",
+                { lineHeight: "22px", letterSpacing: "0em", fontWeight: "400" },
+              ],
+              display: [
+                "32px",
+                {
+                  lineHeight: "40px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "600",
+                },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body
+    class="bg-background font-body-md text-body-md text-on-surface antialiased min-h-screen"
+  >
+    <aside
+      class="fixed left-0 top-0 bottom-0 w-72 bg-surface-container-low z-50 flex flex-col justify-between select-none"
+    >
+      <div class="flex flex-col h-full overflow-hidden">
+        <div
+          class="h-14 px-space-base flex items-center justify-between bg-surface-container-low/50"
+        >
+          <a
+            class="flex items-center gap-space-sm"
+            data-path="sections-directory"
+            href="#"
+            ><div
+              class="w-7 h-7 rounded-lg overflow-hidden flex items-center justify-center"
+            >
+              <img
+                alt="DevNotes Logo"
+                class="w-full h-full object-cover"
+                src="https://lh3.googleusercontent.com/aida/AEtjO1VmCAywLS4fzluife9Oyc9mIQXRULiuEIpsLA6mxoU1VFwrfb7i2Ya1CEuk7NyoomAnponhyvoVU9-U4rydavokniF9cDofqzd-9TNGcEGEJRO8a2T7zENyjuWDFElm0L1B2-8UsZ9wxgyu89JiCY-Jym7iSan2DOdhpz7QHBP8n6apify6c5nZqd-7-cQt7YYY2935MPneRf6leizjo_e_Q1fkNiifeX1z_Elj01J-UDHFWRUwlAqWFB4"
+              />
+            </div>
+            <span
+              class="font-headline-sm text-headline-sm text-on-surface tracking-tight"
+              >DevNotes</span
+            ><span
+              class="font-label-sm text-label-sm px-1.5 py-0.5 rounded bg-surface-container text-outline"
+              >v2.4</span
+            ></a
+          ><button
+            class="text-on-surface-variant hover:text-on-surface p-1 rounded-lg hover:bg-surface-container-high transition-colors"
+            title="Toggle Sidebar"
+          >
+            <span class="material-symbols-outlined text-lg">dock_to_left</span>
+          </button>
+        </div>
+        <div class="px-space-base py-space-sm">
+          <button
+            class="w-full flex items-center justify-between px-space-sm py-1.5 rounded-lg bg-surface-container text-outline-variant hover:text-on-surface-variant hover:bg-surface-container-high transition-all"
+          >
+            <div class="flex items-center gap-space-xs">
+              <span class="material-symbols-outlined text-sm">search</span
+              ><span class="font-body-sm text-body-sm text-outline"
+                >Quick search...</span
+              >
+            </div>
+            <div
+              class="flex items-center gap-0.5 font-label-sm text-label-sm text-outline bg-surface-container-highest px-1.5 py-0.5 rounded"
+            >
+              <span class="text-[10px]">⌘</span>K
+            </div>
+          </button>
+        </div>
+        <nav
+          class="px-space-sm py-space-xs flex flex-col gap-0.5"
+          data-active-classes="bg-surface-container-high text-primary font-medium rounded-lg"
+        >
+          <a
+            aria-current="page"
+            class="flex items-center px-space-sm py-1.5 transition-colors bg-surface-container-high text-primary font-medium rounded-lg"
+            data-path="sections-directory"
+            href="#"
+            >Sections Directory</a
+          ><a
+            class="flex items-center justify-between px-space-sm py-1.5 rounded-lg font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors"
+            data-path="favorites"
+            href="#"
+            ><span class="">Favorites</span
+            ><span class="font-label-sm text-label-sm text-outline">6</span></a
+          ><a
+            class="flex items-center px-space-sm py-1.5 rounded-lg font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors"
+            data-path="global-search"
+            href="#"
+            >Global Search</a
+          ><a
+            class="flex items-center px-space-sm py-1.5 rounded-lg font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors"
+            data-path="settings"
+            href="#"
+            >Settings</a
+          >
+        </nav>
+        <div class="flex-1 overflow-y-auto px-space-sm py-space-xs">
+          <div
+            class="flex items-center justify-between px-space-sm py-space-xs mt-space-xs"
+          >
+            <a
+              class="font-label-sm text-label-sm tracking-wider text-outline hover:text-on-surface uppercase font-semibold transition-colors"
+              data-path="sections-directory"
+              href="#"
+              >Sections</a
+            ><button
+              class="text-outline hover:text-primary p-0.5 rounded hover:bg-surface-container transition-colors"
+              title="Add Section"
+            >
+              <span class="material-symbols-outlined text-base">add</span>
+            </button>
+          </div>
+          <div class="space-y-1 mt-1 font-body-sm text-body-sm">
+            <div class="group">
+              <div
+                class="flex items-center justify-between px-space-sm py-1 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container cursor-pointer transition-colors"
+              >
+                <div class="flex items-center gap-space-xs">
+                  <span class="material-symbols-outlined text-base text-outline"
+                    >chevron_right</span
+                  ><span
+                    class="w-2 h-2 rounded-full bg-secondary-container"
+                  ></span
+                  ><span class="truncate font-medium"
+                    >Programming Fundamentals</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="group">
+              <a
+                class="flex items-center justify-between px-space-sm py-1 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high/60 transition-colors"
+                data-path="section-javascript"
+                href="#"
+                ><div class="flex items-center gap-space-xs">
+                  <span
+                    class="material-symbols-outlined text-base text-on-surface-variant"
+                    >expand_more</span
+                  ><span
+                    class="w-2 h-2 rounded-full bg-tertiary-container"
+                  ></span
+                  ><span class="truncate font-medium">JavaScript</span>
+                </div></a
+              >
+              <div class="pl-5 py-0.5 space-y-0.5">
+                <a
+                  class="block px-space-sm py-1 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors truncate"
+                  data-path="javascript-fundamentals"
+                  href="#"
+                  >Fundamentals</a
+                ><a
+                  class="block px-space-sm py-1 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors truncate"
+                  data-path="javascript-functions"
+                  href="#"
+                  >Functions &amp; Scope</a
+                ><a
+                  class="block px-space-sm py-1 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors truncate"
+                  data-path="javascript-closures"
+                  href="#"
+                  >Closures</a
+                ><a
+                  class="block px-space-sm py-1 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors truncate"
+                  data-path="javascript-async"
+                  href="#"
+                  >Asynchronous JS</a
+                ><a
+                  class="block px-space-sm py-1 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors truncate"
+                  data-path="javascript-dom"
+                  href="#"
+                  >DOM &amp; Events</a
+                >
+              </div>
+            </div>
+            <div class="group">
+              <div
+                class="flex items-center justify-between px-space-sm py-1 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container cursor-pointer transition-colors"
+              >
+                <div class="flex items-center gap-space-xs">
+                  <span class="material-symbols-outlined text-base text-outline"
+                    >chevron_right</span
+                  ><span
+                    class="w-2 h-2 rounded-full bg-primary-container"
+                  ></span
+                  ><span class="truncate font-medium">TypeScript</span>
+                </div>
+              </div>
+            </div>
+            <div class="group">
+              <div
+                class="flex items-center justify-between px-space-sm py-1 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container cursor-pointer transition-colors"
+              >
+                <div class="flex items-center gap-space-xs">
+                  <span class="material-symbols-outlined text-base text-outline"
+                    >chevron_right</span
+                  ><span
+                    class="w-2 h-2 rounded-full bg-secondary-fixed-dim"
+                  ></span
+                  ><span class="truncate font-medium">React</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="p-space-sm bg-surface-container-lowest/70 m-space-xs rounded-xl"
+        >
+          <div class="flex items-center gap-space-sm">
+            <div class="relative">
+              <div
+                class="w-8 h-8 rounded-full bg-surface-container-highest overflow-hidden flex items-center justify-center"
+              >
+                <img
+                  alt="User Avatar"
+                  class="w-full h-full object-cover"
+                  src="https://lh3.googleusercontent.com/aida/AEtjO1V6J9nw0TQiscoelK_N0EkKgwNaQpVBrPoFMW1NSND3lX2-g2wkjOx6YbSdGml4u2V8QHVAYmRu9Ed9LdTOHay4z7DaIdOlqIrS2RHLFbnf77YowBF8zsu6hlKqm4KbLlbcRaw4TdSmU_Rm7D4ubxmLR-Vf-XKizZn2iz3GJaTtMVlfdc-QvQ4YZYeAM_G4pxyBQkUL9ulm5kn2sowX-GD5DEDqI8S5eHpTnEaNpw3sP2Cqnekv_1QqBms"
+                />
+              </div>
+              <span
+                class="absolute bottom-0 right-0 w-2 h-2 rounded-full bg-secondary ring-2 ring-surface-container-low"
+              ></span>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center justify-between">
+                <span
+                  class="font-label-md text-label-md text-on-surface truncate font-semibold"
+                  >alex.dev</span
+                ><a
+                  class="text-outline hover:text-on-surface transition-colors"
+                  data-path="settings"
+                  href="#"
+                  ><span class="material-symbols-outlined text-base"
+                    >tune</span
+                  ></a
+                >
+              </div>
+              <div
+                class="w-full bg-surface-container h-1 rounded-full overflow-hidden mt-1"
+              >
+                <div class="bg-primary h-full w-[2.4%]"></div>
+              </div>
+              <div
+                class="flex justify-between items-center mt-1 font-label-sm text-label-sm text-outline"
+              >
+                <span class="text-[10px]">48 MB / 2 GB</span
+                ><span class="text-[10px]">2%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <div class="pl-72">
+      <header
+        class="fixed top-0 left-72 right-0 h-14 bg-background/80 backdrop-blur-xl z-40 flex items-center justify-between px-space-lg"
+      >
+        <div
+          class="flex items-center gap-space-sm font-label-md text-label-md text-outline"
+        >
+          <a
+            class="hover:text-on-surface transition-colors"
+            data-path="sections-directory"
+            href="#"
+            >DevNotes</a
+          ><span class="material-symbols-outlined text-xs">chevron_right</span
+          ><a
+            class="hover:text-on-surface transition-colors"
+            data-path="section-javascript"
+            href="#"
+            >JavaScript</a
+          ><span class="material-symbols-outlined text-xs">chevron_right</span
+          ><span class="text-on-surface font-semibold">Overview</span>
+        </div>
+        <div class="flex items-center gap-space-md">
+          <div
+            class="flex items-center gap-space-xs font-label-sm text-label-sm text-secondary bg-surface-container px-2 py-0.5 rounded-full"
+          >
+            <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span
+            ><span class="">Synced</span>
+          </div>
+          <button
+            class="text-on-surface-variant hover:text-on-surface p-1 rounded-lg hover:bg-surface-container-high transition-colors"
+            title="Study Mode"
+          >
+            <span class="material-symbols-outlined text-lg"
+              >menu_book</span
+            ></button
+          ><button
+            class="text-on-surface-variant hover:text-on-surface p-1 rounded-lg hover:bg-surface-container-high transition-colors"
+            title="Command Palette"
+          >
+            <span class="material-symbols-outlined text-lg">terminal</span>
+          </button>
+          <div class="w-8 h-8 rounded-full overflow-hidden">
+            <img
+              alt="Profile"
+              class="w-full h-full object-cover"
+              src="https://lh3.googleusercontent.com/aida/AEtjO1V6J9nw0TQiscoelK_N0EkKgwNaQpVBrPoFMW1NSND3lX2-g2wkjOx6YbSdGml4u2V8QHVAYmRu9Ed9LdTOHay4z7DaIdOlqIrS2RHLFbnf77YowBF8zsu6hlKqm4KbLlbcRaw4TdSmU_Rm7D4ubxmLR-Vf-XKizZn2iz3GJaTtMVlfdc-QvQ4YZYeAM_G4pxyBQkUL9ulm5kn2sowX-GD5DEDqI8S5eHpTnEaNpw3sP2Cqnekv_1QqBms"
+            />
+          </div>
+        </div>
+      </header>
+      <main class="relative pt-14 bg-background min-h-screen">
+        <div class="flex flex-col w-full">
+          <!-- Interactive & Filter Controller State -->
+          <div
+            class="px-space-xl py-space-xl max-w-7xl mx-auto w-full space-y-space-xl"
+          >
+            <!-- Top Command & Section Heading Header -->
+            <div class="flex flex-col gap-space-lg">
+              <div
+                class="flex flex-wrap items-center justify-between gap-space-md"
+              >
+                <div class="space-y-1">
+                  <div
+                    class="flex items-center gap-space-xs font-label-sm text-label-sm text-outline uppercase tracking-wider"
+                  >
+                    <span class="">DevNotes Core</span>
+                    <span class="text-outline-variant">/</span>
+                    <span class="text-primary font-medium"
+                      >Sections Directory</span
+                    >
+                    <span
+                      class="w-1.5 h-1.5 rounded-full bg-secondary ml-1"
+                    ></span>
+                  </div>
+                  <h1
+                    class="font-display text-display text-on-surface tracking-tight font-semibold flex items-center gap-space-sm"
+                  >
+                    Knowledge Domains &amp; Sections
+                  </h1>
+                  <p
+                    class="font-body-md text-body-md text-on-surface-variant max-w-2xl"
+                  >
+                    Explore your structured developer study streams, inspect
+                    nested technical subsections, and monitor mastery retention
+                    across engineering verticals.
+                  </p>
+                </div>
+                <!-- Action Buttons -->
+                <div
+                  class="flex items-center gap-space-sm self-start lg:self-center"
+                >
+                  <button
+                    class="flex items-center gap-space-xs px-space-md py-1.5 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface text-label-md font-label-md transition-colors shadow-sm"
+                  >
+                    <span
+                      class="material-symbols-outlined text-base text-outline"
+                      >swap_vert</span
+                    >
+                    <span class="">Reorder</span>
+                  </button>
+                  <button
+                    class="flex items-center gap-space-xs px-space-md py-1.5 rounded-lg bg-primary hover:bg-primary-container text-on-primary text-label-md font-label-md transition-all shadow-md active:scale-95 font-semibold"
+                  >
+                    <span class="material-symbols-outlined text-base">add</span>
+                    <span class="">New Section</span>
+                  </button>
+                </div>
+              </div>
+              <!-- Live Stat Counter Strip -->
 
-</body></html>
+              <!-- Controls & Live Filter Strip -->
+              <div
+                class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-space-md bg-surface-container-lowest p-space-sm rounded-xl"
+              >
+                <div class="relative flex-1 max-w-2xl">
+                  <span
+                    class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-lg pointer-events-none"
+                    >search</span
+                  >
+                  <input
+                    class="w-full bg-surface-container-low text-on-surface font-body-sm text-body-sm placeholder:text-outline pl-9 pr-space-md py-2 rounded-lg outline-none focus:bg-surface-container-high transition-all"
+                    id="domain-search"
+                    oninput="filterCards(this.value)"
+                    placeholder="Search domain, subsection or syntax tag... (e.g. closures, v8, rsc)"
+                    type="text"
+                  />
+                </div>
+                <div
+                  class="flex items-center gap-space-sm justify-between sm:justify-end"
+                >
+                  <div
+                    class="flex items-center gap-1 bg-surface-container-low p-1 rounded-lg"
+                  >
+                    <button
+                      class="p-1.5 rounded bg-surface-container-high text-primary transition-all"
+                      id="view-grid-btn"
+                      onclick="setViewMode('grid')"
+                      title="Grid Layout"
+                    >
+                      <span
+                        class="material-symbols-outlined text-lg leading-none"
+                        >grid_view</span
+                      >
+                    </button>
+                    <button
+                      class="p-1.5 rounded text-outline hover:text-on-surface hover:bg-surface-container-high transition-all"
+                      id="view-list-btn"
+                      onclick="setViewMode('list')"
+                      title="Compact List"
+                    >
+                      <span
+                        class="material-symbols-outlined text-lg leading-none"
+                        >view_agenda</span
+                      >
+                    </button>
+                  </div>
+                  <div
+                    class="h-5 w-px bg-surface-container-high hidden sm:block"
+                  ></div>
+                  <div
+                    class="flex items-center gap-space-xs font-label-sm text-label-sm text-outline"
+                  >
+                    <span class="">Sort:</span>
+                    <button
+                      class="text-on-surface font-medium hover:text-primary flex items-center gap-0.5"
+                    >
+                      Retention %
+                      <span class="material-symbols-outlined text-sm"
+                        >arrow_drop_down</span
+                      >
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Main Domain Cards Grid -->
+            <div
+              class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-space-lg transition-all duration-300"
+              id="domains-container"
+            >
+              <!-- Domain Card 1: Programming Fundamentals -->
+              <div
+                class="domain-card group flex flex-col bg-surface-container-low hover:bg-surface-container rounded-xl overflow-hidden shadow-sm transition-all duration-200"
+                data-domain-title="programming fundamentals core cs algorithms oop memory"
+              >
+                <div
+                  class="p-space-lg flex-1 flex flex-col justify-between space-y-space-md"
+                >
+                  <div>
+                    <div class="flex items-start justify-between gap-space-md">
+                      <div class="flex items-center gap-space-md">
+                        <div
+                          class="w-12 h-12 rounded-xl bg-surface-container-high text-secondary flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform"
+                        >
+                          <span class="material-symbols-outlined text-2xl"
+                            >data_object</span
+                          >
+                        </div>
+                        <div>
+                          <div class="flex items-center gap-space-xs">
+                            <span
+                              class="w-2 h-2 rounded-full bg-secondary"
+                            ></span>
+                            <span
+                              class="font-label-sm text-label-sm text-secondary font-medium tracking-wide uppercase"
+                              >Core Architecture</span
+                            >
+                          </div>
+                          <h2
+                            class="font-headline-md text-headline-md text-on-surface font-semibold group-hover:text-primary transition-colors"
+                          >
+                            Programming Fundamentals
+                          </h2>
+                        </div>
+                      </div>
+                      <div
+                        class="flex items-center gap-1 font-label-sm text-label-sm text-outline"
+                      >
+                        <span class="material-symbols-outlined text-sm"
+                          >schedule</span
+                        >
+                        <span class="">2d ago</span>
+                      </div>
+                    </div>
+                    <p
+                      class="font-body-sm text-body-sm text-on-surface-variant mt-space-md leading-relaxed"
+                    >
+                      Core computer science abstractions, stack/heap memory
+                      topologies, algorithmic complexity, and foundational
+                      object-oriented paradigms.
+                    </p>
+                  </div>
+                  <!-- Subsections Matrix -->
+                  <div class="space-y-space-xs">
+                    <div
+                      class="flex items-center justify-between font-label-sm text-label-sm text-outline"
+                    >
+                      <span class="">Subsections (5)</span>
+                      <span class="text-outline-variant"
+                        >Structured Sequence</span
+                      >
+                    </div>
+                    <div class="flex flex-wrap gap-1.5">
+                      <span
+                        class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface cursor-pointer transition-colors"
+                        >Variables &amp; Data Types</span
+                      >
+                      <span
+                        class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface cursor-pointer transition-colors"
+                        >Control Flow</span
+                      >
+                      <span
+                        class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface cursor-pointer transition-colors"
+                        >Functions &amp; Stack</span
+                      >
+                      <span
+                        class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface cursor-pointer transition-colors"
+                        >OOP Paradigms</span
+                      >
+                      <span
+                        class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface cursor-pointer transition-colors"
+                        >Error Handling</span
+                      >
+                    </div>
+                  </div>
+                  <!-- Mastery / Retention Gauge -->
+                  <div class="space-y-1.5 pt-space-xs">
+                    <div
+                      class="flex items-center justify-between font-label-sm text-label-sm"
+                    >
+                      <span class="text-outline flex items-center gap-1">
+                        <span
+                          class="material-symbols-outlined text-sm text-secondary"
+                          >verified</span
+                        >
+                        Domain Mastery
+                      </span>
+                      <span class="font-semibold text-secondary">95%</span>
+                    </div>
+                    <div
+                      class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden"
+                    >
+                      <div
+                        class="bg-secondary h-full rounded-full transition-all duration-500"
+                        style="width: 95%"
+                      ></div>
+                    </div>
+                    <div
+                      class="flex justify-between items-center font-label-sm text-label-sm text-outline pt-0.5"
+                    >
+                      <span class="">28 Notes</span>
+                      <span class="">Target: 30</span>
+                    </div>
+                  </div>
+                </div>
+                <!-- Footer Card Action Bar -->
+                <div
+                  class="px-space-lg py-space-sm bg-surface-container-lowest/80 flex items-center justify-between"
+                >
+                  <button
+                    class="font-label-sm text-label-sm text-outline hover:text-primary flex items-center gap-1 transition-colors"
+                  >
+                    <span class="material-symbols-outlined text-sm"
+                      >add_circle</span
+                    >
+                    <span class="">Subsection</span>
+                  </button>
+                  <a
+                    class="font-label-sm text-label-sm text-primary hover:text-primary-fixed flex items-center gap-1 font-semibold transition-colors"
+                    data-path="section-javascript"
+                    href="#"
+                  >
+                    <span class="">Open Stream</span>
+                    <span class="material-symbols-outlined text-base"
+                      >arrow_forward</span
+                    >
+                  </a>
+                </div>
+              </div>
+              <!-- Domain Card 2: JavaScript (Highlighted Active Domain) -->
+              <div
+                class="domain-card group flex flex-col bg-surface-container-low hover:bg-surface-container rounded-xl overflow-hidden shadow-md transition-all duration-200"
+                data-domain-title="javascript js ecmascript closures event loop async v8 browser dom"
+              >
+                <div
+                  class="p-space-lg flex-1 flex flex-col justify-between space-y-space-md"
+                >
+                  <div>
+                    <div class="flex items-start justify-between gap-space-md">
+                      <div class="flex items-center gap-space-md">
+                        <div
+                          class="w-12 h-12 rounded-xl bg-surface-container-high text-tertiary flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform"
+                        >
+                          <span class="material-symbols-outlined text-2xl"
+                            >javascript</span
+                          >
+                        </div>
+                        <div>
+                          <div class="flex items-center gap-space-xs">
+                            <span
+                              class="w-2 h-2 rounded-full bg-tertiary"
+                            ></span>
+                            <span
+                              class="font-label-sm text-label-sm text-tertiary font-medium tracking-wide uppercase"
+                              >Primary Study Focus</span
+                            >
+                          </div>
+                          <h2
+                            class="font-headline-md text-headline-md text-on-surface font-semibold group-hover:text-primary transition-colors flex items-center gap-space-xs"
+                          >
+                            JavaScript
+                            <span
+                              class="font-label-sm text-label-sm px-1.5 py-0.5 rounded bg-surface-container-high text-secondary font-mono"
+                              >Active</span
+                            >
+                          </h2>
+                        </div>
+                      </div>
+                      <div
+                        class="flex items-center gap-1 font-label-sm text-label-sm text-secondary"
+                      >
+                        <span class="material-symbols-outlined text-sm"
+                          >bolt</span
+                        >
+                        <span class="">22m ago</span>
+                      </div>
+                    </div>
+                    <p
+                      class="font-body-sm text-body-sm text-on-surface-variant mt-space-md leading-relaxed"
+                    >
+                      ECMAScript specifications, V8 engine internals, call
+                      stacks, lexical scoping, closures, microtask queues, and
+                      web runtime APIs.
+                    </p>
+                  </div>
+                  <!-- Subsections Matrix with Active Closures Node -->
+                  <div class="space-y-space-xs">
+                    <div
+                      class="flex items-center justify-between font-label-sm text-label-sm text-outline"
+                    >
+                      <span class="">Subsections (5)</span>
+                      <span class="text-tertiary font-mono"
+                        >1 Active Topic</span
+                      >
+                    </div>
+                    <div class="flex flex-wrap gap-1.5">
+                      <a
+                        class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface transition-colors"
+                        data-path="javascript-fundamentals"
+                        href="#"
+                        >Fundamentals</a
+                      >
+                      <a
+                        class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface transition-colors"
+                        data-path="javascript-functions"
+                        href="#"
+                        >Functions &amp; Scope</a
+                      >
+                      <a
+                        class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-highest text-primary flex items-center gap-1 shadow-sm font-semibold"
+                        data-path="javascript-closures"
+                        href="#"
+                      >
+                        <span
+                          class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"
+                        ></span>
+                        Closures (8 notes)
+                      </a>
+                      <a
+                        class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface transition-colors"
+                        data-path="javascript-async"
+                        href="#"
+                        >Async &amp; Event Loop</a
+                      >
+                      <a
+                        class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface transition-colors"
+                        data-path="javascript-dom"
+                        href="#"
+                        >DOM &amp; Web APIs</a
+                      >
+                    </div>
+                  </div>
+                  <!-- Mastery Gauge -->
+                  <div class="space-y-1.5 pt-space-xs">
+                    <div
+                      class="flex items-center justify-between font-label-sm text-label-sm"
+                    >
+                      <span class="text-outline flex items-center gap-1">
+                        <span
+                          class="material-symbols-outlined text-sm text-primary"
+                          >verified</span
+                        >
+                        Domain Mastery
+                      </span>
+                      <span class="font-semibold text-primary">88%</span>
+                    </div>
+                    <div
+                      class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden"
+                    >
+                      <div
+                        class="bg-primary h-full rounded-full transition-all duration-500"
+                        style="width: 88%"
+                      ></div>
+                    </div>
+                    <div
+                      class="flex justify-between items-center font-label-sm text-label-sm text-outline pt-0.5"
+                    >
+                      <span class="">48 Notes Recorded</span>
+                      <span class="">5 Active Branches</span>
+                    </div>
+                  </div>
+                </div>
+                <!-- Footer Card Action Bar -->
+                <div
+                  class="px-space-lg py-space-sm bg-surface-container-lowest/80 flex items-center justify-between"
+                >
+                  <button
+                    class="font-label-sm text-label-sm text-outline hover:text-primary flex items-center gap-1 transition-colors"
+                  >
+                    <span class="material-symbols-outlined text-sm"
+                      >add_circle</span
+                    >
+                    <span class="">Subsection</span>
+                  </button>
+                  <a
+                    class="font-label-sm text-label-sm text-primary hover:text-primary-fixed flex items-center gap-1 font-semibold transition-colors"
+                    data-path="section-javascript"
+                    href="#"
+                  >
+                    <span class="">Resume Stream</span>
+                    <span class="material-symbols-outlined text-base"
+                      >arrow_forward</span
+                    >
+                  </a>
+                </div>
+              </div>
+              <!-- Domain Card 3: TypeScript -->
+              <div
+                class="domain-card group flex flex-col bg-surface-container-low hover:bg-surface-container rounded-xl overflow-hidden shadow-sm transition-all duration-200"
+                data-domain-title="typescript ts types generics interfaces type systems ast"
+              >
+                <div
+                  class="p-space-lg flex-1 flex flex-col justify-between space-y-space-md"
+                >
+                  <div>
+                    <div class="flex items-start justify-between gap-space-md">
+                      <div class="flex items-center gap-space-md">
+                        <div
+                          class="w-12 h-12 rounded-xl bg-surface-container-high text-primary flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform"
+                        >
+                          <span class="material-symbols-outlined text-2xl"
+                            >code_blocks</span
+                          >
+                        </div>
+                        <div>
+                          <div class="flex items-center gap-space-xs">
+                            <span
+                              class="w-2 h-2 rounded-full bg-primary"
+                            ></span>
+                            <span
+                              class="font-label-sm text-label-sm text-primary font-medium tracking-wide uppercase"
+                              >Static Typing</span
+                            >
+                          </div>
+                          <h2
+                            class="font-headline-md text-headline-md text-on-surface font-semibold group-hover:text-primary transition-colors"
+                          >
+                            TypeScript
+                          </h2>
+                        </div>
+                      </div>
+                      <div
+                        class="flex items-center gap-1 font-label-sm text-label-sm text-outline"
+                      >
+                        <span class="material-symbols-outlined text-sm"
+                          >schedule</span
+                        >
+                        <span class="">2h ago</span>
+                      </div>
+                    </div>
+                    <p
+                      class="font-body-sm text-body-sm text-on-surface-variant mt-space-md leading-relaxed"
+                    >
+                      Structural type engine, generics constraints, conditional
+                      types, template literals, compiler AST analysis, and type
+                      gymnastics.
+                    </p>
+                  </div>
+                  <!-- Subsections Matrix -->
+                  <div class="space-y-space-xs">
+                    <div
+                      class="flex items-center justify-between font-label-sm text-label-sm text-outline"
+                    >
+                      <span class="">Subsections (5)</span>
+                      <span class="text-outline-variant">Advanced Typing</span>
+                    </div>
+                    <div class="flex flex-wrap gap-1.5">
+                      <span
+                        class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface cursor-pointer transition-colors"
+                        >Basic &amp; Primitive</span
+                      >
+                      <span
+                        class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface cursor-pointer transition-colors"
+                        >Interfaces &amp; Aliases</span
+                      >
+                      <span
+                        class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface cursor-pointer transition-colors"
+                        >Generics &amp; Bounds</span
+                      >
+                      <span
+                        class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface cursor-pointer transition-colors"
+                        >Utility Types</span
+                      >
+                      <span
+                        class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface cursor-pointer transition-colors"
+                        >Type Inference</span
+                      >
+                    </div>
+                  </div>
+                  <!-- Mastery Gauge -->
+                  <div class="space-y-1.5 pt-space-xs">
+                    <div
+                      class="flex items-center justify-between font-label-sm text-label-sm"
+                    >
+                      <span class="text-outline flex items-center gap-1">
+                        <span
+                          class="material-symbols-outlined text-sm text-primary"
+                          >verified</span
+                        >
+                        Domain Mastery
+                      </span>
+                      <span class="font-semibold text-primary">74%</span>
+                    </div>
+                    <div
+                      class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden"
+                    >
+                      <div
+                        class="bg-primary h-full rounded-full transition-all duration-500"
+                        style="width: 74%"
+                      ></div>
+                    </div>
+                    <div
+                      class="flex justify-between items-center font-label-sm text-label-sm text-outline pt-0.5"
+                    >
+                      <span class="">36 Notes</span>
+                      <span class="">12 Code Snippets</span>
+                    </div>
+                  </div>
+                </div>
+                <!-- Footer Card Action Bar -->
+                <div
+                  class="px-space-lg py-space-sm bg-surface-container-lowest/80 flex items-center justify-between"
+                >
+                  <button
+                    class="font-label-sm text-label-sm text-outline hover:text-primary flex items-center gap-1 transition-colors"
+                  >
+                    <span class="material-symbols-outlined text-sm"
+                      >add_circle</span
+                    >
+                    <span class="">Subsection</span>
+                  </button>
+                  <a
+                    class="font-label-sm text-label-sm text-primary hover:text-primary-fixed flex items-center gap-1 font-semibold transition-colors"
+                    href="#"
+                  >
+                    <span class="">Open Stream</span>
+                    <span class="material-symbols-outlined text-base"
+                      >arrow_forward</span
+                    >
+                  </a>
+                </div>
+              </div>
+              <!-- Domain Card 4: React Ecosystem -->
+              <div
+                class="domain-card group flex flex-col bg-surface-container-low hover:bg-surface-container rounded-xl overflow-hidden shadow-sm transition-all duration-200"
+                data-domain-title="react ecosystem rsc fiber hooks components nextjs frontend"
+              >
+                <div
+                  class="p-space-lg flex-1 flex flex-col justify-between space-y-space-md"
+                >
+                  <div>
+                    <div class="flex items-start justify-between gap-space-md">
+                      <div class="flex items-center gap-space-md">
+                        <div
+                          class="w-12 h-12 rounded-xl bg-surface-container-high text-primary flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform"
+                        >
+                          <span class="material-symbols-outlined text-2xl"
+                            >view_in_ar</span
+                          >
+                        </div>
+                        <div>
+                          <div class="flex items-center gap-space-xs">
+                            <span
+                              class="w-2 h-2 rounded-full bg-primary"
+                            ></span>
+                            <span
+                              class="font-label-sm text-label-sm text-primary font-medium tracking-wide uppercase"
+                              >UI &amp; Concurrency</span
+                            >
+                          </div>
+                          <h2
+                            class="font-headline-md text-headline-md text-on-surface font-semibold group-hover:text-primary transition-colors"
+                          >
+                            React Ecosystem
+                          </h2>
+                        </div>
+                      </div>
+                      <div
+                        class="flex items-center gap-1 font-label-sm text-label-sm text-outline"
+                      >
+                        <span class="material-symbols-outlined text-sm"
+                          >schedule</span
+                        >
+                        <span class="">Yesterday</span>
+                      </div>
+                    </div>
+                    <p
+                      class="font-body-sm text-body-sm text-on-surface-variant mt-space-md leading-relaxed"
+                    >
+                      Fiber reconciler architecture, concurrent scheduling,
+                      custom hook mechanics, Server Components (RSC), and state
+                      orchestration.
+                    </p>
+                  </div>
+                  <!-- Subsections Matrix -->
+                  <div class="space-y-space-xs">
+                    <div
+                      class="flex items-center justify-between font-label-sm text-label-sm text-outline"
+                    >
+                      <span class="">Subsections (5)</span>
+                      <span class="text-outline-variant">Frameworks</span>
+                    </div>
+                    <div class="flex flex-wrap gap-1.5">
+                      <span
+                        class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface cursor-pointer transition-colors"
+                        >Component Anatomy</span
+                      >
+                      <span
+                        class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface cursor-pointer transition-colors"
+                        >State &amp; Props</span
+                      >
+                      <span
+                        class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface cursor-pointer transition-colors"
+                        >Hooks Deep-Dive</span
+                      >
+                      <span
+                        class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface cursor-pointer transition-colors"
+                        >RSC &amp; Server Actions</span
+                      >
+                      <span
+                        class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface cursor-pointer transition-colors"
+                        >Memo &amp; Profiling</span
+                      >
+                    </div>
+                  </div>
+                  <!-- Mastery Gauge -->
+                  <div class="space-y-1.5 pt-space-xs">
+                    <div
+                      class="flex items-center justify-between font-label-sm text-label-sm"
+                    >
+                      <span class="text-outline flex items-center gap-1">
+                        <span
+                          class="material-symbols-outlined text-sm text-primary"
+                          >verified</span
+                        >
+                        Domain Mastery
+                      </span>
+                      <span class="font-semibold text-primary">82%</span>
+                    </div>
+                    <div
+                      class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden"
+                    >
+                      <div
+                        class="bg-primary h-full rounded-full transition-all duration-500"
+                        style="width: 82%"
+                      ></div>
+                    </div>
+                    <div
+                      class="flex justify-between items-center font-label-sm text-label-sm text-outline pt-0.5"
+                    >
+                      <span class="">32 Notes</span>
+                      <span class="">8 Sandboxes</span>
+                    </div>
+                  </div>
+                </div>
+                <!-- Footer Card Action Bar -->
+                <div
+                  class="px-space-lg py-space-sm bg-surface-container-lowest/80 flex items-center justify-between"
+                >
+                  <button
+                    class="font-label-sm text-label-sm text-outline hover:text-primary flex items-center gap-1 transition-colors"
+                  >
+                    <span class="material-symbols-outlined text-sm"
+                      >add_circle</span
+                    >
+                    <span class="">Subsection</span>
+                  </button>
+                  <a
+                    class="font-label-sm text-label-sm text-primary hover:text-primary-fixed flex items-center gap-1 font-semibold transition-colors"
+                    href="#"
+                  >
+                    <span class="">Open Stream</span>
+                    <span class="material-symbols-outlined text-base"
+                      >arrow_forward</span
+                    >
+                  </a>
+                </div>
+              </div>
+              <!-- Domain Card 5: Databases & Storage -->
+              <div
+                class="domain-card group flex flex-col bg-surface-container-low hover:bg-surface-container rounded-xl overflow-hidden shadow-sm transition-all duration-200"
+                data-domain-title="databases storage sql postgresql btree acid wal redis cache"
+              >
+                <div
+                  class="p-space-lg flex-1 flex flex-col justify-between space-y-space-md"
+                >
+                  <div>
+                    <div class="flex items-start justify-between gap-space-md">
+                      <div class="flex items-center gap-space-md">
+                        <div
+                          class="w-12 h-12 rounded-xl bg-surface-container-high text-secondary flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform"
+                        >
+                          <span class="material-symbols-outlined text-2xl"
+                            >database</span
+                          >
+                        </div>
+                        <div>
+                          <div class="flex items-center gap-space-xs">
+                            <span
+                              class="w-2 h-2 rounded-full bg-secondary"
+                            ></span>
+                            <span
+                              class="font-label-sm text-label-sm text-secondary font-medium tracking-wide uppercase"
+                              >Persistence &amp; OLTP</span
+                            >
+                          </div>
+                          <h2
+                            class="font-headline-md text-headline-md text-on-surface font-semibold group-hover:text-primary transition-colors"
+                          >
+                            Databases &amp; Storage
+                          </h2>
+                        </div>
+                      </div>
+                      <div
+                        class="flex items-center gap-1 font-label-sm text-label-sm text-outline"
+                      >
+                        <span class="material-symbols-outlined text-sm"
+                          >schedule</span
+                        >
+                        <span class="">3d ago</span>
+                      </div>
+                    </div>
+                    <p
+                      class="font-body-sm text-body-sm text-on-surface-variant mt-space-md leading-relaxed"
+                    >
+                      Relational algebra, PostgreSQL MVCC, B-Tree indices,
+                      Write-Ahead Logging (WAL), distributed consensus, and
+                      Redis storage engines.
+                    </p>
+                  </div>
+                  <!-- Subsections Matrix -->
+                  <div class="space-y-space-xs">
+                    <div
+                      class="flex items-center justify-between font-label-sm text-label-sm text-outline"
+                    >
+                      <span class="">Subsections (4)</span>
+                      <span class="text-outline-variant">Storage Engines</span>
+                    </div>
+                    <div class="flex flex-wrap gap-1.5">
+                      <span
+                        class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface cursor-pointer transition-colors"
+                        >Relational &amp; Postgres</span
+                      >
+                      <span
+                        class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface cursor-pointer transition-colors"
+                        >Indexing &amp; B-Trees</span
+                      >
+                      <span
+                        class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface cursor-pointer transition-colors"
+                        >Distributed Consensus</span
+                      >
+                      <span
+                        class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface cursor-pointer transition-colors"
+                        >Key-Value Caching</span
+                      >
+                    </div>
+                  </div>
+                  <!-- Mastery Gauge -->
+                  <div class="space-y-1.5 pt-space-xs">
+                    <div
+                      class="flex items-center justify-between font-label-sm text-label-sm"
+                    >
+                      <span class="text-outline flex items-center gap-1">
+                        <span
+                          class="material-symbols-outlined text-sm text-secondary"
+                          >verified</span
+                        >
+                        Domain Mastery
+                      </span>
+                      <span class="font-semibold text-secondary">68%</span>
+                    </div>
+                    <div
+                      class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden"
+                    >
+                      <div
+                        class="bg-secondary h-full rounded-full transition-all duration-500"
+                        style="width: 68%"
+                      ></div>
+                    </div>
+                    <div
+                      class="flex justify-between items-center font-label-sm text-label-sm text-outline pt-0.5"
+                    >
+                      <span class="">26 Notes</span>
+                      <span class="">4 Schemas</span>
+                    </div>
+                  </div>
+                </div>
+                <!-- Footer Card Action Bar -->
+                <div
+                  class="px-space-lg py-space-sm bg-surface-container-lowest/80 flex items-center justify-between"
+                >
+                  <button
+                    class="font-label-sm text-label-sm text-outline hover:text-primary flex items-center gap-1 transition-colors"
+                  >
+                    <span class="material-symbols-outlined text-sm"
+                      >add_circle</span
+                    >
+                    <span class="">Subsection</span>
+                  </button>
+                  <a
+                    class="font-label-sm text-label-sm text-primary hover:text-primary-fixed flex items-center gap-1 font-semibold transition-colors"
+                    href="#"
+                  >
+                    <span class="">Open Stream</span>
+                    <span class="material-symbols-outlined text-base"
+                      >arrow_forward</span
+                    >
+                  </a>
+                </div>
+              </div>
+              <!-- Domain Card 6: System Design & Architecture -->
+              <div
+                class="domain-card group flex flex-col bg-surface-container-low hover:bg-surface-container rounded-xl overflow-hidden shadow-sm transition-all duration-200"
+                data-domain-title="system design architecture distributed microservices kafka grpc scale"
+              >
+                <div
+                  class="p-space-lg flex-1 flex flex-col justify-between space-y-space-md"
+                >
+                  <div>
+                    <div class="flex items-start justify-between gap-space-md">
+                      <div class="flex items-center gap-space-md">
+                        <div
+                          class="w-12 h-12 rounded-xl bg-surface-container-high text-tertiary flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform"
+                        >
+                          <span class="material-symbols-outlined text-2xl"
+                            >hub</span
+                          >
+                        </div>
+                        <div>
+                          <div class="flex items-center gap-space-xs">
+                            <span
+                              class="w-2 h-2 rounded-full bg-tertiary"
+                            ></span>
+                            <span
+                              class="font-label-sm text-label-sm text-tertiary font-medium tracking-wide uppercase"
+                              >Distributed Infra</span
+                            >
+                          </div>
+                          <h2
+                            class="font-headline-md text-headline-md text-on-surface font-semibold group-hover:text-primary transition-colors"
+                          >
+                            System Design &amp; Architecture
+                          </h2>
+                        </div>
+                      </div>
+                      <div
+                        class="flex items-center gap-1 font-label-sm text-label-sm text-outline"
+                      >
+                        <span class="material-symbols-outlined text-sm"
+                          >schedule</span
+                        >
+                        <span class="">5d ago</span>
+                      </div>
+                    </div>
+                    <p
+                      class="font-body-sm text-body-sm text-on-surface-variant mt-space-md leading-relaxed"
+                    >
+                      High-availability topologies, message queues (Kafka),
+                      microservice boundaries, gRPC/REST protocols, and
+                      rate-limiting mechanics.
+                    </p>
+                  </div>
+                  <!-- Subsections Matrix -->
+                  <div class="space-y-space-xs">
+                    <div
+                      class="flex items-center justify-between font-label-sm text-label-sm text-outline"
+                    >
+                      <span class="">Subsections (4)</span>
+                      <span class="text-outline-variant">Scale Topologies</span>
+                    </div>
+                    <div class="flex flex-wrap gap-1.5">
+                      <span
+                        class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface cursor-pointer transition-colors"
+                        >Distributed Systems</span
+                      >
+                      <span
+                        class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface cursor-pointer transition-colors"
+                        >Event-Driven &amp; Kafka</span
+                      >
+                      <span
+                        class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface cursor-pointer transition-colors"
+                        >API Protocols (gRPC)</span
+                      >
+                      <span
+                        class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface cursor-pointer transition-colors"
+                        >Cache Invalidation</span
+                      >
+                    </div>
+                  </div>
+                  <!-- Mastery Gauge -->
+                  <div class="space-y-1.5 pt-space-xs">
+                    <div
+                      class="flex items-center justify-between font-label-sm text-label-sm"
+                    >
+                      <span class="text-outline flex items-center gap-1">
+                        <span
+                          class="material-symbols-outlined text-sm text-tertiary"
+                          >verified</span
+                        >
+                        Domain Mastery
+                      </span>
+                      <span class="font-semibold text-tertiary">55%</span>
+                    </div>
+                    <div
+                      class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden"
+                    >
+                      <div
+                        class="bg-tertiary h-full rounded-full transition-all duration-500"
+                        style="width: 55%"
+                      ></div>
+                    </div>
+                    <div
+                      class="flex justify-between items-center font-label-sm text-label-sm text-outline pt-0.5"
+                    >
+                      <span class="">18 Notes</span>
+                      <span class="">6 Diagrams</span>
+                    </div>
+                  </div>
+                </div>
+                <!-- Footer Card Action Bar -->
+                <div
+                  class="px-space-lg py-space-sm bg-surface-container-lowest/80 flex items-center justify-between"
+                >
+                  <button
+                    class="font-label-sm text-label-sm text-outline hover:text-primary flex items-center gap-1 transition-colors"
+                  >
+                    <span class="material-symbols-outlined text-sm"
+                      >add_circle</span
+                    >
+                    <span class="">Subsection</span>
+                  </button>
+                  <a
+                    class="font-label-sm text-label-sm text-primary hover:text-primary-fixed flex items-center gap-1 font-semibold transition-colors"
+                    href="#"
+                  >
+                    <span class="">Open Stream</span>
+                    <span class="material-symbols-outlined text-base"
+                      >arrow_forward</span
+                    >
+                  </a>
+                </div>
+              </div>
+              <!-- Domain Card 7: Linux & Systems Programming -->
+              <div
+                class="domain-card group flex flex-col bg-surface-container-low hover:bg-surface-container rounded-xl overflow-hidden shadow-sm transition-all duration-200"
+                data-domain-title="linux systems programming kernel ebpf syscalls posix memory io"
+              >
+                <div
+                  class="p-space-lg flex-1 flex flex-col justify-between space-y-space-md"
+                >
+                  <div>
+                    <div class="flex items-start justify-between gap-space-md">
+                      <div class="flex items-center gap-space-md">
+                        <div
+                          class="w-12 h-12 rounded-xl bg-surface-container-high text-outline flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform"
+                        >
+                          <span class="material-symbols-outlined text-2xl"
+                            >terminal</span
+                          >
+                        </div>
+                        <div>
+                          <div class="flex items-center gap-space-xs">
+                            <span
+                              class="w-2 h-2 rounded-full bg-outline"
+                            ></span>
+                            <span
+                              class="font-label-sm text-label-sm text-outline font-medium tracking-wide uppercase"
+                              >Kernel &amp; Runtime</span
+                            >
+                          </div>
+                          <h2
+                            class="font-headline-md text-headline-md text-on-surface font-semibold group-hover:text-primary transition-colors"
+                          >
+                            Linux &amp; Systems Programming
+                          </h2>
+                        </div>
+                      </div>
+                      <div
+                        class="flex items-center gap-1 font-label-sm text-label-sm text-outline"
+                      >
+                        <span class="material-symbols-outlined text-sm"
+                          >schedule</span
+                        >
+                        <span class="">1w ago</span>
+                      </div>
+                    </div>
+                    <p
+                      class="font-body-sm text-body-sm text-on-surface-variant mt-space-md leading-relaxed"
+                    >
+                      Linux kernel architecture, eBPF tracepoints, POSIX
+                      threads, memory paging, and low-level system call
+                      interfaces.
+                    </p>
+                  </div>
+                  <!-- Subsections Matrix -->
+                  <div class="space-y-space-xs">
+                    <div
+                      class="flex items-center justify-between font-label-sm text-label-sm text-outline"
+                    >
+                      <span class="">Subsections (3)</span>
+                      <span class="text-outline-variant">Kernel Space</span>
+                    </div>
+                    <div class="flex flex-wrap gap-1.5">
+                      <span
+                        class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface cursor-pointer transition-colors"
+                        >Kernel &amp; Syscalls</span
+                      >
+                      <span
+                        class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface cursor-pointer transition-colors"
+                        >eBPF &amp; Observability</span
+                      >
+                      <span
+                        class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface cursor-pointer transition-colors"
+                        >Memory Paging &amp; I/O</span
+                      >
+                    </div>
+                  </div>
+                  <!-- Mastery Gauge -->
+                  <div class="space-y-1.5 pt-space-xs">
+                    <div
+                      class="flex items-center justify-between font-label-sm text-label-sm"
+                    >
+                      <span class="text-outline flex items-center gap-1">
+                        <span
+                          class="material-symbols-outlined text-sm text-outline"
+                          >verified</span
+                        >
+                        Domain Mastery
+                      </span>
+                      <span class="font-semibold text-on-surface">62%</span>
+                    </div>
+                    <div
+                      class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden"
+                    >
+                      <div
+                        class="bg-outline h-full rounded-full transition-all duration-500"
+                        style="width: 62%"
+                      ></div>
+                    </div>
+                    <div
+                      class="flex justify-between items-center font-label-sm text-label-sm text-outline pt-0.5"
+                    >
+                      <span class="">14 Notes</span>
+                      <span class="">3 Modules</span>
+                    </div>
+                  </div>
+                </div>
+                <!-- Footer Card Action Bar -->
+                <div
+                  class="px-space-lg py-space-sm bg-surface-container-lowest/80 flex items-center justify-between"
+                >
+                  <button
+                    class="font-label-sm text-label-sm text-outline hover:text-primary flex items-center gap-1 transition-colors"
+                  >
+                    <span class="material-symbols-outlined text-sm"
+                      >add_circle</span
+                    >
+                    <span class="">Subsection</span>
+                  </button>
+                  <a
+                    class="font-label-sm text-label-sm text-primary hover:text-primary-fixed flex items-center gap-1 font-semibold transition-colors"
+                    href="#"
+                  >
+                    <span class="">Open Stream</span>
+                    <span class="material-symbols-outlined text-base"
+                      >arrow_forward</span
+                    >
+                  </a>
+                </div>
+              </div>
+              <!-- Domain Card 8: DevOps & Cloud Infrastructure -->
+              <div
+                class="domain-card group flex flex-col bg-surface-container-low hover:bg-surface-container rounded-xl overflow-hidden shadow-sm transition-all duration-200"
+                data-domain-title="devops cloud infrastructure kubernetes docker k8s terraform cicd"
+              >
+                <div
+                  class="p-space-lg flex-1 flex flex-col justify-between space-y-space-md"
+                >
+                  <div>
+                    <div class="flex items-start justify-between gap-space-md">
+                      <div class="flex items-center gap-space-md">
+                        <div
+                          class="w-12 h-12 rounded-xl bg-surface-container-high text-outline-variant flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform"
+                        >
+                          <span class="material-symbols-outlined text-2xl"
+                            >cloud_sync</span
+                          >
+                        </div>
+                        <div>
+                          <div class="flex items-center gap-space-xs">
+                            <span
+                              class="w-2 h-2 rounded-full bg-outline-variant"
+                            ></span>
+                            <span
+                              class="font-label-sm text-label-sm text-outline-variant font-medium tracking-wide uppercase"
+                              >Deployments &amp; IaC</span
+                            >
+                          </div>
+                          <h2
+                            class="font-headline-md text-headline-md text-on-surface font-semibold group-hover:text-primary transition-colors"
+                          >
+                            DevOps &amp; Cloud Infrastructure
+                          </h2>
+                        </div>
+                      </div>
+                      <div
+                        class="flex items-center gap-1 font-label-sm text-label-sm text-outline"
+                      >
+                        <span class="material-symbols-outlined text-sm"
+                          >schedule</span
+                        >
+                        <span class="">2w ago</span>
+                      </div>
+                    </div>
+                    <p
+                      class="font-body-sm text-body-sm text-on-surface-variant mt-space-md leading-relaxed"
+                    >
+                      Kubernetes cluster orchestrations, Docker layer caching
+                      strategies, GitOps continuous delivery, and declarative
+                      Terraform specs.
+                    </p>
+                  </div>
+                  <!-- Subsections Matrix -->
+                  <div class="space-y-space-xs">
+                    <div
+                      class="flex items-center justify-between font-label-sm text-label-sm text-outline"
+                    >
+                      <span class="">Subsections (3)</span>
+                      <span class="text-outline-variant">Cloud Native</span>
+                    </div>
+                    <div class="flex flex-wrap gap-1.5">
+                      <span
+                        class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface cursor-pointer transition-colors"
+                        >Container Runtimes</span
+                      >
+                      <span
+                        class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface cursor-pointer transition-colors"
+                        >Kubernetes Operators</span
+                      >
+                      <span
+                        class="font-code-inline text-code-inline px-2 py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface cursor-pointer transition-colors"
+                        >CI/CD Automation</span
+                      >
+                    </div>
+                  </div>
+                  <!-- Mastery Gauge -->
+                  <div class="space-y-1.5 pt-space-xs">
+                    <div
+                      class="flex items-center justify-between font-label-sm text-label-sm"
+                    >
+                      <span class="text-outline flex items-center gap-1">
+                        <span
+                          class="material-symbols-outlined text-sm text-outline"
+                          >verified</span
+                        >
+                        Domain Mastery
+                      </span>
+                      <span class="font-semibold text-outline">45%</span>
+                    </div>
+                    <div
+                      class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden"
+                    >
+                      <div
+                        class="bg-outline-variant h-full rounded-full transition-all duration-500"
+                        style="width: 45%"
+                      ></div>
+                    </div>
+                    <div
+                      class="flex justify-between items-center font-label-sm text-label-sm text-outline pt-0.5"
+                    >
+                      <span class="">11 Notes</span>
+                      <span class="">2 Clusters</span>
+                    </div>
+                  </div>
+                </div>
+                <!-- Footer Card Action Bar -->
+                <div
+                  class="px-space-lg py-space-sm bg-surface-container-lowest/80 flex items-center justify-between"
+                >
+                  <button
+                    class="font-label-sm text-label-sm text-outline hover:text-primary flex items-center gap-1 transition-colors"
+                  >
+                    <span class="material-symbols-outlined text-sm"
+                      >add_circle</span
+                    >
+                    <span class="">Subsection</span>
+                  </button>
+                  <a
+                    class="font-label-sm text-label-sm text-primary hover:text-primary-fixed flex items-center gap-1 font-semibold transition-colors"
+                    href="#"
+                  >
+                    <span class="">Open Stream</span>
+                    <span class="material-symbols-outlined text-base"
+                      >arrow_forward</span
+                    >
+                  </a>
+                </div>
+              </div>
+            </div>
+            <!-- Empty Search State -->
+            <div
+              class="hidden flex-col items-center justify-center py-space-2xl text-center space-y-space-md"
+              id="empty-state"
+            >
+              <div
+                class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-outline"
+              >
+                <span class="material-symbols-outlined text-2xl"
+                  >manage_search</span
+                >
+              </div>
+              <div>
+                <h3 class="font-headline-sm text-headline-sm text-on-surface">
+                  No knowledge domain found
+                </h3>
+                <p class="font-body-sm text-body-sm text-outline mt-1 max-w-sm">
+                  No domains match your search query. Try filtering by general
+                  keywords like "async", "v8", "memory", or "sql".
+                </p>
+              </div>
+              <button
+                class="px-space-md py-1.5 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-primary font-label-sm text-label-sm transition-colors"
+                onclick="clearSearch()"
+              >
+                Clear Filter
+              </button>
+            </div>
+            <!-- Activity & Stream Feed Micro-Panel -->
+            <div
+              class="bg-surface-container-low rounded-xl p-space-lg shadow-sm"
+            >
+              <div class="flex items-center justify-between pb-space-md">
+                <div class="flex items-center gap-space-sm">
+                  <span class="material-symbols-outlined text-primary text-xl"
+                    >history</span
+                  >
+                  <h3 class="font-headline-sm text-headline-sm text-on-surface">
+                    Recent Sub-Topic Activity
+                  </h3>
+                </div>
+                <span class="font-label-sm text-label-sm text-outline"
+                  >Realtime Sync Active</span
+                >
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+                <a
+                  class="p-space-md bg-surface-container rounded-lg hover:bg-surface-container-high transition-colors flex flex-col justify-between"
+                  data-path="javascript-closures"
+                  href="#"
+                >
+                  <div class="space-y-1">
+                    <div class="flex items-center justify-between">
+                      <span class="font-label-sm text-label-sm text-tertiary"
+                        >JavaScript / Closures</span
+                      >
+                      <span class="font-label-sm text-label-sm text-outline"
+                        >22m ago</span
+                      >
+                    </div>
+                    <div
+                      class="font-headline-sm text-headline-sm text-on-surface font-semibold text-sm"
+                    >
+                      Lexical Environment Lexicon Record
+                    </div>
+                    <p
+                      class="font-body-sm text-body-sm text-outline line-clamp-1"
+                    >
+                      Detailed note on inner scope capture vs GC deallocation.
+                    </p>
+                  </div>
+                  <div
+                    class="pt-2 font-code-inline text-code-inline text-primary flex items-center gap-1"
+                  >
+                    <span class="">Inspect note</span>
+                    <span class="material-symbols-outlined text-xs"
+                      >chevron_right</span
+                    >
+                  </div>
+                </a>
+                <div
+                  class="p-space-md bg-surface-container rounded-lg hover:bg-surface-container-high transition-colors flex flex-col justify-between cursor-pointer"
+                >
+                  <div class="space-y-1">
+                    <div class="flex items-center justify-between">
+                      <span class="font-label-sm text-label-sm text-primary"
+                        >TypeScript / Generics</span
+                      >
+                      <span class="font-label-sm text-label-sm text-outline"
+                        >2h ago</span
+                      >
+                    </div>
+                    <div
+                      class="font-headline-sm text-headline-sm text-on-surface font-semibold text-sm"
+                    >
+                      Distributed Conditional Types
+                    </div>
+                    <p
+                      class="font-body-sm text-body-sm text-outline line-clamp-1"
+                    >
+                      Naked type parameter behavior across union distributions.
+                    </p>
+                  </div>
+                  <div
+                    class="pt-2 font-code-inline text-code-inline text-primary flex items-center gap-1"
+                  >
+                    <span class="">Inspect note</span>
+                    <span class="material-symbols-outlined text-xs"
+                      >chevron_right</span
+                    >
+                  </div>
+                </div>
+                <div
+                  class="p-space-md bg-surface-container rounded-lg hover:bg-surface-container-high transition-colors flex flex-col justify-between cursor-pointer"
+                >
+                  <div class="space-y-1">
+                    <div class="flex items-center justify-between">
+                      <span class="font-label-sm text-label-sm text-secondary"
+                        >Databases / Indexing</span
+                      >
+                      <span class="font-label-sm text-label-sm text-outline"
+                        >3d ago</span
+                      >
+                    </div>
+                    <div
+                      class="font-headline-sm text-headline-sm text-on-surface font-semibold text-sm"
+                    >
+                      PostgreSQL GiST vs GIN Indexes
+                    </div>
+                    <p
+                      class="font-body-sm text-body-sm text-outline line-clamp-1"
+                    >
+                      Tradeoffs for full-text search and array containment.
+                    </p>
+                  </div>
+                  <div
+                    class="pt-2 font-code-inline text-code-inline text-primary flex items-center gap-1"
+                  >
+                    <span class="">Inspect note</span>
+                    <span class="material-symbols-outlined text-xs"
+                      >chevron_right</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <script>
+            function filterCards(query) {
+              const q = query.toLowerCase().trim();
+              const cards = document.querySelectorAll(".domain-card");
+              let visibleCount = 0;
+
+              cards.forEach((card) => {
+                const text = card.getAttribute("data-domain-title") || "";
+                const innerContent = card.innerText.toLowerCase();
+                if (text.includes(q) || innerContent.includes(q)) {
+                  card.classList.remove("hidden");
+                  visibleCount++;
+                } else {
+                  card.classList.add("hidden");
+                }
+              });
+
+              const empty = document.getElementById("empty-state");
+              if (visibleCount === 0) {
+                empty.classList.remove("hidden");
+                empty.classList.add("flex");
+              } else {
+                empty.classList.add("hidden");
+                empty.classList.remove("flex");
+              }
+            }
+
+            function clearSearch() {
+              const input = document.getElementById("domain-search");
+              input.value = "";
+              filterCards("");
+              input.focus();
+            }
+
+            function setViewMode(mode) {
+              const container = document.getElementById("domains-container");
+              const gridBtn = document.getElementById("view-grid-btn");
+              const listBtn = document.getElementById("view-list-btn");
+
+              if (mode === "list") {
+                container.classList.remove("md:grid-cols-2", "xl:grid-cols-2");
+                container.classList.add("grid-cols-1");
+                listBtn.classList.add(
+                  "bg-surface-container-high",
+                  "text-primary",
+                );
+                listBtn.classList.remove("text-outline");
+                gridBtn.classList.remove(
+                  "bg-surface-container-high",
+                  "text-primary",
+                );
+                gridBtn.classList.add("text-outline");
+              } else {
+                container.classList.add("md:grid-cols-2", "xl:grid-cols-2");
+                container.classList.remove("grid-cols-1");
+                gridBtn.classList.add(
+                  "bg-surface-container-high",
+                  "text-primary",
+                );
+                gridBtn.classList.remove("text-outline");
+                listBtn.classList.remove(
+                  "bg-surface-container-high",
+                  "text-primary",
+                );
+                listBtn.classList.add("text-outline");
+              }
+            }
+          </script>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

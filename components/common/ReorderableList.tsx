@@ -70,7 +70,7 @@ export function ReorderableList<T>({
         const item = itemsById.get(id);
         if (item === undefined) return null;
 
-        const handlers = itemHandlers(index);
+        const { onGrabStart, onGrabEnd, ...domHandlers } = itemHandlers(index);
         const isDragging = dragIndex === index;
         const isDropTarget = overIndex === index && dragIndex !== null && dragIndex !== index;
 
@@ -91,14 +91,14 @@ export function ReorderableList<T>({
                   ? "opacity-60 shadow-2xl ring-2 ring-[#388bfd] ring-offset-2 ring-offset-background"
                   : ""
               }`}
-              {...handlers}
+              {...domHandlers}
             >
               {renderItem(item, {
                 isDragging,
                 isDropTarget,
                 handleProps: {
-                  onGrabStart: handlers.onGrabStart,
-                  onGrabEnd: handlers.onGrabEnd,
+                  onGrabStart,
+                  onGrabEnd,
                 },
                 moveBy: (delta: number) => moveBy(index, delta),
                 canMoveUp: index > 0,

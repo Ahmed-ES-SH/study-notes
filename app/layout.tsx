@@ -43,7 +43,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
-      <body className="flex min-h-full flex-col">
+      <body className="flex min-h-full pt-12 flex-col">
         {children}
         {/* Global ⌘K / Ctrl+K command palette (self-contained client island) */}
         <CommandPalette />

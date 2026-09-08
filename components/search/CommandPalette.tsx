@@ -1,13 +1,21 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import { useCommandPalette, PaletteItem } from "../../lib/hooks/useCommandPalette";
+import {
+  useCommandPalette,
+  PaletteItem,
+} from "../../lib/hooks/useCommandPalette";
 import { SearchResultItem } from "./SearchResultItem";
 import { SearchScopeFilter } from "./SearchScopeFilter";
 import { KeyboardShortcutBadge } from "../common/KeyboardShortcutBadge";
 import { SearchIcon, CloseIcon } from "../common/Icons";
 
-const GROUP_ORDER: PaletteItem["kind"][] = ["action", "section", "subsection", "note"];
+const GROUP_ORDER: PaletteItem["kind"][] = [
+  "action",
+  "section",
+  "subsection",
+  "note",
+];
 const GROUP_TITLE: Record<PaletteItem["kind"], string> = {
   action: "Quick Actions",
   section: "Knowledge Domains",
@@ -57,7 +65,7 @@ export function CommandPalette() {
         className="px-4 pt-3 pb-1 font-mono text-[10px] uppercase tracking-wider text-outline font-semibold"
       >
         {GROUP_TITLE[kind]}
-      </div>
+      </div>,
     );
     for (const { item, idx } of groupItems) {
       rendered.push(
@@ -68,7 +76,7 @@ export function CommandPalette() {
           active={idx === palette.activeIndex}
           onHover={() => palette.setActiveIndex(idx)}
           onSelect={palette.navigateTo}
-        />
+        />,
       );
       flatIndex += 1;
     }
@@ -91,7 +99,7 @@ export function CommandPalette() {
         aria-modal="true"
         aria-label="Command palette"
         onKeyDown={palette.handleKeyDown}
-        className="w-full max-w-2xl bg-surface-container-low border border-outline-variant rounded-xl shadow-2xl overflow-hidden animate-pal-in"
+        className="w-full max-w-3xl bg-surface-container-low border border-outline-variant rounded-xl shadow-2xl overflow-hidden animate-pal-in"
       >
         {/* Input Row */}
         <div className="flex items-center gap-3 px-4 h-12 border-b border-outline-variant/40">
@@ -125,7 +133,12 @@ export function CommandPalette() {
         />
 
         {/* Results */}
-        <div ref={listRef} role="listbox" aria-label="Search results" className="max-h-[50vh] overflow-y-auto py-1">
+        <div
+          ref={listRef}
+          role="listbox"
+          aria-label="Search results"
+          className="max-h-[50vh] overflow-y-auto py-1"
+        >
           {empty && (
             <div className="px-4 py-10 text-center space-y-1.5">
               <p className="font-sans text-sm text-on-surface font-medium">
