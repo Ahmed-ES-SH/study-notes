@@ -47,6 +47,7 @@ pub fn run() {
             db::commands::check_db_integrity,
             db::commands::search_notes,
             db::commands::reorder_entities,
+            db::commands::get_data_dir,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

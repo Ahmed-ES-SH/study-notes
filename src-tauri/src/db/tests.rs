@@ -664,6 +664,19 @@ fn test_init_creates_file_db_with_schema() {
         .join("study-notes.db")
         .is_file());
 
+    // The private data directory must be restricted to the owning user.
+    #[cfg(unix)]
+    {
+        use std::os::unix::fs::PermissionsExt;
+        let mode = tmp_root
+            .join("study-notes")
+            .metadata()
+            .unwrap()
+            .permissions()
+            .mode();
+        assert_eq!(mode & 0o777, 0o700, "data dir must be 0700");
+    }
+
     drop(conn);
     std::fs::remove_dir_all(&tmp_root).ok();
 }

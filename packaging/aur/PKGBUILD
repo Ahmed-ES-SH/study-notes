@@ -1,0 +1,64 @@
+# Maintainer: Ahmed <ahmed@users.noreply.github.com>
+# Contributor: Ahmed-ES-SH (https://github.com/Ahmed-ES-SH)
+pkgname=study-notes
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="Linux-first, offline hierarchical study notes desktop application for developers"
+arch=('x86_64')
+url="https://github.com/Ahmed-ES-SH/study-notes"
+license=('MIT')
+depends=(
+    'webkit2gtk-4.1'
+    'gtk3'
+    'libappindicator-gtk3'
+    'sqlite'
+    'hicolor-icon-theme'
+)
+makedepends=(
+    'cargo'
+    'rust'
+    'pnpm'
+    'nodejs'
+)
+install=study-notes.install
+source=("$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/v$pkgver.tar.gz")
+sha256sums=('SKIP')
+options=('!lto')
+
+build() {
+    cd "$pkgname-$pkgver"
+    export RUSTUP_TOOLCHAIN=stable
+    pnpm install --frozen-lockfile
+    # pnpm tauri build compiles both the Next.js frontend and the Rust
+    # backend in a single step — no separate cargo build invocation needed.
+    # `--bundles none` skips packaging; makepkg only needs the raw binary
+    # plus the resources installed manually in package().
+    pnpm tauri build --bundles none
+}
+
+check() {
+    cd "$pkgname-$pkgver"
+    cargo test --locked --manifest-path src-tauri/Cargo.toml
+}
+
+package() {
+    cd "$pkgname-$pkgver"
+
+    # Main binary
+    install -Dm755 "src-tauri/target/release/study-notes" "$pkgdir/usr/bin/study-notes"
+
+    # XDG Desktop Entry
+    install -Dm644 "packaging/linux/com.studynotes.app.desktop" \
+        "$pkgdir/usr/share/applications/com.studynotes.app.desktop"
+
+    # Hicolor icon set
+    for size in 16 32 64 128 256 512; do
+        install -Dm644 "src-tauri/icons/${size}x${size}.png" \
+            "$pkgdir/usr/share/icons/hicolor/${size}x${size}/apps/study-notes.png"
+    done
+    install -Dm644 "src-tauri/icons/icon.svg" \
+        "$pkgdir/usr/share/icons/hicolor/scalable/apps/study-notes.svg"
+
+    # License
+    install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+}

@@ -1,36 +1,114 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Study Notes
 
-## Getting Started
+A **Linux-first, 100% offline** desktop app for hierarchical programming study
+notes — built with **Tauri v2 + Next.js + SQLite**. Zero cloud, zero telemetry,
+zero outbound network connections (enforced by CSP and verified by
+`pnpm check:offline`).
 
-First, run the development server:
+## Features
+
+- **4-level hierarchy** — Main Sections → Subsections → Notes → Assets
+- **Markdown editor** with autosave, syntax-aware formatting shortcuts, and
+  keyboard-driven reordering
+- **Full-text search** (SQLite FTS5) with BM25 ranking, snippets, and scope
+  narrowing, via the global command palette (`Ctrl+K`)
+- **Local image assets** stored on disk next to the database
+- **Integrity tooling** — `PRAGMA integrity_check` / foreign-key report from
+  inside the app
+- **First-run onboarding** — a clean install provisions the data directory and
+  seeds a "Getting Started" welcome note
+
+## Installation
+
+### Arch Linux (AUR, source build)
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+yay -S study-notes
+# or with paru / makepkg directly:
+git clone https://github.com/Ahmed-ES-SH/study-notes.git
+cd study-notes/packaging/aur
+makepkg -si
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The package installs the `study-notes` binary, an XDG desktop entry, and the
+full hicolor icon set, so it appears in GNOME, KDE, XFCE, and launchers like
+rofi/dmenu automatically.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### AppImage (any distribution)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Download `study-notes_0.1.0_amd64.AppImage` from the releases page, then:
 
-## Learn More
+```bash
+chmod +x study-notes_0.1.0_amd64.AppImage
+./study-notes_0.1.0_amd64.AppImage
+```
 
-To learn more about Next.js, take a look at the following resources:
+> **No FUSE?** On minimal installs without `libfuse2` (e.g. Ubuntu 24.04+),
+> run: `./study-notes_0.1.0_amd64.AppImage --appimage-extract-and-run`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The app runs natively on both X11 and Wayland.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### From source
 
-## Deploy on Vercel
+Requirements: Node.js ≥ 20, pnpm, Rust (stable), and the Tauri Linux
+prerequisites (`webkit2gtk-4.1`, `gtk3`).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+pnpm install
+pnpm tauri build          # produces target/release/study-notes + AppImage
+./src-tauri/target/release/study-notes
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Where your data lives
+
+Everything is stored locally under the XDG data directory:
+
+```
+~/.local/share/study-notes/
+├── study-notes.db     # SQLite database (WAL mode) — all notes & hierarchy
+└── assets/            # attached images & media
+```
+
+Uninstalling the app never deletes your data. To move your notes to another
+machine, copy this directory (or use the backup scripts below).
+
+## Backup & restore
+
+The repository ships two CLI utilities:
+
+```bash
+# Create ~/study-notes-backups/study-notes-backup-YYYY-MM-DD_HHMMSS.tar.gz
+scripts/backup-data.sh [destination-dir]
+
+# Restore an archive (takes a safety snapshot of current data first)
+scripts/restore-data.sh path/to/study-notes-backup-YYYY-MM-DD_HHMMSS.tar.gz
+```
+
+`backup-data.sh` runs `PRAGMA wal_checkpoint(TRUNCATE)` before archiving, so
+the tarball is consistent even if the app is open. Schedule it with cron or
+systemd timers for automatic backups.
+
+## Keyboard shortcuts
+
+| Shortcut | Action |
+|---|---|
+| `Ctrl/Cmd + K` | Global command palette & full-text search |
+| `Ctrl/Cmd + S` | Flush pending autosave immediately |
+| `Ctrl/Cmd + B` / `Ctrl/Cmd + I` | Bold / italic selection |
+| `Alt + ↑` / `Alt + ↓` | Reorder the focused list item |
+| `Esc` | Close dialog / exit Zen mode |
+
+## Development
+
+```bash
+pnpm install
+pnpm dev                # Next.js dev server
+pnpm tauri dev          # full desktop dev shell
+pnpm lint               # eslint
+cargo test              # Rust unit tests (src-tauri)
+pnpm check:offline      # verify zero outbound network usage (FR-11)
+```
+
+## License
+
+[MIT](./LICENSE)

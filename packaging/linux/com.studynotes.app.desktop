@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=Study Notes
+GenericName=Technical Study Notes
+Comment=Linux-first, offline hierarchical study notes for developers
+Exec=study-notes %U
+Icon=study-notes
+Terminal=false
+Type=Application
+Categories=Education;TextEditor;
+Keywords=notes;study;markdown;programming;offline;developer;
+StartupWMClass=study-notes
+StartupNotify=true

@@ -1,0 +1,20 @@
+pkgbase = study-notes
+	pkgdesc = Linux-first, offline hierarchical study notes desktop application for developers
+	pkgver = 0.1.0
+	pkgrel = 1
+	url = https://github.com/Ahmed-ES-SH/study-notes
+	arch = x86_64
+	license = MIT
+	makedepends = cargo
+	makedepends = rust
+	makedepends = pnpm
+	makedepends = nodejs
+	depends = webkit2gtk-4.1
+	depends = gtk3
+	depends = libappindicator-gtk3
+	depends = sqlite
+	depends = hicolor-icon-theme
+	source = study-notes-0.1.0.tar.gz::https://github.com/Ahmed-ES-SH/study-notes/archive/refs/tags/v0.1.0.tar.gz
+	sha256sums = SKIP
+
+pkgname = study-notes

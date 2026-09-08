@@ -1131,3 +1131,15 @@ pub(crate) fn reorder_entities_conn(
     tx.commit().map_err(|e| e.to_string())?;
     Ok(())
 }
+
+// ── Data Directory Inspection ──────────────────────────────────────
+
+/// Reports the absolute path of the app's XDG data directory
+/// (`$XDG_DATA_HOME/study-notes`, default `~/.local/share/study-notes`) so
+/// users can locate the database and assets for manual backups.
+#[tauri::command]
+pub fn get_data_dir() -> Result<String, String> {
+    super::data_dir()
+        .map(|p| p.display().to_string())
+        .map_err(|e| e.to_string())
+}
