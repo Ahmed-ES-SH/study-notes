@@ -146,9 +146,7 @@ pub(crate) fn asset_paths_for_notes(
     note_filter_sql: &str,
     id: &str,
 ) -> Vec<String> {
-    let sql = format!(
-        "SELECT file_path FROM assets WHERE note_id IN ({note_filter_sql})"
-    );
+    let sql = format!("SELECT file_path FROM assets WHERE note_id IN ({note_filter_sql})");
     let Ok(mut stmt) = conn.prepare(&sql) else {
         return Vec::new();
     };
@@ -201,29 +199,35 @@ pub fn get_main_section_cascade_info_conn(
     conn: &Connection,
     id: &str,
 ) -> rusqlite::Result<MainSectionCascadeInfo> {
-    let subsection_count: i64 = conn.query_row(
-        "SELECT COUNT(*) FROM subsections WHERE main_section_id = ?1",
-        rusqlite::params![id],
-        |r| r.get(0),
-    ).unwrap_or(0);
+    let subsection_count: i64 = conn
+        .query_row(
+            "SELECT COUNT(*) FROM subsections WHERE main_section_id = ?1",
+            rusqlite::params![id],
+            |r| r.get(0),
+        )
+        .unwrap_or(0);
 
-    let note_count: i64 = conn.query_row(
-        "SELECT COUNT(*) FROM notes WHERE subsection_id IN (
+    let note_count: i64 = conn
+        .query_row(
+            "SELECT COUNT(*) FROM notes WHERE subsection_id IN (
             SELECT id FROM subsections WHERE main_section_id = ?1
         )",
-        rusqlite::params![id],
-        |r| r.get(0),
-    ).unwrap_or(0);
+            rusqlite::params![id],
+            |r| r.get(0),
+        )
+        .unwrap_or(0);
 
-    let asset_count: i64 = conn.query_row(
-        "SELECT COUNT(*) FROM assets WHERE note_id IN (
+    let asset_count: i64 = conn
+        .query_row(
+            "SELECT COUNT(*) FROM assets WHERE note_id IN (
             SELECT id FROM notes WHERE subsection_id IN (
                 SELECT id FROM subsections WHERE main_section_id = ?1
             )
         )",
-        rusqlite::params![id],
-        |r| r.get(0),
-    ).unwrap_or(0);
+            rusqlite::params![id],
+            |r| r.get(0),
+        )
+        .unwrap_or(0);
 
     Ok(MainSectionCascadeInfo {
         subsection_count,
@@ -348,11 +352,8 @@ pub fn update_subsection(
 pub fn delete_subsection(state: State<'_, Mutex<Connection>>, id: String) -> Result<(), String> {
     let conn = state.lock().map_err(|e| e.to_string())?;
 
-    let asset_paths = asset_paths_for_notes(
-        &conn,
-        "SELECT id FROM notes WHERE subsection_id = ?1",
-        &id,
-    );
+    let asset_paths =
+        asset_paths_for_notes(&conn, "SELECT id FROM notes WHERE subsection_id = ?1", &id);
 
     conn.execute("BEGIN IMMEDIATE", [])
         .map_err(|e| e.to_string())?;
@@ -385,19 +386,23 @@ pub fn get_subsection_cascade_info_conn(
     conn: &Connection,
     id: &str,
 ) -> rusqlite::Result<SubsectionCascadeInfo> {
-    let note_count: i64 = conn.query_row(
-        "SELECT COUNT(*) FROM notes WHERE subsection_id = ?1",
-        rusqlite::params![id],
-        |r| r.get(0),
-    ).unwrap_or(0);
+    let note_count: i64 = conn
+        .query_row(
+            "SELECT COUNT(*) FROM notes WHERE subsection_id = ?1",
+            rusqlite::params![id],
+            |r| r.get(0),
+        )
+        .unwrap_or(0);
 
-    let asset_count: i64 = conn.query_row(
-        "SELECT COUNT(*) FROM assets WHERE note_id IN (
+    let asset_count: i64 = conn
+        .query_row(
+            "SELECT COUNT(*) FROM assets WHERE note_id IN (
             SELECT id FROM notes WHERE subsection_id = ?1
         )",
-        rusqlite::params![id],
-        |r| r.get(0),
-    ).unwrap_or(0);
+            rusqlite::params![id],
+            |r| r.get(0),
+        )
+        .unwrap_or(0);
 
     Ok(SubsectionCascadeInfo {
         note_count,
@@ -535,8 +540,7 @@ pub fn update_note(
 pub fn delete_note(state: State<'_, Mutex<Connection>>, id: String) -> Result<(), String> {
     let conn = state.lock().map_err(|e| e.to_string())?;
 
-    let asset_paths =
-        asset_paths_for_notes(&conn, "SELECT id FROM notes WHERE id = ?1", &id);
+    let asset_paths = asset_paths_for_notes(&conn, "SELECT id FROM notes WHERE id = ?1", &id);
 
     conn.execute("BEGIN IMMEDIATE", [])
         .map_err(|e| e.to_string())?;
@@ -566,15 +570,15 @@ pub fn get_note_cascade_info_conn(
     conn: &Connection,
     id: &str,
 ) -> rusqlite::Result<NoteCascadeInfo> {
-    let asset_count: i64 = conn.query_row(
-        "SELECT COUNT(*) FROM assets WHERE note_id = ?1",
-        rusqlite::params![id],
-        |r| r.get(0),
-    ).unwrap_or(0);
+    let asset_count: i64 = conn
+        .query_row(
+            "SELECT COUNT(*) FROM assets WHERE note_id = ?1",
+            rusqlite::params![id],
+            |r| r.get(0),
+        )
+        .unwrap_or(0);
 
-    Ok(NoteCascadeInfo {
-        asset_count,
-    })
+    Ok(NoteCascadeInfo { asset_count })
 }
 
 // ── Assets ──────────────────────────────────────────────────────────
@@ -669,7 +673,10 @@ pub fn get_note(state: State<'_, Mutex<Connection>>, id: String) -> Result<Note,
     get_note_conn(&conn, &id).map_err(|e| e.to_string())
 }
 
-pub fn get_note_context_conn(conn: &Connection, id: &str) -> rusqlite::Result<NoteContextHierarchy> {
+pub fn get_note_context_conn(
+    conn: &Connection,
+    id: &str,
+) -> rusqlite::Result<NoteContextHierarchy> {
     conn.query_row(
         "SELECT n.id, n.subsection_id, n.title, n.content, n.created_at, n.updated_at, n.sort_order,
                 s.main_section_id, s.name,
@@ -866,9 +873,8 @@ pub fn attach_note_asset_conn(
 /// protocol configuration.
 #[tauri::command]
 pub fn read_asset_data_url(file_path: String) -> Result<String, String> {
-    let disk_path = resolve_asset_disk_path(&file_path).ok_or_else(|| {
-        format!("Refusing to read asset outside managed storage: {file_path}")
-    })?;
+    let disk_path = resolve_asset_disk_path(&file_path)
+        .ok_or_else(|| format!("Refusing to read asset outside managed storage: {file_path}"))?;
 
     let bytes = std::fs::read(&disk_path)
         .map_err(|e| format!("Failed to read asset '{file_path}': {e}"))?;
@@ -913,7 +919,9 @@ pub(crate) fn check_db_integrity_conn(
         let table: String = row.get(0)?;
         let rowid: i64 = row.get(1)?;
         let parent: String = row.get(2)?;
-        Ok(format!("Table '{table}' rowid {rowid} -> broken ref to '{parent}'"))
+        Ok(format!(
+            "Table '{table}' rowid {rowid} -> broken ref to '{parent}'"
+        ))
     })?;
 
     let mut fk_violations = Vec::new();
@@ -957,9 +965,7 @@ pub(crate) fn check_db_integrity_conn(
 pub fn check_db_integrity(state: State<'_, Mutex<Connection>>) -> Result<IntegrityReport, String> {
     let conn = state.lock().map_err(|e| e.to_string())?;
 
-    let db_path = super::data_dir()
-        .ok()
-        .map(|p| p.join(super::DB_FILE_NAME));
+    let db_path = super::data_dir().ok().map(|p| p.join(super::DB_FILE_NAME));
 
     check_db_integrity_conn(&conn, db_path.as_deref()).map_err(|e| e.to_string())
 }

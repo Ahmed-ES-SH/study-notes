@@ -12,10 +12,16 @@ pub const ASSETS_DIR_NAME: &str = "assets";
 
 pub fn data_dir() -> Result<PathBuf, Box<dyn std::error::Error>> {
     let base = dirs::data_local_dir().ok_or_else(|| {
-        std::io::Error::new(
-            std::io::ErrorKind::NotFound,
-            "could not resolve the local data directory (XDG_DATA_HOME is unset)",
-        )
+        // Windows resolves via %LOCALAPPDATA%; Unix via $XDG_DATA_HOME.
+        // Filesystem behavior is identical — only the diagnostic differs.
+        let hint = if cfg!(windows) {
+            "could not resolve the local data directory \
+             (check that %LOCALAPPDATA% is set and writable, \
+             typically C:\\Users\\<user>\\AppData\\Local)"
+        } else {
+            "could not resolve the local data directory (XDG_DATA_HOME is unset)"
+        };
+        std::io::Error::new(std::io::ErrorKind::NotFound, hint)
     })?;
     Ok(base.join(APP_DIR_NAME))
 }
@@ -39,12 +45,27 @@ fn apply_permissions(dir: &std::path::Path, assets: &std::path::Path) -> std::io
 }
 
 pub fn init() -> Result<Connection, Box<dyn std::error::Error>> {
-    let dir = data_dir()?;
+    init_under(&data_dir()?)
+}
+
+/// Provisioning helper with an explicit base directory. `init()` passes the
+/// real per-user data dir; tests pass a temp dir so they stay hermetic on
+/// every OS (Windows resolves the data dir via the shell and ignores
+/// `XDG_DATA_HOME`, so env-var redirection cannot isolate tests there).
+pub(crate) fn init_under(
+    base_dir: &std::path::Path,
+) -> Result<Connection, Box<dyn std::error::Error>> {
+    let dir = base_dir.join(APP_DIR_NAME);
     let assets_dir = dir.join(ASSETS_DIR_NAME);
     std::fs::create_dir_all(&assets_dir).map_err(|e| {
+        let hint = if cfg!(windows) {
+            "Check that %LOCALAPPDATA% \
+             (default C:\\Users\\<user>\\AppData\\Local) is writable."
+        } else {
+            "Check that $XDG_DATA_HOME (default ~/.local/share) is writable."
+        };
         format!(
-            "could not provision the data directory at {}: {e}. \
-             Check that $XDG_DATA_HOME (default ~/.local/share) is writable.",
+            "could not provision the data directory at {}: {e}. {hint}",
             dir.display()
         )
     })?;
