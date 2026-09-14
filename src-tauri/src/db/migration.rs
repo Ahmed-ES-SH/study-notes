@@ -4,9 +4,18 @@ const CURRENT_VERSION: i64 = 3;
 
 /// Ordered list of migrations; index i migrates from version i to i + 1.
 const MIGRATIONS: &[(&str, &str)] = &[
-    ("001_initial_schema.sql", include_str!("../../migrations/001_initial_schema.sql")),
-    ("002_performance_indexes.sql", include_str!("../../migrations/002_performance_indexes.sql")),
-    ("003_full_text_search.sql", include_str!("../../migrations/003_full_text_search.sql")),
+    (
+        "001_initial_schema.sql",
+        include_str!("../../migrations/001_initial_schema.sql"),
+    ),
+    (
+        "002_performance_indexes.sql",
+        include_str!("../../migrations/002_performance_indexes.sql"),
+    ),
+    (
+        "003_full_text_search.sql",
+        include_str!("../../migrations/003_full_text_search.sql"),
+    ),
 ];
 
 pub fn run_migrations(conn: &Connection) -> Result<(), Box<dyn std::error::Error>> {
