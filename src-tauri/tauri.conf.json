@@ -29,7 +29,7 @@
   },
   "bundle": {
     "active": true,
-    "targets": ["appimage"],
+    "targets": ["appimage", "nsis"],
     "icon": [
       "icons/16x16.png",
       "icons/32x32.png",
@@ -38,7 +38,9 @@
       "icons/128x128@2x.png",
       "icons/256x256.png",
       "icons/512x512.png",
-      "icons/icon.svg"
+      "icons/icon.svg",
+      "icons/icon.png",
+      "icons/icon.ico"
     ],
     "shortDescription": "Linux-first, offline hierarchical study notes for developers",
     "longDescription": "A distraction-free, 100% offline desktop application for creating, organizing, and studying programming notes with code highlighting and local media storage.",
@@ -48,6 +50,13 @@
     "linux": {
       "appimage": {
         "bundleMediaFramework": false
+      }
+    },
+    "windows": {
+      "allowDowngrades": true,
+      "nsis": {
+        "installMode": "currentUser",
+        "displayLanguageSelector": false
       }
     },
     "android": {

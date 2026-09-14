@@ -49,6 +49,25 @@ chmod +x study-notes_0.2.0_amd64.AppImage
 
 The app runs natively on both X11 and Wayland.
 
+### Windows (NSIS)
+
+Download `study-notes_0.2.0_x64-setup.exe` from the releases page (or from
+the `windows-nsis-installer` artifact of any PR CI run) and launch it.
+
+- The installer runs in **currentUser** mode: it installs for your user
+  account only, so no administrator/UAC prompt appears.
+- **WebView2** is required to render the app. It ships preinstalled on
+  Windows 11 and on Windows 10 version 1809 and newer; on older Windows 10
+  builds install the Evergreen WebView2 Runtime from Microsoft first.
+- The installer is currently **unsigned**, so Windows SmartScreen shows an
+  "Unknown publisher" warning. Click **More info → Run anyway** to proceed.
+  (Code signing is planned as future work.)
+- Your notes live at `%LOCALAPPDATA%\study-notes`
+  (typically `C:\Users\<you>\AppData\Local\study-notes`), with the same
+  `study-notes.db` + `assets/` layout described below.
+- The `--appimage-extract-and-run` flag documented above is Linux-only and
+  has no Windows equivalent.
+
 ### From source
 
 Requirements: Node.js ≥ 20, pnpm, Rust (stable), and the Tauri Linux
@@ -73,6 +92,11 @@ Everything is stored locally under the XDG data directory:
 Uninstalling the app never deletes your data. To move your notes to another
 machine, copy this directory (or use the backup scripts below).
 
+On Windows the same layout lives at `%LOCALAPPDATA%\study-notes`
+(typically `C:\Users\<you>\AppData\Local\study-notes`). Uninstalling the
+NSIS package likewise preserves this directory, so reinstalling picks up
+your existing notes automatically.
+
 ## Backup & restore
 
 The repository ships two CLI utilities:
@@ -88,6 +112,20 @@ scripts/restore-data.sh path/to/study-notes-backup-YYYY-MM-DD_HHMMSS.tar.gz
 `backup-data.sh` runs `PRAGMA wal_checkpoint(TRUNCATE)` before archiving, so
 the tarball is consistent even if the app is open. Schedule it with cron or
 systemd timers for automatic backups.
+
+### Windows backup & restore (PowerShell)
+
+```powershell
+# Create ~/study-notes-backups/study-notes-backup-YYYY-MM-DD_HHMMSS.zip
+scripts/backup-data.ps1 [-Destination <dir>]
+
+# Restore an archive (takes a safety snapshot of current data first)
+scripts/restore-data.ps1 $HOME\study-notes-backups\study-notes-backup-YYYY-MM-DD_HHMMSS.zip
+```
+
+Both scripts accept `-WhatIf` to preview without changing anything. Like
+their Linux counterparts, restore refuses to run while the `study-notes`
+process is open — close the app first.
 
 ## Keyboard shortcuts
 

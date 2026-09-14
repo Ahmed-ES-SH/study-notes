@@ -1237,6 +1237,25 @@ fn test_resolve_asset_disk_path_rejects_traversal() {
     assert!(resolve_asset_disk_path("other/file.png").is_none());
     assert!(resolve_asset_disk_path("assets/").is_none());
     assert!(resolve_asset_disk_path("assets/..\\windows.png").is_none());
+    // Windows-style parent-directory escapes are rejected as well
+    assert!(resolve_asset_disk_path("assets/..\\evil.png").is_none());
+    assert!(resolve_asset_disk_path("..\\evil.png").is_none());
+    assert!(resolve_asset_disk_path("assets/../evil.png").is_none());
+}
+
+// ── Test 21b: data_dir resolves inside the per-user local data dir ──
+
+#[test]
+fn test_data_dir_ends_with_app_dir() {
+    let dir = crate::db::data_dir().expect("local data dir must resolve");
+    // Assert on the final path component (not a string suffix) so the
+    // check holds with either `/` or `\` separators.
+    assert_eq!(
+        dir.file_name().and_then(|n| n.to_str()),
+        Some(crate::db::APP_DIR_NAME),
+        "data dir must live in a folder named `{}`",
+        crate::db::APP_DIR_NAME
+    );
 }
 
 // ── Test 22: Migration 002 creates all performance indexes ──────

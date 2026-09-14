@@ -12,10 +12,16 @@ pub const ASSETS_DIR_NAME: &str = "assets";
 
 pub fn data_dir() -> Result<PathBuf, Box<dyn std::error::Error>> {
     let base = dirs::data_local_dir().ok_or_else(|| {
-        std::io::Error::new(
-            std::io::ErrorKind::NotFound,
-            "could not resolve the local data directory (XDG_DATA_HOME is unset)",
-        )
+        // Windows resolves via %LOCALAPPDATA%; Unix via $XDG_DATA_HOME.
+        // Filesystem behavior is identical — only the diagnostic differs.
+        let hint = if cfg!(windows) {
+            "could not resolve the local data directory \
+             (check that %LOCALAPPDATA% is set and writable, \
+             typically C:\\Users\\<user>\\AppData\\Local)"
+        } else {
+            "could not resolve the local data directory (XDG_DATA_HOME is unset)"
+        };
+        std::io::Error::new(std::io::ErrorKind::NotFound, hint)
     })?;
     Ok(base.join(APP_DIR_NAME))
 }
@@ -42,9 +48,14 @@ pub fn init() -> Result<Connection, Box<dyn std::error::Error>> {
     let dir = data_dir()?;
     let assets_dir = dir.join(ASSETS_DIR_NAME);
     std::fs::create_dir_all(&assets_dir).map_err(|e| {
+        let hint = if cfg!(windows) {
+            "Check that %LOCALAPPDATA% \
+             (default C:\\Users\\<user>\\AppData\\Local) is writable."
+        } else {
+            "Check that $XDG_DATA_HOME (default ~/.local/share) is writable."
+        };
         format!(
-            "could not provision the data directory at {}: {e}. \
-             Check that $XDG_DATA_HOME (default ~/.local/share) is writable.",
+            "could not provision the data directory at {}: {e}. {hint}",
             dir.display()
         )
     })?;
